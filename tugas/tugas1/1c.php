@@ -8,7 +8,7 @@
     <style>
         .box {
             background-color: magenta;
-            border: 3px solid;
+            border: 2px solid;
             width: 100px;
             height: 100px;
             text-align: center;
