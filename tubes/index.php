@@ -15,40 +15,31 @@
 <nav class="navbar navbar-expand-lg fixed-top bg-primary navbar-dark">
   <div class="container">
     <a class="navbar-brand" href="#">
-      <img src="" alt="Logo" width="30" height="24">
+      <img src="img/sample/sample.png" alt="Logo" width="30" height="24">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">News</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Popular</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
       </ul>
-      <form class="d-flex" role="search">
-        <button class="btn btn-light" type="submit">Login</button>
-      </form>
+      <a class="d-flex ms-auto btn btn-light" href="pages/account/login.php">
+            <img src="../../img/logo/loginLogo.png" alt="" width="22" height="24">
+        Login
+      </a>
     </div>
   </div>
 </nav>
+
 <!-- content -->
-<div class="container" style="height: 20px;"></div>
-<div class="container mt-5">
+<div class="container" style="height: 70px;"></div>
+<div class="container">
   <div class="row g-0 bg-body-secondary position-relative">
     <div class="col-md-6 mb-md-0 p-md-4">
       <img src="img/sample/sample.png" class="w-100" alt="...">
@@ -75,7 +66,7 @@
 </div>
 
 <!-- footer -->
-<div class="container-fluid bg-body-secondary ps-5 pt-3 pb-3">
+<div class="container-fluid bg-body-secondary ps-5 pt-3 pb-3 mt-3">
     ©Narapati Keysa Anandi 2023
 </div>
 
