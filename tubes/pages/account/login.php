@@ -41,8 +41,8 @@
 <div class="container" style="height: 70px;"></div>
 <div class="container w-50 ">
     <div class="form-floating mb-3">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-        <label for="floatingInput">Email address</label>
+        <input type="text" class="form-control" id="floatingInput" placeholder="Username/name@example.com">
+        <label for="floatingInput">Username</label>
     </div>
     <div class="form-floating mb-3">
         <input type="password" class="form-control" id="floatingPassword" placeholder="Password">

@@ -36,6 +36,49 @@
     </div>
     </div>
 </nav>
+
+<!-- content -->
+<div class="container" style="height: 70px;"></div>
+<div class="container w-50 ">
+    <div class="row mb-3">
+        <div class="col form-floating">
+            <input type="text" class="form-control" id="firstName" placeholder="First name">
+            <label style="margin-left: 12px;" for="firstName">First Name</label>
+        </div>
+        <div class="col form-floating">
+            <input type="text" class="form-control" id="lastName" placeholder="Last name">
+            <label style="margin-left: 12px;" for="lastName">Last Name</label>
+        </div>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="number" class="form-control" id="floatingInput" placeholder="Username">
+        <label for="floatingInput">Age</label>
+    </div>
+    <select class="form-select mb-3" aria-label="Default select example">
+        <option selected>Gender</option>
+        <option value="1">Male</option>
+        <option value="2">Female</option>
+    </select>
+    <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="floatingInput" placeholder="Username">
+        <label for="floatingInput">Username</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">Email Address</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <label for="floatingPassword">Password</label>
+    </div>
+    <button type="submit" class="btn btn-primary mb-3">Register</button>
+</div>
+
+<!-- footer -->
+<div class="container-fluid bg-body-secondary ps-5 pt-3 pb-3 mt-3">
+    ©Narapati Keysa Anandi 2023
+</div>
+
 <!-- Java Script -->
 <script src="../../js/bootstrap/bootstrap.min.js"></script>
 </body>

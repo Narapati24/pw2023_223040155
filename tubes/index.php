@@ -30,7 +30,7 @@
         </li>
       </ul>
       <a class="d-flex ms-auto btn btn-light" href="pages/account/login.php">
-            <img src="../../img/logo/loginLogo.png" alt="" width="22" height="24">
+            <img src="img/logo/loginLogo.png" alt="" width="22" height="24">
         Login
       </a>
     </div>
@@ -40,7 +40,8 @@
 <!-- content -->
 <div class="container" style="height: 70px;"></div>
 <div class="container">
-  <div class="row g-0 bg-body-secondary position-relative">
+  <h4>Hot This Week</h4>
+  <div class="row g-0 bg-body-secondary position-relative mb-4">
     <div class="col-md-6 mb-md-0 p-md-4">
       <img src="img/sample/sample.png" class="w-100" alt="...">
     </div>
@@ -55,7 +56,8 @@
     </div>
   </div>
   
-  <div class="card mt-4" style="width: 18rem;">
+  <h5>Other News</h5>
+  <div class="card" style="width: 18rem;">
     <img src="img/sample/sample.png" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">Card with stretched link</h5>
