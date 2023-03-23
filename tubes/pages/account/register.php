@@ -51,8 +51,8 @@
         </div>
     </div>
     <div class="form-floating mb-3">
-        <input type="number" class="form-control" id="floatingInput" placeholder="Username">
-        <label for="floatingInput">Age</label>
+        <input type="date" class="form-control" id="floatingInput" placeholder="Username">
+        <label for="floatingInput">Date of birth</label>
     </div>
     <select class="form-select mb-3" aria-label="Default select example">
         <option selected>Gender</option>
