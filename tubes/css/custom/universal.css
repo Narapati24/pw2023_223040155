@@ -1,23 +1,27 @@
 /* 30%
-  #0D1F2D
-  #546A7B
+  #1F363D
+  #40798C
   
   60%
-  #9EA3B0
-  #FAE1DF
+  #70A9A1
+  #9EC1A3
   
   10%
-  #E4C3AD*/
+  #CFE0C3*/
 
 body {
   height: 100%;
-  background-color: #9EA3B0;
+}
+
+nav {
+  background-color: #40798C;
 }
 
 footer {
-  background-color: #546A7B;
+  background-color: #1F363D;
   color: #fff;
   padding: 20px 0;
+  margin-top: 30px;
   bottom: 0;
   width: 100%;
 }
