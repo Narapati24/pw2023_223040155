@@ -1,0 +1,29 @@
+/* 30%
+  #0D1F2D
+  #546A7B
+  
+  60%
+  #9EA3B0
+  #FAE1DF
+  
+  10%
+  #E4C3AD*/
+
+body {
+  height: 100%;
+  background-color: #9EA3B0;
+}
+
+footer {
+  background-color: #546A7B;
+  color: #fff;
+  padding: 20px 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer {
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
+}
