@@ -60,6 +60,27 @@ function registerAccount($data)
   return mysqli_affected_rows($db);
 }
 
+function loginAccount($data)
+{
+  $db = connect();
+
+  $username = htmlspecialchars($data['username']);
+  $password = htmlspecialchars($data['password']);
+
+  if ($username == 'admin' && $password == '12345') {
+    // set session
+    $_SESSION['login'] = true;
+
+    header("Location: ../../index.php");
+    exit;
+  } else {
+    return [
+      'error' => true,
+      'pesan' => 'Username / Password salah!'
+    ];
+  }
+}
+
 function inputArticle($data)
 {
   $db = connect();

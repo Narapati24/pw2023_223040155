@@ -61,7 +61,7 @@ if (isset($_POST['register'])) {
         <form action="" method="post">
             <div class="row mb-3">
                 <div class="col form-floating">
-                    <input name="first_name" type="text" class="form-control" id="firstName" placeholder="First name" required>
+                    <input name="first_name" type="text" class="form-control" id="firstName" placeholder="First name" required autofocus>
                     <label style="margin-left: 12px;" for="firstName">First Name</label>
                 </div>
                 <div class="col form-floating">

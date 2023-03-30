@@ -1,3 +1,17 @@
+<?php
+session_start();
+if (isset($_SESSION['login'])) {
+    header("Location: ../../index.php");
+}
+
+require '../../function.php';
+
+if (isset($_POST['login'])) {
+    $login = loginAccount($_POST);
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,15 +58,22 @@
     <!-- content -->
     <div class="container" style="height: 70px;"></div>
     <div class="container w-50 ">
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" placeholder="Username/name@example.com">
-            <label for="floatingInput">Username</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Password</label>
-        </div>
-        <button type="submit" class="btn btn-primary mb-3">Login</button>
+        <!-- info error -->
+        <?php if (isset($login['error'])) : ?>
+            <p><?= $login['pesan']; ?></p>
+        <?php endif; ?>
+        <!-- form kogin -->
+        <form action="" method="post">
+            <div class="form-floating mb-3">
+                <input name="username" type="text" class="form-control" id="floatingInput" placeholder="Username/name@example.com" autofocus autocomplete="off" required>
+                <label for="floatingInput">Username</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                <label for="floatingPassword">Password</label>
+            </div>
+            <button name="login" type="submit" class="btn btn-primary mb-3">Login</button>
+        </form>
         <p>dont have account? <a href="register.php">Register</a> here</p>
     </div>
 

@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require 'function.php';
 // tampung ke variable
 $article = query("SELECT * FROM article ORDER BY id DESC");
@@ -50,14 +52,30 @@ if (isset($_POST['search'])) {
             <input name="keyword" class="form-control me-2" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
             <button name="search" class="btn btn-outline-success" type="submit">Search</button>
           </form>
-          <a class="mt-1 me-2" href="pages/newArticle.php">
-            <img src="img/logo/uploadLogo.png" alt="New Article" width="22" height="24" style="
+
+          <!-- if login or not -->
+          <?php if (isset($_SESSION['login'])) { ?>
+            <a class="mt-1 me-2" href="pages/newArticle.php">
+              <img src="img/logo/uploadLogo.png" alt="New Article" width="22" height="24" style="
                 filter: brightness(0) invert(1);">
-          </a>
-          <a class="d-flex btn btn-light" href="pages/account/login.php">
-            <img src="img/logo/loginLogo.png" alt="" width="22" height="24">
-            Login
-          </a>
+            </a>
+            <a data-bs-toggle="collapse" href="#profileSetting" role="button" aria-expanded="false" aria-controls="collapseExample">
+              <img class="rounded-circle" src="img/sample/sample.png" width="40px" height="40px" alt="">
+            </a>
+            <div class="position-absolute collapse mt-5" style="width: 100px; right: 100px;" id="profileSetting">
+              <div class="card card-body">
+                <a href="">Profile</a>
+              </div>
+              <div class="card card-body">
+                <a href="">Logout</a>
+              </div>
+            </div>
+          <?php } else { ?>
+            <a class="d-flex btn btn-light" href="pages/account/login.php">
+              <img src="img/logo/loginLogo.png" alt="" width="22" height="24">
+              Login
+            </a>
+          <?php }; ?>
         </div>
       </div>
     </div>
