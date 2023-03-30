@@ -13,9 +13,9 @@ function query($query)
   $result = mysqli_query($db, $query);
 
   // if only one data
-  if (mysqli_num_rows($result) == 1) {
-    return mysqli_fetch_assoc($result);
-  }
+  // if (mysqli_num_rows($result) == 1) {
+  //   return mysqli_fetch_assoc($result);
+  // }
 
   $rows = [];
   while ($row = mysqli_fetch_assoc($result)) {
@@ -53,7 +53,7 @@ function registerAccount($data)
   $email = htmlspecialchars($data['email']);
   $password = htmlspecialchars($data['password']);
 
-  $query = "INSERT INTO users VALUE (null,'$first_name','$last_name','$birthdate','$gender','$username','$email','$password');";
+  $query = "INSERT INTO users VALUES (null,'$first_name','$last_name','$birthdate','$gender','$username','$email','$password');";
 
   mysqli_query($db, $query);
   echo mysqli_error($db);
@@ -67,11 +67,12 @@ function loginAccount($data)
   $username = htmlspecialchars($data['username']);
   $password = htmlspecialchars($data['password']);
 
-  if ($username == 'admin' && $password == '12345') {
+  if ($query = query("SELECT * FROM users WHERE username = '$username' && password = '$password'")[0]) {
     // set session
+    $_SESSION['ids'] = $query['id'];
     $_SESSION['login'] = true;
 
-    header("Location: ../../index.php");
+    echo '<script>history.back();</script>';
     exit;
   } else {
     return [
@@ -87,9 +88,10 @@ function inputArticle($data)
 
   $title = htmlspecialchars($data['title']);
   $img = htmlspecialchars($data['img']);
-  $content = htmlspecialchars($data['content']);
+  $content = $data['contentArticle'];
+  $idAuthor = htmlspecialchars($data['idAuthor']);
 
-  $query = "INSERT INTO article VALUE (null,'$title','$img','$content',null,null);";
+  $query = "INSERT INTO article VALUES (null,'$title','$img','$content', 'now()','$idAuthor');";
 
   mysqli_query($db, $query);
   echo mysqli_error($db);

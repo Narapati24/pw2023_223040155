@@ -1,13 +1,16 @@
 <?php
+session_start();
+
 require '../function.php';
 
+// return pages if no id
 if (!isset($_GET['id'])) {
   header("Location: ../index.php");
   exit;
 }
 
 $id = $_GET['id'];
-$article = query("SELECT * FROM article WHERE id = $id");
+$article = query("SELECT * FROM article WHERE id = $id")[0];
 
 ?>
 
@@ -47,14 +50,29 @@ $article = query("SELECT * FROM article WHERE id = $id");
           </li>
         </ul>
         <div class="d-flex ms-auto">
-          <a class="mt-1 me-2" href="newArticle.php">
-            <img src="../img/logo/uploadLogo.png" alt="New Article" width="22" height="24" style="
+          <!-- if login or not -->
+          <?php if (isset($_SESSION['login'])) { ?>
+            <a class="mt-1 me-2" href="newArticle.php">
+              <img src="img/logo/uploadLogo.png" alt="New Article" width="22" height="24" style="
                 filter: brightness(0) invert(1);">
-          </a>
-          <a class="d-flex btn btn-light" href="pages/account/login.php">
-            <img src="../img/logo/loginLogo.png" alt="" width="22" height="24">
-            Login
-          </a>
+            </a>
+            <a data-bs-toggle="collapse" href="#profileSetting" role="button" aria-expanded="false" aria-controls="collapseExample">
+              <img class="rounded-circle" src="img/sample/sample.png" width="40px" height="40px" alt="">
+            </a>
+            <div class="position-absolute collapse mt-5" style="width: 100px; right: 100px;" id="profileSetting">
+              <div class="card card-body">
+                <a href="">Profile</a>
+              </div>
+              <div class="card card-body">
+                <a href="account/logout.php">Logout</a>
+              </div>
+            </div>
+          <?php } else { ?>
+            <a class="d-flex btn btn-light" href="account/login.php">
+              <img src="../img/logo/loginLogo.png" alt="" width="22" height="24">
+              Login
+            </a>
+          <?php }; ?>
         </div>
       </div>
     </div>
@@ -78,7 +96,7 @@ $article = query("SELECT * FROM article WHERE id = $id");
   </footer>
 
   <!-- Java Script -->
-  <script src="js/bootstrap/bootstrap.min.js"></script>
+  <script src="../js/bootstrap/bootstrap.min.js"></script>
 </body>
 
 </html>

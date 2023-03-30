@@ -4,8 +4,9 @@ session_start();
 require 'function.php';
 // tampung ke variable
 $article = query("SELECT * FROM article ORDER BY id DESC");
-$hotArticle = query("SELECT * FROM article");
+$hotArticle = query("SELECT * FROM article ORDER BY id DESC");
 
+// search bar
 if (isset($_POST['search'])) {
   $article = find($_POST['keyword']);
 }
@@ -67,7 +68,7 @@ if (isset($_POST['search'])) {
                 <a href="">Profile</a>
               </div>
               <div class="card card-body">
-                <a href="">Logout</a>
+                <a href="pages/account/logout.php">Logout</a>
               </div>
             </div>
           <?php } else { ?>

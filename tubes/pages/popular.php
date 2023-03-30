@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+require '../function.php';
+
+// Search bar
+if (isset($_POST['search'])) {
+  $article = find($_POST['keyword']);
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,10 +44,31 @@
             <a class="nav-link active" href="#">Popular</a>
           </li>
         </ul>
-        <a class="d-flex ms-auto btn btn-light" href="../pages/account/login.php">
-          <img src="../img/logo/loginLogo.png" alt="" width="22" height="24">
-          Login
-        </a>
+        <div class="d-flex ms-auto">
+          <!-- if login or not -->
+          <?php if (isset($_SESSION['login'])) { ?>
+            <a class="mt-1 me-2" href="newArticle.php">
+              <img src="img/logo/uploadLogo.png" alt="New Article" width="22" height="24" style="
+                filter: brightness(0) invert(1);">
+            </a>
+            <a data-bs-toggle="collapse" href="#profileSetting" role="button" aria-expanded="false" aria-controls="collapseExample">
+              <img class="rounded-circle" src="img/sample/sample.png" width="40px" height="40px" alt="">
+            </a>
+            <div class="position-absolute collapse mt-5" style="width: 100px; right: 100px;" id="profileSetting">
+              <div class="card card-body">
+                <a href="">Profile</a>
+              </div>
+              <div class="card card-body">
+                <a href="account/logout.php">Logout</a>
+              </div>
+            </div>
+          <?php } else { ?>
+            <a class="d-flex btn btn-light" href="account/login.php">
+              <img src="../img/logo/loginLogo.png" alt="" width="22" height="24">
+              Login
+            </a>
+          <?php }; ?>
+        </div>
       </div>
     </div>
   </nav>
@@ -45,6 +77,10 @@
   <div class="container" style="height: 70px;"></div>
   <!-- today -->
   <div class="container">
+    <form class="d-flex mb-3" role="search" method="post">
+      <input name="keyword" class="form-control me-2" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
+      <button name="search" class="btn btn-outline-success" type="submit">Search</button>
+    </form>
     <h4>Trending Today</h4>
     <div class="card" style="width: 18rem;">
       <img src="../img/sample/sample.png" class="card-img-top" alt="...">

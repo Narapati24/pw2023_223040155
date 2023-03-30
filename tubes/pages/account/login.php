@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['login'])) {
-    header("Location: ../../index.php");
+    echo '<script>history.back();</script>';
 }
 
 require '../../function.php';

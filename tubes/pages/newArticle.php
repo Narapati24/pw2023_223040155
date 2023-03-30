@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require '../function.php';
 
@@ -47,14 +48,29 @@ if (isset($_POST['submit'])) {
           </li>
         </ul>
         <div class="d-flex ms-auto">
-          <a class="mt-1 me-2" href="newArticle.php">
-            <img src="../img/logo/uploadLogo.png" alt="New Article" width="22" height="24" style="
+          <!-- if login or not -->
+          <?php if (isset($_SESSION['login'])) { ?>
+            <a class="mt-1 me-2" href="newArticle.php">
+              <img src="../img/logo/uploadLogo.png" alt="New Article" width="22" height="24" style="
                 filter: brightness(0) invert(1);">
-          </a>
-          <a class="d-flex btn btn-light" href="pages/account/login.php">
-            <img src="../img/logo/loginLogo.png" alt="" width="22" height="24">
-            Login
-          </a>
+            </a>
+            <a data-bs-toggle="collapse" href="#profileSetting" role="button" aria-expanded="false" aria-controls="collapseExample">
+              <img class="rounded-circle" src="img/sample/sample.png" width="40px" height="40px" alt="">
+            </a>
+            <div class="position-absolute collapse mt-5" style="width: 100px; right: 100px;" id="profileSetting">
+              <div class="card card-body">
+                <a href="">Profile</a>
+              </div>
+              <div class="card card-body">
+                <a href="account/logout.php">Logout</a>
+              </div>
+            </div>
+          <?php } else { ?>
+            <a class="d-flex btn btn-light" href="account/login.php">
+              <img src="../img/logo/loginLogo.png" alt="" width="22" height="24">
+              Login
+            </a>
+          <?php }; ?>
         </div>
       </div>
     </div>
@@ -64,6 +80,7 @@ if (isset($_POST['submit'])) {
   <div class="container" style="height: 70px;"></div>
   <div class="container">
     <form action="" method="post">
+      <input name="idAuthor" type="hidden" value="<?= $_SESSION['ids']; ?>">
       <div class="form-floating mb-3">
         <input name="title" type="text" class="form-control" id="floatingInput" placeholder="Title" required>
         <label for="floatingInput">Title</label>
@@ -73,8 +90,7 @@ if (isset($_POST['submit'])) {
         <label for="floatingInput">img</label>
       </div>
       <div class="form-floating mb-3">
-        <textarea name="content" style="height: 200px;" type="textarea" class="form-control" id="floatingInput" placeholder="Description" required></textarea>
-        <label for="floatingInput">Description</label>
+        <textarea name="contentArticle" style="height: 200px;" type="textarea" class="form-control text-editor" id="floatingInput" placeholder="Description"></textarea>
       </div>
       <button name="submit" type="submit" class="btn btn-primary mb-3">Submit</button>
     </form>
@@ -89,7 +105,15 @@ if (isset($_POST['submit'])) {
   </footer>
 
   <!-- Java Script -->
-  <script src="js/bootstrap/bootstrap.min.js"></script>
+  <script src="../js/bootstrap/bootstrap.min.js"></script>
+  <script src="../js/CKEditor/ckeditor.js"></script>
+  <script>
+    ClassicEditor
+      .create(document.querySelector('.text-editor'))
+      .catch(error => {
+        console.error(error);
+      });
+  </script>
 </body>
 
 </html>
