@@ -27,10 +27,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="../index.php">News</a>
+            <a class="nav-link" aria-current="page" href="../index.php">News</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Popular</a>
+            <a class="nav-link active" href="#">Popular</a>
           </li>
         </ul>
         <a class="d-flex ms-auto btn btn-light" href="../pages/account/login.php">

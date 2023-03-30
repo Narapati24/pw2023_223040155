@@ -1,14 +1,14 @@
 <?php
+
 require '../function.php';
 
-if (!isset($_GET['id'])) {
-  header("Location: ../index.php");
-  exit;
+if (isset($_POST['submit'])) {
+  if (inputArticle($_POST) > 0) {
+    echo "succest";
+  } else {
+    echo "Failed to Register";
+  }
 }
-
-$id = $_GET['id'];
-$article = query("SELECT * FROM article WHERE id = $id");
-
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +18,7 @@ $article = query("SELECT * FROM article WHERE id = $id");
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?= $article['title']; ?></title>
+  <title>New Article</title>
   <!-- reset css -->
   <link rel="stylesheet" href="../css/reset.css">
   <!-- bootstrap -->
@@ -27,7 +27,7 @@ $article = query("SELECT * FROM article WHERE id = $id");
   <link rel="stylesheet" href="../css/custom/universal.css">
 </head>
 
-<body>
+<body style="height: 100vh;">
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
     <div class="container">
@@ -40,7 +40,7 @@ $article = query("SELECT * FROM article WHERE id = $id");
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="../index.php">News</a>
+            <a class="nav-link" aria-current="page" href="../index.php">News</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="popular.php">Popular</a>
@@ -63,14 +63,25 @@ $article = query("SELECT * FROM article WHERE id = $id");
   <!-- content -->
   <div class="container" style="height: 70px;"></div>
   <div class="container">
-    <h1>
-      <?= $article['title']; ?>
-    </h1>
-    <img src="../img/article/<?= $article['img']; ?>" alt="">
-    <p><?= $article['content']; ?></p>
+    <form action="" method="post">
+      <div class="form-floating mb-3">
+        <input name="title" type="text" class="form-control" id="floatingInput" placeholder="Title" required>
+        <label for="floatingInput">Title</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input name="img" type="text" class="form-control" id="floatingInput" placeholder="img" required>
+        <label for="floatingInput">img</label>
+      </div>
+      <div class="form-floating mb-3">
+        <textarea name="content" style="height: 200px;" type="textarea" class="form-control" id="floatingInput" placeholder="Description" required></textarea>
+        <label for="floatingInput">Description</label>
+      </div>
+      <button name="submit" type="submit" class="btn btn-primary mb-3">Submit</button>
+    </form>
   </div>
 
   <!-- footer -->
+  <div class="container" style="height: 115px;"></div>
   <footer>
     <div class="footer">
       <p>&copy; 2023 My Company. All Rights Reserved.</p>

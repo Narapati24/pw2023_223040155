@@ -2,7 +2,11 @@
 require 'function.php';
 // tampung ke variable
 $article = query("SELECT * FROM article ORDER BY id DESC");
+$hotArticle = query("SELECT * FROM article");
 
+if (isset($_POST['search'])) {
+  $article = find($_POST['keyword']);
+}
 
 ?>
 
@@ -41,10 +45,20 @@ $article = query("SELECT * FROM article ORDER BY id DESC");
             <a class="nav-link" href="pages/popular.php">Popular</a>
           </li>
         </ul>
-        <a class="d-flex ms-auto btn btn-light" href="pages/account/login.php">
-          <img src="img/logo/loginLogo.png" alt="" width="22" height="24">
-          Login
-        </a>
+        <div class="d-flex ms-auto">
+          <form class="d-flex" role="search" method="post">
+            <input name="keyword" class="form-control me-2" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
+            <button name="search" class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+          <a class="mt-1 me-2" href="pages/newArticle.php">
+            <img src="img/logo/uploadLogo.png" alt="New Article" width="22" height="24" style="
+                filter: brightness(0) invert(1);">
+          </a>
+          <a class="d-flex btn btn-light" href="pages/account/login.php">
+            <img src="img/logo/loginLogo.png" alt="" width="22" height="24">
+            Login
+          </a>
+        </div>
       </div>
     </div>
   </nav>
@@ -55,23 +69,23 @@ $article = query("SELECT * FROM article ORDER BY id DESC");
     <h4>Hot This Week</h4>
     <div class="row g-0 bg-body-secondary position-relative mb-4">
       <div class="col-md-6 mb-md-0 p-md-4">
-        <img src="img/sample/sample.png" class="w-100" alt="...">
+        <img src="img/article/<?= $hotArticle[0]['img']; ?>" class="w-100" alt="...">
       </div>
       <div class="col-md-6 p-4 ps-md-0">
         <h5 class="mt-0">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, accusamus!
+          <?= $hotArticle[0]['title']; ?>
         </h5>
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatum eum perspiciatis alias fugiat ad doloremque sequi vero assumenda excepturi, tenetur atque est fugit libero nesciunt itaque debitis maiores nemo, similique rerum, vitae harum. Obcaecati exercitationem architecto soluta. Vel ut harum corrupti dolorem beatae, animi cumque error. Earum ut alias libero accusantium vitae voluptatem voluptates distinctio, mollitia dolorem voluptas harum perspiciatis sit et tempore quae animi quisquam, inventore blanditiis adipisci eaque ab sint commodi! Cumque ad necessitatibus perspiciatis, in minus laboriosam ipsa dolore id perferendis explicabo ipsum asperiores, officiis blanditiis molestiae, omnis culpa iste. Odio odit iste eveniet? Exercitationem, alias consectetur.
+          <?= $hotArticle[0]['content']; ?>
         </p>
-        <a href="#" class="stretched-link">Go somewhere</a>
+        <a href="pages/detail.php?id=<?= $hotArticle[0]['id']; ?>" class="stretched-link">Go somewhere</a>
       </div>
     </div>
 
     <h5>Other News</h5>
     <?php foreach ($article as $a) : ?>
       <div class="card d-inline-block ms-2 me-2" style="width: 18rem; height: 500px; overflow: hidden;">
-        <img src="img/article/<?= $a['img']; ?>" class="card-img-top" alt="...">
+        <img src="img/article/<?= $a['img']; ?>" class="card-img-top" alt="..." height="160px">
         <div class="card-body">
           <h5 class="card-title"><?= $a['title']; ?></h5>
           <p class="card-text"><?= $a['content']; ?></p>

@@ -1,3 +1,17 @@
+<?php
+require '../../function.php';
+
+if (isset($_POST['register'])) {
+    if (registerAccount($_POST) > 0) {
+        echo "<script>
+                document.location.href = 'login.php';
+            </script>";
+    } else {
+        echo "Failed to Register";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,38 +58,40 @@
     <!-- content -->
     <div class="container" style="height: 70px;"></div>
     <div class="container w-50 ">
-        <div class="row mb-3">
-            <div class="col form-floating">
-                <input type="text" class="form-control" id="firstName" placeholder="First name">
-                <label style="margin-left: 12px;" for="firstName">First Name</label>
+        <form action="" method="post">
+            <div class="row mb-3">
+                <div class="col form-floating">
+                    <input name="first_name" type="text" class="form-control" id="firstName" placeholder="First name" required>
+                    <label style="margin-left: 12px;" for="firstName">First Name</label>
+                </div>
+                <div class="col form-floating">
+                    <input name="last_name" type="text" class="form-control" id="lastName" placeholder="Last name" required>
+                    <label style="margin-left: 12px;" for="lastName">Last Name</label>
+                </div>
             </div>
-            <div class="col form-floating">
-                <input type="text" class="form-control" id="lastName" placeholder="Last name">
-                <label style="margin-left: 12px;" for="lastName">Last Name</label>
+            <div class="form-floating mb-3">
+                <input name="birthdate" type="date" class="form-control" id="floatingInput" placeholder="Username" required>
+                <label for="floatingInput">Date of birth</label>
             </div>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="date" class="form-control" id="floatingInput" placeholder="Username">
-            <label for="floatingInput">Date of birth</label>
-        </div>
-        <select class="form-select mb-3" aria-label="Default select example">
-            <option selected>Gender</option>
-            <option value="1">Male</option>
-            <option value="2">Female</option>
-        </select>
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="Username">
-            <label for="floatingInput">Username</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">Email Address</label>
-        </div>
-        <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Password</label>
-        </div>
-        <button type="submit" class="btn btn-primary mb-3">Register</button>
+            <select name="gender" class="form-select mb-3" aria-label="Default select example" required>
+                <option selected>Gender</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+            </select>
+            <div class="form-floating mb-3">
+                <input name="username" type="email" class="form-control" id="floatingInput" placeholder="Username" required>
+                <label for="floatingInput">Username</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+                <label for="floatingInput">Email Address</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                <label for="floatingPassword">Password</label>
+            </div>
+            <button name="register" type="submit" class="btn btn-primary mb-3">Register</button>
+        </form>
     </div>
 
     <!-- footer -->
