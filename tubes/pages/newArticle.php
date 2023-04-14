@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require '../function.php';
+require '../_backend/function.php';
 
 if (isset($_POST['submit'])) {
   if (inputArticle($_POST) > 0) {
@@ -32,9 +32,7 @@ if (isset($_POST['submit'])) {
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
     <div class="container">
-      <a class="navbar-brand" href="#">
-        <img src="../img/sample/sample.png" alt="Logo" width="30" height="24">
-      </a>
+      <img src="../img/logo/P-news-logo.png" alt="Logo" height="40">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -55,7 +53,7 @@ if (isset($_POST['submit'])) {
                 filter: brightness(0) invert(1);">
             </a>
             <a data-bs-toggle="collapse" href="#profileSetting" role="button" aria-expanded="false" aria-controls="collapseExample">
-              <img class="rounded-circle" src="img/sample/sample.png" width="40px" height="40px" alt="">
+              <img class="rounded-circle" src="../img/sample/sample.png" width="40px" height="40px" alt="">
             </a>
             <div class="position-absolute collapse mt-5" style="width: 100px; right: 100px;" id="profileSetting">
               <div class="card card-body">

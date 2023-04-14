@@ -1,5 +1,10 @@
 <?php
-require '../../function.php';
+session_start();
+if (isset($_SESSION['login'])) {
+    header("Location: ../../index.php");
+}
+
+require '../../_backend/function.php';
 
 if (isset($_POST['register'])) {
     if (registerAccount($_POST) > 0) {
@@ -32,9 +37,7 @@ if (isset($_POST['register'])) {
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="../../img/sample/sample.png" alt="Logo" width="30" height="24">
-            </a>
+            <img src="../../img/logo/P-news-logo.png" alt="Logo" height="40">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -61,11 +64,11 @@ if (isset($_POST['register'])) {
         <form action="" method="post">
             <div class="row mb-3">
                 <div class="col form-floating">
-                    <input name="first_name" type="text" class="form-control" id="firstName" placeholder="First name" required autofocus>
+                    <input name="first_name" type="text" class="form-control" id="firstName" placeholder="First name" autocomplete="off" required autofocus>
                     <label style="margin-left: 12px;" for="firstName">First Name</label>
                 </div>
                 <div class="col form-floating">
-                    <input name="last_name" type="text" class="form-control" id="lastName" placeholder="Last name" required>
+                    <input name="last_name" type="text" class="form-control" id="lastName" placeholder="Last name" autocomplete="off" required>
                     <label style="margin-left: 12px;" for="lastName">Last Name</label>
                 </div>
             </div>
@@ -79,11 +82,11 @@ if (isset($_POST['register'])) {
                 <option value="F">Female</option>
             </select>
             <div class="form-floating mb-3">
-                <input name="username" type="email" class="form-control" id="floatingInput" placeholder="Username" required>
+                <input name="username" type="text" class="form-control" id="floatingInput" placeholder="Username" autocomplete="off" required>
                 <label for="floatingInput">Username</label>
             </div>
             <div class="form-floating mb-3">
-                <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+                <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" autocomplete="off" required>
                 <label for="floatingInput">Email Address</label>
             </div>
             <div class="form-floating mb-3">

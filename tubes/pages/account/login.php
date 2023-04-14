@@ -4,7 +4,7 @@ if (isset($_SESSION['login'])) {
     echo '<script>history.back();</script>';
 }
 
-require '../../function.php';
+require '../../_backend/function.php';
 
 if (isset($_POST['login'])) {
     $login = loginAccount($_POST);
@@ -32,9 +32,7 @@ if (isset($_POST['login'])) {
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="../../img/sample/sample.png" alt="Logo" width="30" height="24">
-            </a>
+            <img src="../../img/logo/P-news-logo.png" alt="Logo" height="40">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

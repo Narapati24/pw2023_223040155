@@ -49,11 +49,11 @@ function registerAccount($data)
   $last_name = htmlspecialchars($data['last_name']);
   $birthdate = htmlspecialchars($data['birthdate']);
   $gender = htmlspecialchars($data['gender']);
-  $username = htmlspecialchars($data['username']);
+  $username = htmlspecialchars(strtolower($data['username']));
   $email = htmlspecialchars($data['email']);
   $password = htmlspecialchars($data['password']);
 
-  $query = "INSERT INTO users VALUES (null,'$first_name','$last_name','$birthdate','$gender','$username','$email','$password');";
+  $query = "INSERT INTO users VALUES (null,'$first_name','$last_name','$birthdate','$gender','$username','$email','$password', default);";
 
   mysqli_query($db, $query);
   echo mysqli_error($db);
@@ -67,18 +67,23 @@ function loginAccount($data)
   $username = htmlspecialchars($data['username']);
   $password = htmlspecialchars($data['password']);
 
-  if ($query = query("SELECT * FROM users WHERE username = '$username' && password = '$password'")[0]) {
-    // set session
-    $_SESSION['ids'] = $query['id'];
-    $_SESSION['login'] = true;
+  if ($query = query("SELECT users.id, users.first_name, roles.role_name FROM users, roles WHERE users.id_role = roles.id && users.username = '$username'")[0]) {
+    if (query("SELECT * FROM users
+                                WHERE username = '$username' && password = '$password'
+                                || email = '$username' && password = '$password'")[0]) {
+      // set session
+      $_SESSION['roles'] = $query['role_name'];
+      $_SESSION['ids'] = $query['id'];
+      $_SESSION['login'] = true;
 
-    echo '<script>history.back();</script>';
-    exit;
-  } else {
-    return [
-      'error' => true,
-      'pesan' => 'Username / Password salah!'
-    ];
+      echo '<script>history.back();</script>';
+      exit;
+    } else {
+      return [
+        'error' => true,
+        'pesan' => 'Username / Password salah!'
+      ];
+    }
   }
 }
 
@@ -91,7 +96,7 @@ function inputArticle($data)
   $content = $data['contentArticle'];
   $idAuthor = htmlspecialchars($data['idAuthor']);
 
-  $query = "INSERT INTO article VALUES (null,'$title','$img','$content', 'now()','$idAuthor');";
+  $query = "INSERT INTO article VALUES (null,'$title','$img','$content', now(),'$idAuthor');";
 
   mysqli_query($db, $query);
   echo mysqli_error($db);
