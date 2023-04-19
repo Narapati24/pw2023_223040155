@@ -49,7 +49,7 @@ if (isset($_POST['register'])) {
         }
 
         .register-form {
-            height: 520px;
+            height: 540px;
             transition: 600ms ease-in;
         }
     </style>
@@ -132,8 +132,12 @@ if (isset($_POST['register'])) {
                 <label for="floatingInput">Email Address</label>
             </div>
             <div class="form-floating mb-3">
-                <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                <input name="password1" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
                 <label for="floatingPassword">Password</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input name="password2" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                <label for="floatingPassword">Confirmation Password</label>
             </div>
             <button name="register" type="submit" class="btn btn-primary mb-3">Register</button>
         </form>

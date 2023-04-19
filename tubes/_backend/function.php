@@ -51,9 +51,44 @@ function registerAccount($data)
   $gender = htmlspecialchars($data['gender']);
   $username = htmlspecialchars(strtolower($data['username']));
   $email = htmlspecialchars($data['email']);
-  $password = htmlspecialchars($data['password']);
+  $password1 = mysqli_real_escape_string($db, $data['password1']);
+  $password2 = mysqli_real_escape_string($db, $data['password2']);
 
-  $query = "INSERT INTO users VALUES (null,'$first_name','$last_name','$birthdate','$gender','$username','$email','$password', default);";
+  // username / password kosong
+  if (empty($username) || empty($password1) || empty($password2)) {
+    echo "<script>
+          alert('username / password need to fill');
+          </script>";
+    return false;
+  }
+
+  // username sudah ada
+  if (query("SELECT * FROM users WHERE username ='$username'")) {
+    echo "<script>
+          alert('username sudah dipakai');
+          </script>";
+    return false;
+  }
+
+  // konfirmasi password
+  if ($password1 !== $password2) {
+    echo "<script>
+          alert('konfirmasi password tidak sesuai');
+          </script>";
+    return false;
+  }
+
+  // panjang password
+  if (strlen($password1) < 5) {
+    echo "<script>
+          alert('password terlalu pendek');
+          </script>";
+    return false;
+  }
+
+  $realPassword = password_hash($password1, PASSWORD_DEFAULT);
+
+  $query = "INSERT INTO users VALUES (null,'$first_name','$last_name','$birthdate','$gender','$username','$email','$realPassword', default);";
 
   mysqli_query($db, $query);
   echo mysqli_error($db);
@@ -68,16 +103,28 @@ function loginAccount($data)
   $password = htmlspecialchars($data['password']);
 
   if ($query = query("SELECT users.id, users.first_name, roles.role_name FROM users, roles WHERE users.id_role = roles.id && users.username = '$username'")[0]) {
-    if (query("SELECT * FROM users
-                                WHERE username = '$username' && password = '$password'
-                                || email = '$username' && password = '$password'")[0]) {
-      // set session
-      $_SESSION['roles'] = $query['role_name'];
-      $_SESSION['ids'] = $query['id'];
-      $_SESSION['login'] = true;
+    if ($user = query("SELECT * FROM users
+                                WHERE username = '$username'
+                                || email = '$username'")[0]) {
+      if (query("SELECT * FROM users WHERE password = '$password'")) {
 
-      echo '<script>history.back();</script>';
-      exit;
+        // set session
+        $_SESSION['roles'] = $query['role_name'];
+        $_SESSION['ids'] = $query['id'];
+        $_SESSION['login'] = true;
+
+        echo '<script>history.back();</script>';
+        exit;
+      } elseif (password_verify($password, $user['password'])) {
+
+        // set session
+        $_SESSION['roles'] = $query['role_name'];
+        $_SESSION['ids'] = $query['id'];
+        $_SESSION['login'] = true;
+
+        echo '<script>history.back();</script>';
+        exit;
+      }
     } else {
       return [
         'error' => true,
