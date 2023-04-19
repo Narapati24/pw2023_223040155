@@ -3,7 +3,7 @@ session_start();
 
 require '_backend/function.php';
 // tampung ke variable
-$article = query("SELECT * FROM article ORDER BY id DESC LIMIT 8");
+$article = query("SELECT * FROM article ORDER BY id DESC LIMIT 11");
 $hotArticle = query("SELECT * FROM article ORDER BY rand()");
 
 ?>
@@ -28,14 +28,16 @@ $hotArticle = query("SELECT * FROM article ORDER BY rand()");
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
     <div class="container">
-      <img src="img/logo/P-news-logo.png" alt="Logo" height="40">
+      <a href="#">
+        <img src="img/logo/P-news-logo.png" alt="Logo" height="40">
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">News</a>
+            <a class="nav-link" aria-current="page" href="pages/news.php">News</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="pages/popular.php">Popular</a>
@@ -77,7 +79,7 @@ $hotArticle = query("SELECT * FROM article ORDER BY rand()");
     <h4>Hot This Week</h4>
     <div class="row g-0 bg-body-secondary position-relative mb-4" style="height: 450px;overflow: hidden;">
       <div class="col-md-6 mb-md-0 p-md-4">
-        <img src="img/article/<?= $hotArticle[0]['img']; ?>" class="w-100" alt="...">
+        <img src="img/article/<?= $hotArticle[0]['img']; ?>" class="w-100" alt="..." style="object-fit: cover;" height="400">
       </div>
       <div class="col-md-6 p-4 ps-md-0">
         <h5 class="mt-0">
@@ -86,7 +88,7 @@ $hotArticle = query("SELECT * FROM article ORDER BY rand()");
         <p>
           <?= substr($hotArticle[0]['content'], 0, 500); ?>
         </p>
-        <a href="pages/detail.php?id=<?= $hotArticle[0]['id']; ?>" class="stretched-link">Go somewhere</a>
+        <a href="pages/detail.php?id=<?= $hotArticle[0]['id']; ?>" class="stretched-link">see more</a>
       </div>
     </div>
 
@@ -100,6 +102,15 @@ $hotArticle = query("SELECT * FROM article ORDER BY rand()");
         </div>
       </div>
     <?php endforeach; ?>
+    <!-- see more news -->
+    <div class="card d-inline-block ms-3 me-3 mb-4" style="width: 18rem; height: 320px; overflow: hidden;">
+      <div class="d-flex" style="height: 100%; align-items: center; justify-content: center;">
+        <a href="pages/popular.php" style="text-align: center;">
+          <img src="img/logo/rightArrow.png" alt="" height="60" width="60">
+          <p>see more news</p>
+        </a>
+      </div>
+    </div>
   </div>
 
   <!-- footer -->

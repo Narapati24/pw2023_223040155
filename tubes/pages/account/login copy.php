@@ -1,20 +1,15 @@
 <?php
 session_start();
 if (isset($_SESSION['login'])) {
-    header("Location: ../../index.php");
+    echo '<script>history.back();</script>';
 }
 
 require '../../_backend/function.php';
 
-if (isset($_POST['register'])) {
-    if (registerAccount($_POST) > 0) {
-        echo "<script>
-                document.location.href = 'login.php';
-            </script>";
-    } else {
-        echo "Failed to Register";
-    }
+if (isset($_POST['login'])) {
+    $login = loginAccount($_POST);
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +19,7 @@ if (isset($_POST['register'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Account</title>
+    <title>Login</title>
     <!-- reset css -->
     <link rel="stylesheet" href="../../css/reset.css">
     <!-- bootstrap -->
@@ -63,40 +58,23 @@ if (isset($_POST['register'])) {
     <!-- content -->
     <div class="container" style="height: 70px;"></div>
     <div class="container w-50 ">
+        <!-- info error -->
+        <?php if (isset($login['error'])) : ?>
+            <p><?= $login['pesan']; ?></p>
+        <?php endif; ?>
+        <!-- form kogin -->
         <form action="" method="post">
-            <div class="row mb-3">
-                <div class="col form-floating">
-                    <input name="first_name" type="text" class="form-control" id="firstName" placeholder="First name" autocomplete="off" required autofocus>
-                    <label style="margin-left: 12px;" for="firstName">First Name</label>
-                </div>
-                <div class="col form-floating">
-                    <input name="last_name" type="text" class="form-control" id="lastName" placeholder="Last name" autocomplete="off" required>
-                    <label style="margin-left: 12px;" for="lastName">Last Name</label>
-                </div>
-            </div>
             <div class="form-floating mb-3">
-                <input name="birthdate" type="date" class="form-control" id="floatingInput" placeholder="Username" required>
-                <label for="floatingInput">Date of birth</label>
-            </div>
-            <select name="gender" class="form-select mb-3" aria-label="Default select example" required>
-                <option selected>Gender</option>
-                <option value="M">Male</option>
-                <option value="F">Female</option>
-            </select>
-            <div class="form-floating mb-3">
-                <input name="username" type="text" class="form-control" id="floatingInput" placeholder="Username" autocomplete="off" required>
+                <input name="username" type="text" class="form-control" id="floatingInput" placeholder="Username/name@example.com" autofocus autocomplete="off" required>
                 <label for="floatingInput">Username</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" autocomplete="off" required>
-                <label for="floatingInput">Email Address</label>
             </div>
             <div class="form-floating mb-3">
                 <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
                 <label for="floatingPassword">Password</label>
             </div>
-            <button name="register" type="submit" class="btn btn-primary mb-3">Register</button>
+            <button name="login" type="submit" class="btn btn-primary mb-3">Login</button>
         </form>
+        <p>dont have account? <a href="register.php">Register</a> here</p>
     </div>
 
     <!-- footer -->

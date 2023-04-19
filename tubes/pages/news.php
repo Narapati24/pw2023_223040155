@@ -3,15 +3,12 @@ session_start();
 
 require '../_backend/function.php';
 
-if (isset($_POST['submit'])) {
-  if (inputArticle($_POST) > 0) {
-    echo "succest";
-  } else {
-    echo "Failed to Register";
-  }
+// Search bar
+if (isset($_POST['search'])) {
+  $article = find($_POST['keyword']);
 }
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +16,7 @@ if (isset($_POST['submit'])) {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Article</title>
+  <title>Pati News Right</title>
   <!-- reset css -->
   <link rel="stylesheet" href="../css/reset.css">
   <!-- bootstrap -->
@@ -28,7 +25,7 @@ if (isset($_POST['submit'])) {
   <link rel="stylesheet" href="../css/custom/universal.css">
 </head>
 
-<body style="height: 100vh;">
+<body>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
     <div class="container">
@@ -41,7 +38,7 @@ if (isset($_POST['submit'])) {
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="news.php">News</a>
+            <a class="nav-link active" aria-current="page" href="#">News</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="popular.php">Popular</a>
@@ -78,26 +75,50 @@ if (isset($_POST['submit'])) {
 
   <!-- content -->
   <div class="container" style="height: 70px;"></div>
+  <!-- today -->
   <div class="container">
-    <form action="" method="post">
-      <input name="idAuthor" type="hidden" value="<?= $_SESSION['ids']; ?>">
-      <div class="form-floating mb-3">
-        <input name="title" type="text" class="form-control" id="floatingInput" placeholder="Title" required>
-        <label for="floatingInput">Title</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input name="img" type="text" class="form-control" id="floatingInput" placeholder="img" required>
-        <label for="floatingInput">img</label>
-      </div>
-      <div class="form-floating mb-3">
-        <textarea name="contentArticle" style="height: 200px;" type="textarea" class="form-control text-editor" id="floatingInput" placeholder="Description"></textarea>
-      </div>
-      <button name="submit" type="submit" class="btn btn-primary mb-3">Submit</button>
+    <form class="d-flex mb-3" role="search" method="post">
+      <input name="keyword" class="form-control me-2" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
+      <button name="search" class="btn btn-outline-success" type="submit">Search</button>
     </form>
+    <h4>Trending Today</h4>
+    <div class="card" style="width: 18rem;">
+      <img src="../img/sample/sample.png" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card with stretched link</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary stretched-link">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+  <br>
+  <!-- week -->
+  <div class="container">
+    <h4>Trending This Week</h4>
+    <div class="card" style="width: 18rem;">
+      <img src="../img/sample/sample.png" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card with stretched link</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary stretched-link">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+  <br>
+  <!-- month -->
+  <div class="container">
+    <h4>Trending This Month</h4>
+    <div class="card" style="width: 18rem;">
+      <img src="../img/sample/sample.png" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card with stretched link</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary stretched-link">Go somewhere</a>
+      </div>
+    </div>
   </div>
 
   <!-- footer -->
-  <div class="container" style="height: 115px;"></div>
   <footer>
     <div class="footer">
       <p>&copy; 2023 My Company. All Rights Reserved.</p>
@@ -106,14 +127,6 @@ if (isset($_POST['submit'])) {
 
   <!-- Java Script -->
   <script src="../js/bootstrap/bootstrap.min.js"></script>
-  <script src="../js/CKEditor/ckeditor.js"></script>
-  <script>
-    ClassicEditor
-      .create(document.querySelector('.text-editor'))
-      .catch(error => {
-        console.error(error);
-      });
-  </script>
 </body>
 
 </html>
