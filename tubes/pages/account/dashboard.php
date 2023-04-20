@@ -12,6 +12,7 @@ if ($_SESSION['roles'] === 'Author' || $_SESSION['roles'] === 'User') {
 
 $id = $_SESSION['ids'];
 $query = query("SELECT * FROM users, article WHERE users.id = '$id' && article.user_id = '$id'");
+$users = query("SELECT * FROM users");
 ?>
 
 <!DOCTYPE html>
@@ -99,7 +100,7 @@ $query = query("SELECT * FROM users, article WHERE users.id = '$id' && article.u
                             <p>Email Address : <?= $query[0]['email']; ?></p>
                             <p>Name : <?= $query[0]['first_name'] . ' ' . $query[0]['last_name']; ?></p>
                             <p>Gender : <?= $query[0]['gender']; ?></p>
-                            <p>Age : 19</p>
+                            <p>birthdate : <?= $query[0]['birthdate']; ?></p>
                             <button type="button" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                 Edit
                             </button>
@@ -118,12 +119,14 @@ $query = query("SELECT * FROM users, article WHERE users.id = '$id' && article.u
                     </div>
                     <!-- Users -->
                     <div class="tab-pane fade" id="list-users" role="tabpanel" aria-labelledby="list-messages-list">
-                        <div class="d-inline-block text-center col-sm-2">
-                            <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#profileUser" role="tab" aria-expanded="false" aria-controls="collapseExample">
-                                <img src="../../img/sample/sample.png" class="rounded-circle" width="100" height="100" alt="profile">
-                            </button>
-                            <p>User Name</p>
-                        </div>
+                        <?php foreach ($users as $u) { ?>
+                            <div class="d-inline-block text-center col-sm-2">
+                                <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#profileUser" role="tab" aria-expanded="false" aria-controls="collapseExample">
+                                    <img src="../../img/sample/sample.png" class="rounded-circle" width="100" height="100" alt="profile">
+                                </button>
+                                <p><?= $u['username']; ?></p>
+                            </div>
+                        <?php }; ?>
                     </div>
                     <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">Lorem ipsum dolor sit amet.</div>
                 </div>

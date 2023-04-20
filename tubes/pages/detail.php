@@ -2,6 +2,7 @@
 session_start();
 
 require '../_backend/function.php';
+require '../_backend/updateClicks.php';
 
 // return pages if no id
 if (!isset($_GET['id'])) {
@@ -10,8 +11,8 @@ if (!isset($_GET['id'])) {
 }
 
 $id = $_GET['id'];
+clicks("UPDATE article SET clicks = clicks + 1 WHERE id = $id")[0];
 $article = query("SELECT * FROM article WHERE id = $id")[0];
-
 ?>
 
 <!DOCTYPE html>

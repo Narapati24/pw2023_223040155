@@ -4,7 +4,7 @@ session_start();
 require '_backend/function.php';
 // tampung ke variable
 $article = query("SELECT * FROM article ORDER BY id DESC LIMIT 11");
-$hotArticle = query("SELECT * FROM article ORDER BY rand()");
+$hotArticle = query("SELECT * FROM article ORDER BY clicks DESC");
 
 ?>
 
@@ -86,7 +86,7 @@ $hotArticle = query("SELECT * FROM article ORDER BY rand()");
           <?= $hotArticle[0]['title']; ?>
         </h5>
         <p>
-          <?= substr($hotArticle[0]['content'], 0, 500); ?>
+          <?= substr($hotArticle[0]['content'], 0, 500); ?> ...
         </p>
         <a href="pages/detail.php?id=<?= $hotArticle[0]['id']; ?>" class="stretched-link">see more</a>
       </div>
@@ -94,18 +94,19 @@ $hotArticle = query("SELECT * FROM article ORDER BY rand()");
 
     <h5>Other News</h5>
     <?php foreach ($article as $a) : ?>
-      <div class="card d-inline-block ms-3 me-3 mb-4" style="width: 18rem; height: 320px; overflow: hidden;">
+      <div class="card d-inline-block ms-3 me-3 mb-4" style="width: 18rem; height: 400px; overflow: hidden;">
         <img src="img/article/<?= $a['img']; ?>" class="card-img-top" alt="..." height="160px">
         <div class="card-body">
           <h5 class="card-title"><?= $a['title']; ?></h5>
+          <p class="card-text"><?= substr($a['content'], 0, 90); ?> ...</p>
           <a href="pages/detail.php?id=<?= $a['id']; ?>" style="position: absolute; bottom: 10px;" class="btn btn-primary stretched-link">More Details</a>
         </div>
       </div>
     <?php endforeach; ?>
     <!-- see more news -->
-    <div class="card d-inline-block ms-3 me-3 mb-4" style="width: 18rem; height: 320px; overflow: hidden;">
+    <div class="card d-inline-block ms-3 me-3 mb-4" style="width: 18rem; height: 400px; overflow: hidden;">
       <div class="d-flex" style="height: 100%; align-items: center; justify-content: center;">
-        <a href="pages/popular.php" style="text-align: center;">
+        <a href="pages/news.php" style="text-align: center;">
           <img src="img/logo/rightArrow.png" alt="" height="60" width="60">
           <p>see more news</p>
         </a>

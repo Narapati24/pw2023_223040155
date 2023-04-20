@@ -8,6 +8,8 @@ if (isset($_POST['search'])) {
   $article = find($_POST['keyword']);
 }
 
+$article = query("SELECT * FROM article ORDER BY id DESC");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,43 +83,19 @@ if (isset($_POST['search'])) {
       <input name="keyword" class="form-control me-2" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
       <button name="search" class="btn btn-outline-success" type="submit">Search</button>
     </form>
-    <h4>Trending Today</h4>
-    <div class="card" style="width: 18rem;">
-      <img src="../img/sample/sample.png" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card with stretched link</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary stretched-link">Go somewhere</a>
+    <h4>Newes</h4>
+    <?php foreach ($article as $a) : ?>
+      <div class="card d-inline-block ms-3 me-3 mb-4" style="width: 18rem; height: 400px; overflow: hidden;">
+        <img src="../img/article/<?= $a['img']; ?>" class="card-img-top" alt="..." height="160px">
+        <div class="card-body">
+          <h5 class="card-title"><?= $a['title']; ?></h5>
+          <p class="card-text"><?= substr($a['content'], 0, 90); ?> ...</p>
+          <a href="pages/detail.php?id=<?= $a['id']; ?>" style="position: absolute; bottom: 10px;" class="btn btn-primary stretched-link">More Details</a>
+        </div>
       </div>
-    </div>
+    <?php endforeach; ?>
   </div>
   <br>
-  <!-- week -->
-  <div class="container">
-    <h4>Trending This Week</h4>
-    <div class="card" style="width: 18rem;">
-      <img src="../img/sample/sample.png" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card with stretched link</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary stretched-link">Go somewhere</a>
-      </div>
-    </div>
-  </div>
-  <br>
-  <!-- month -->
-  <div class="container">
-    <h4>Trending This Month</h4>
-    <div class="card" style="width: 18rem;">
-      <img src="../img/sample/sample.png" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card with stretched link</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary stretched-link">Go somewhere</a>
-      </div>
-    </div>
-  </div>
-
   <!-- footer -->
   <footer>
     <div class="footer">

@@ -38,18 +38,22 @@ if (isset($_POST['register'])) {
     <link rel="stylesheet" href="../../css/custom/universal.css">
     <style>
         .login-form {
-            height: 240px;
+            position: absolute;
+            width: 50%;
             overflow: hidden;
+            transition: 600ms ease-in;
         }
 
         .hidden-form {
-            height: 0px;
+            position: absolute;
+            width: 0%;
             overflow: hidden;
             transition: 600ms ease-in;
         }
 
         .register-form {
-            height: 540px;
+            position: absolute;
+            width: 50%;
             transition: 600ms ease-in;
         }
     </style>
@@ -100,7 +104,7 @@ if (isset($_POST['register'])) {
                 <label for="floatingPassword">Password</label>
             </div>
             <button name="login" type="submit" class="btn btn-primary mb-3">Login</button>
-            <p>dont have account? <b><span id="registerButton">Register</span></b> here</p>
+            <p>dont have account? <b><span id="registerButton" style="cursor: pointer;">Register</span></b> here</p>
         </form>
         <!-- form register -->
         <form action="" method="post" id="registerForm" class="hidden-form">

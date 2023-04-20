@@ -1,6 +1,8 @@
 <?php
 session_start();
 require '../../_backend/function.php';
+$idusers = $_SESSION['ids'];
+$query = query("SELECT * FROM users,article WHERE users.id = '$idusers' && users.id = article.user_id");
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +51,7 @@ require '../../_backend/function.php';
     </nav>
     <!-- content -->
     <div class="container" style="height: 70px;"></div>
-    <h4 class="container">Hello <?= $_SESSION['name']; ?>!</h4>
+    <h4 class="container">Hello <?= $query[0]['first_name']; ?>!</h4>
     <div class="container">
         <div class="row">
             <div class="row col-sm-4">
@@ -74,25 +76,27 @@ require '../../_backend/function.php';
                     <!-- Tab Profile -->
                     <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
                         <img src="../../img/sample/sample.png" class="rounded-circle" width="200" height="200" alt="profile">
-                        <p>Username : lio_keysa24</p>
-                        <p>Email Address : lioingrid2016@gmail.com</p>
-                        <p>Name : Narapati Anandi</p>
-                        <p>Gender : Male</p>
-                        <p>Age : 19</p>
+                        <p>Username : <?= $query[0]['username']; ?></p>
+                        <p>Email Address : <?= $query[0]['email']; ?></p>
+                        <p>Name : <?= $query[0]['first_name']; ?> <?= $query[0]['last_name']; ?></p>
+                        <p>Gender : <?= $query[0]['gender']; ?></p>
+                        <p>Birthdate : <?= $query[0]['birthdate']; ?></p>
                         <button type="button" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                             Edit
                         </button>
                     </div>
-                    <!-- Article -->
+                    <!-- Tab Article -->
                     <div class="tab-pane fade" id="list-article" role="tabpanel" aria-labelledby="list-profile-list">
-                        <div class="d-inline-block text-center col-sm-2">
-                            <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#articleInfo" aria-expanded="false" aria-controls="collapseExample">
-                                <img src="../../img/sample/sample.png" class="rounded-circle" width="100" height="100" alt="profile">
-                            </button>
-                            <p>Title</p>
-                        </div>
+                        <?php foreach ($query as $a) { ?>
+                            <div class="d-inline-block text-center col-sm-2">
+                                <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#articleInfo" aria-expanded="false" aria-controls="collapseExample">
+                                    <img src="../../img/article/<?= $a['img']; ?>" class="rounded-circle" width="100" height="100" alt="profile">
+                                </button>
+                                <p><?= $a['title']; ?></p>
+                            </div>
+                        <?php }; ?>
                     </div>
-                    <!-- Setting -->
+                    <!-- Tab Setting -->
                     <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">Lorem ipsum dolor sit amet.</div>
                 </div>
             </div>
