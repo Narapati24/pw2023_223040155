@@ -11,6 +11,7 @@
 
 body {
   height: 100%;
+  background-image: url("../../img/background/white_abstract.png");
 }
 
 nav {

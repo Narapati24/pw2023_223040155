@@ -81,9 +81,11 @@ $query = query("SELECT * FROM users,article WHERE users.id = '$idusers' && users
                         <p>Name : <?= $query[0]['first_name']; ?> <?= $query[0]['last_name']; ?></p>
                         <p>Gender : <?= $query[0]['gender']; ?></p>
                         <p>Birthdate : <?= $query[0]['birthdate']; ?></p>
-                        <button type="button" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                            Edit
-                        </button>
+                        <a href="#">
+                            <button type="button" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                Edit
+                            </button>
+                        </a>
                     </div>
                     <!-- Tab Article -->
                     <div class="tab-pane fade" id="list-article" role="tabpanel" aria-labelledby="list-profile-list">

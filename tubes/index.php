@@ -24,7 +24,7 @@ $hotArticle = query("SELECT * FROM article ORDER BY clicks DESC");
   <link rel="stylesheet" href="css/custom/universal.css">
 </head>
 
-<body>
+<body">
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
     <div class="container">
@@ -123,6 +123,6 @@ $hotArticle = query("SELECT * FROM article ORDER BY clicks DESC");
 
   <!-- Java Script -->
   <script src="js/bootstrap/bootstrap.min.js"></script>
-</body>
+  </body>
 
 </html>
