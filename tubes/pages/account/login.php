@@ -88,7 +88,7 @@ if (isset($_POST['register'])) {
 
     <!-- content -->
     <div class="container" style="height: 70px;"></div>
-    <div class="container w-50" style="height: 550px; overflow: hidden;">
+    <div class="container w-50" style="height: 550px; overflow: hidden; background-color: whitesmoke;">
         <!-- info error -->
         <?php if (isset($login['error'])) : ?>
             <p><?= $login['pesan']; ?></p>

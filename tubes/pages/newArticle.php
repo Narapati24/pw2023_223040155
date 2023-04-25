@@ -59,7 +59,7 @@ if (isset($_POST['submit'])) {
             </a>
             <div class="position-absolute collapse mt-5" style="width: 100px; right: 100px;" id="profileSetting">
               <div class="card card-body">
-                <a href="">Profile</a>
+                <a href="account/dashboard.php">Profile</a>
               </div>
               <div class="card card-body">
                 <a href="account/logout.php">Logout</a>
@@ -90,11 +90,13 @@ if (isset($_POST['submit'])) {
         <label for="floatingInput">img</label>
       </div>
       <div class="form-floating mb-3">
-        <textarea name="contentArticle" style="height: 200px;" type="textarea" class="form-control text-editor" id="floatingInput" placeholder="Description"></textarea>
+        <textarea name="contentArticle" type="textarea" class="form-control text-editor" id="floatingInput" placeholder="Description"></textarea>
       </div>
       <button name="submit" type="submit" class="btn btn-primary mb-3">Submit</button>
     </form>
   </div>
+
+  <div style="height: 110px;"></div>
 
   <!-- footer -->
   <div class="container" style="height: 115px;"></div>

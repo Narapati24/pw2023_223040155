@@ -5,7 +5,6 @@ function connect()
   return mysqli_connect('localhost', 'root', '', 'tubes');
 }
 
-
 function query($query)
 {
   $db = connect();
@@ -143,7 +142,7 @@ function inputArticle($data)
   $content = $data['contentArticle'];
   $idAuthor = htmlspecialchars($data['idAuthor']);
 
-  $query = "INSERT INTO article VALUES (null,'$title','$img','$content', now(),'$idAuthor');";
+  $query = "INSERT INTO article VALUES (null,'$title','$img','$content', now(),DEFAULT,'$idAuthor');";
 
   mysqli_query($db, $query);
   echo mysqli_error($db);
