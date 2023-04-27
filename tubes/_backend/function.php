@@ -24,22 +24,6 @@ function query($query)
   return $rows;
 }
 
-function find($data)
-{
-
-  $db = connect();
-
-  $query = "SELECT * FROM article WHERE title LIKE '%$data%'";
-
-  $result = mysqli_query($db, $query);
-  $rows = [];
-  while ($row = mysqli_fetch_assoc($result)) {
-    $rows[] = $row;
-  }
-
-  return $rows;
-}
-
 function registerAccount($data)
 {
   $db = connect();

@@ -2,13 +2,14 @@
 session_start();
 
 require '../_backend/function.php';
+require '../_backend/searchBar.php';
+
+$article = query("SELECT * FROM article ORDER BY id DESC");
 
 // Search bar
 if (isset($_POST['search'])) {
   $article = find($_POST['keyword']);
 }
-
-$article = query("SELECT * FROM article ORDER BY id DESC");
 
 ?>
 <!DOCTYPE html>
@@ -77,7 +78,6 @@ $article = query("SELECT * FROM article ORDER BY id DESC");
 
   <!-- content -->
   <div class="container" style="height: 70px;"></div>
-  <!-- today -->
   <div class="container">
     <form class="d-flex mb-3" role="search" method="post">
       <input name="keyword" class="form-control me-2" type="text" placeholder="Search" aria-label="Search" autocomplete="off">

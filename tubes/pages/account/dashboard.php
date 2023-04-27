@@ -1,6 +1,7 @@
 <?php
 session_start();
 require '../../_backend/function.php';
+require '../../_backend/searchBar.php';
 
 if (!isset($_SESSION['login']) && !isset($_SESSION['roles'])) {
     header("Location: login.php");
@@ -11,6 +12,12 @@ if ($_SESSION['roles'] === 'Author' || $_SESSION['roles'] === 'User') {
 }
 
 $id = $_SESSION['ids'];
+
+// Search bar
+if (isset($_POST['search'])) {
+    $query = findAdminArticle($_POST['keyword']);
+}
+
 $query = query("SELECT * FROM users, article WHERE users.id = '$id' && article.user_id = '$id'");
 $users = query("SELECT * FROM users");
 ?>
@@ -67,18 +74,9 @@ $users = query("SELECT * FROM users");
             <div class="col-sm-4">
                 <div class="list-group pe-2 mb-3" id="list-tab" role="tablist">
                     <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">Profile</a>
-                    <a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="#list-article" role="tab" aria-controls="list-profile">Article</a>
+                    <a class="list-group-item list-group-item-action id=" list-profile-list" data-bs-toggle="list" href="#list-article" role="tab" aria-controls="list-profile">Article</a>
                     <a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list" href="#list-users" role="tab" aria-controls="list-messages">Users</a>
                     <a class="list-group-item list-group-item-action" id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">Settings</a>
-                </div>
-                <!-- Article Info -->
-                <div class="collapse text-center border border-primary pt-2" id="articleInfo" role="tabpanel">
-                    <img src="../../img/sample/sample.png" class="rounded-circle" width="100" height="100" alt="profile">
-                    <p>Username : lio_keysa24</p>
-                    <p>Email Address : lioingrid2016@gmail.com</p>
-                    <p>Name : Narapati Anandi</p>
-                    <p>Gender : Male</p>
-                    <p>Age : 19</p>
                 </div>
                 <!-- User Info -->
                 <div class="collapse text-center border border-primary pt-2" id="profileUser" role="tabpanel">
@@ -91,9 +89,9 @@ $users = query("SELECT * FROM users");
                 </div>
             </div>
             <div class="col-sm-8">
-                <div class="tab-content" id="nav-tabContent">
+                <div class="tab-content" style="background-color: whitesmoke;" id="nav-tabContent">
                     <!-- tabs profile -->
-                    <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                    <div class="tab-pane fade show active text-center" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
                         <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
                             <img src="../../img/sample/sample.png" class="rounded-circle" width="200" height="200" alt="profile">
                             <p>Username : <?= $query[0]['username']; ?></p>
@@ -108,14 +106,23 @@ $users = query("SELECT * FROM users");
                     </div>
                     <!-- Article -->
                     <div class="tab-pane fade" id="list-article" role="tabpanel" aria-labelledby="list-profile-list">
-                        <?php foreach ($query as $a) { ?>
-                            <div class="d-inline-block text-center col-sm-2">
-                                <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#articleInfo" aria-expanded="false" aria-controls="collapseExample">
-                                    <img src="../../img/article/<?= $a['img']; ?>" class="rounded-circle" width="100" height="100" alt="profile">
-                                </button>
-                                <p><?= $a['title']; ?></p>
-                            </div>
-                        <?php }; ?>
+                        <form class="d-flex mb-3" role="search" method="post">
+                            <input name="keywordArticle" class="form-control me-2 keyword" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
+                        </form>
+                        <div class="articleContainer">
+                            <?php foreach ($query as $a) { ?>
+                                <div class="d-flex">
+                                    <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#articleInfo" aria-expanded="false" aria-controls="collapseExample">
+                                        <img src="../../img/article/<?= $a['img']; ?>" width="100" height="60" alt="profile">
+                                    </button>
+                                    <div style="line-height: 3px; margin-top: 12px;">
+                                        <p><?= $a['title']; ?></p>
+                                        <p>Editor : <?= $a['first_name'] . ' ' . $a['last_name']; ?></p>
+                                        <p><?= $a['insert_date']; ?></p>
+                                    </div>
+                                </div>
+                            <?php }; ?>
+                        </div>
                     </div>
                     <!-- Users -->
                     <div class="tab-pane fade" id="list-users" role="tabpanel" aria-labelledby="list-messages-list">
@@ -136,6 +143,7 @@ $users = query("SELECT * FROM users");
 
     <!-- Java Script -->
     <script src="../../js/bootstrap/bootstrap.min.js"></script>
+    <script src="../../js/custom/searchBar/adminPage.js"></script>
 </body>
 
 </html>

@@ -2,10 +2,11 @@
 session_start();
 
 require '../_backend/function.php';
+require '../_backend/searchBar.php';
 
 // Search bar
 if (isset($_POST['search'])) {
-  $article = find($_POST['keyword']);
+  $article = findPopular($_POST['keyword']);
 }
 
 ?>

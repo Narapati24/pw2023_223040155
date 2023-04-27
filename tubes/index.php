@@ -22,6 +22,7 @@ $hotArticle = query("SELECT * FROM article ORDER BY clicks DESC");
   <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
   <!-- Custom css -->
   <link rel="stylesheet" href="css/custom/universal.css">
+  <link rel="icon" href="img/logo/P-news-logo.png">
 </head>
 
 <body">
@@ -93,23 +94,25 @@ $hotArticle = query("SELECT * FROM article ORDER BY clicks DESC");
     </div>
 
     <h5>Other News</h5>
-    <?php foreach ($article as $a) : ?>
-      <div class="card d-inline-block ms-3 me-3 mb-4" style="width: 18rem; height: 400px; overflow: hidden;">
-        <img src="img/article/<?= $a['img']; ?>" class="card-img-top" alt="..." height="160px">
-        <div class="card-body">
-          <h5 class="card-title"><?= $a['title']; ?></h5>
-          <p class="card-text"><?= substr($a['content'], 0, 90); ?> ...</p>
-          <a href="pages/detail.php?id=<?= $a['id']; ?>" style="position: absolute; bottom: 10px;" class="btn btn-primary stretched-link">More Details</a>
+    <div class="row">
+      <?php foreach ($article as $a) : ?>
+        <div class=" card ms-3 me-3 mb-4 col-4" style="width: 298px; height: 400px; overflow: hidden;">
+          <img src="img/article/<?= $a['img']; ?>" class="card-img-top" alt="..." height="160px">
+          <div class="card-body">
+            <h5 class="card-title"><?= substr($a['title'], 0, 38); ?> ...</h5>
+            <p class="card-text"><?= substr($a['content'], 0, 90); ?> ...</p>
+            <a href="pages/detail.php?id=<?= $a['id']; ?>" style="position: absolute; bottom: 10px;" class="btn btn-primary stretched-link">More Details</a>
+          </div>
         </div>
-      </div>
-    <?php endforeach; ?>
-    <!-- see more news -->
-    <div class="card d-inline-block ms-3 me-3 mb-4" style="width: 18rem; height: 400px; overflow: hidden;">
-      <div class="d-flex" style="height: 100%; align-items: center; justify-content: center;">
-        <a href="pages/news.php" style="text-align: center;">
-          <img src="img/logo/rightArrow.png" alt="" height="60" width="60">
-          <p>see more news</p>
-        </a>
+      <?php endforeach; ?>
+      <!-- see more news -->
+      <div class="card d-inline-block ms-3 me-3 mb-4" style="width: 298px; height: 400px; overflow: hidden;">
+        <div class="d-flex" style="height: 100%; align-items: center; justify-content: center;">
+          <a href="pages/news.php" style="text-align: center;">
+            <img src="img/logo/rightArrow.png" alt="" height="60" width="60">
+            <p>see more news</p>
+          </a>
+        </div>
       </div>
     </div>
   </div>

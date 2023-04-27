@@ -72,9 +72,9 @@ $query = query("SELECT * FROM users,article WHERE users.id = '$idusers' && users
                 </div>
             </div>
             <div class="col-sm-8">
-                <div class="tab-content" id="nav-tabContent">
+                <div class="tab-content" id="nav-tabContent" style="background-color: whitesmoke;">
                     <!-- Tab Profile -->
-                    <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                    <div class="tab-pane fade show active text-center" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
                         <img src="../../img/sample/sample.png" class="rounded-circle" width="200" height="200" alt="profile">
                         <p>Username : <?= $query[0]['username']; ?></p>
                         <p>Email Address : <?= $query[0]['email']; ?></p>
@@ -89,14 +89,23 @@ $query = query("SELECT * FROM users,article WHERE users.id = '$idusers' && users
                     </div>
                     <!-- Tab Article -->
                     <div class="tab-pane fade" id="list-article" role="tabpanel" aria-labelledby="list-profile-list">
-                        <?php foreach ($query as $a) { ?>
-                            <div class="d-inline-block text-center col-sm-2">
-                                <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#articleInfo" aria-expanded="false" aria-controls="collapseExample">
-                                    <img src="../../img/article/<?= $a['img']; ?>" class="rounded-circle" width="100" height="100" alt="profile">
-                                </button>
-                                <p><?= $a['title']; ?></p>
-                            </div>
-                        <?php }; ?>
+                        <form class="d-flex mb-3" role="search" method="post">
+                            <input name="keyword" class="form-control me-2 keyword" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
+                        </form>
+                        <div class="articleContainer">
+                            <?php foreach ($query as $a) { ?>
+                                <div class="d-flex">
+                                    <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#articleInfo" aria-expanded="false" aria-controls="collapseExample">
+                                        <img src="../../img/article/<?= $a['img']; ?>" width="100" height="60" alt="profile">
+                                    </button>
+                                    <div style="line-height: 3px; margin-top: 12px;">
+                                        <p><?= $a['title']; ?></p>
+                                        <p>Editor : <?= $a['first_name'] . ' ' . $a['last_name']; ?></p>
+                                        <p><?= $a['insert_date']; ?></p>
+                                    </div>
+                                </div>
+                            <?php }; ?>
+                        </div>
                     </div>
                     <!-- Tab Setting -->
                     <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">Lorem ipsum dolor sit amet.</div>
@@ -107,6 +116,7 @@ $query = query("SELECT * FROM users,article WHERE users.id = '$idusers' && users
 
     <!-- Java Script -->
     <script src="../../js/bootstrap/bootstrap.min.js"></script>
+    <script src="../../js/custom/searchBar/userPage.js"></script>
 </body>
 
 </html>
