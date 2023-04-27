@@ -79,14 +79,14 @@ if (isset($_POST['submit'])) {
   <!-- content -->
   <div class="container" style="height: 70px;"></div>
   <div class="container">
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
       <input name="idAuthor" type="hidden" value="<?= $_SESSION['ids']; ?>">
       <div class="form-floating mb-3">
         <input name="title" type="text" class="form-control" id="floatingInput" placeholder="Title" required>
         <label for="floatingInput">Title</label>
       </div>
       <div class="form-floating mb-3">
-        <input name="img" type="text" class="form-control" id="floatingInput" placeholder="img" required>
+        <input name="img" type="file" class="form-control" id="floatingInput" placeholder="img" required>
         <label for="floatingInput">img</label>
       </div>
       <div class="form-floating mb-3">

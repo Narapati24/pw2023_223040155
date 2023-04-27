@@ -90,7 +90,7 @@ $query = query("SELECT * FROM users,article WHERE users.id = '$idusers' && users
                     <!-- Tab Article -->
                     <div class="tab-pane fade" id="list-article" role="tabpanel" aria-labelledby="list-profile-list">
                         <form class="d-flex mb-3" role="search" method="post">
-                            <input name="keyword" class="form-control me-2 keyword" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
+                            <input name="keywordArticle" class="form-control me-2 keywordArticle" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
                         </form>
                         <div class="articleContainer">
                             <?php foreach ($query as $a) { ?>

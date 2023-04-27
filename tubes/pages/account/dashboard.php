@@ -19,7 +19,8 @@ if (isset($_POST['search'])) {
 }
 
 $query = query("SELECT * FROM users, article WHERE users.id = '$id' && article.user_id = '$id'");
-$users = query("SELECT * FROM users");
+$users = query("SELECT * FROM users, roles WHERE users.id_role = roles.id");
+
 ?>
 
 <!DOCTYPE html>
@@ -93,7 +94,7 @@ $users = query("SELECT * FROM users");
                     <!-- tabs profile -->
                     <div class="tab-pane fade show active text-center" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
                         <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-                            <img src="../../img/sample/sample.png" class="rounded-circle" width="200" height="200" alt="profile">
+                            <img src="../../img/profile/<?= $query[0]['users.img']; ?>" class="rounded-circle" width="200" height="200" alt="profile">
                             <p>Username : <?= $query[0]['username']; ?></p>
                             <p>Email Address : <?= $query[0]['email']; ?></p>
                             <p>Name : <?= $query[0]['first_name'] . ' ' . $query[0]['last_name']; ?></p>
@@ -107,7 +108,7 @@ $users = query("SELECT * FROM users");
                     <!-- Article -->
                     <div class="tab-pane fade" id="list-article" role="tabpanel" aria-labelledby="list-profile-list">
                         <form class="d-flex mb-3" role="search" method="post">
-                            <input name="keywordArticle" class="form-control me-2 keyword" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
+                            <input name="keyword" class="form-control me-2 keywordArticle" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
                         </form>
                         <div class="articleContainer">
                             <?php foreach ($query as $a) { ?>
@@ -129,9 +130,10 @@ $users = query("SELECT * FROM users");
                         <?php foreach ($users as $u) { ?>
                             <div class="d-inline-block text-center col-sm-2">
                                 <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#profileUser" role="tab" aria-expanded="false" aria-controls="collapseExample">
-                                    <img src="../../img/sample/sample.png" class="rounded-circle" width="100" height="100" alt="profile">
+                                    <img src="../../img/profile/<?= $u['img']; ?>" class="rounded-circle" width="100" height="100" alt="profile">
                                 </button>
                                 <p><?= $u['username']; ?></p>
+                                <p style="font-size: 12px; margin-top: -10px;"><?= $u['role_name']; ?></p>
                             </div>
                         <?php }; ?>
                     </div>

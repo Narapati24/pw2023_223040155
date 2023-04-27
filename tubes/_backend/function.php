@@ -53,6 +53,14 @@ function registerAccount($data)
     return false;
   }
 
+  // email sudah dipakai
+  if (query("SELECT * FROM users WHERE email ='$email'")) {
+    echo "<script>
+          alert('email sudah dipakai');
+          </script>";
+    return false;
+  }
+
   // konfirmasi password
   if ($password1 !== $password2) {
     echo "<script>
@@ -71,7 +79,7 @@ function registerAccount($data)
 
   $realPassword = password_hash($password1, PASSWORD_DEFAULT);
 
-  $query = "INSERT INTO users VALUES (null,'$first_name','$last_name','$birthdate','$gender','$username','$email','$realPassword', default);";
+  $query = "INSERT INTO users VALUES (null,DEFAULT,$first_name','$last_name','$birthdate','$gender','$username','$email','$realPassword', default);";
 
   mysqli_query($db, $query);
   echo mysqli_error($db);
@@ -117,14 +125,73 @@ function loginAccount($data)
   }
 }
 
+function upload()
+{
+  $name_file = $_FILES['img']['name'];
+  $type_file = $_FILES['img']['type'];
+  $size_file = $_FILES['img']['size'];
+  $error = $_FILES['img']['error'];
+  $tmp_file = $_FILES['img']['tmp_name'];
+
+  // check file existence
+  if ($error == 4) {
+    echo "<script>
+            alert('pilih gambar terlebih dahulu');
+          </script>";
+    return false;
+  }
+
+  // chect name file
+  $list_type = ['jpg', 'jpeg', 'png'];
+  $file_extension = explode('.', $name_file);
+  $file_extension = strtolower(end($file_extension));
+  if (!in_array($file_extension, $list_type)) {
+    echo "<script>
+            alert('Harus File Gambar');
+          </script>";
+    return false;
+  }
+
+  // check type file
+  if ($type_file != 'image/jpeg' && $type_file != 'image/png') {
+    echo "<script>
+    alert('Harus File Gambar');
+          </script>";
+    return false;
+  }
+
+  // check size file
+  // 5mb
+  if ($size_file > 5000000) {
+    echo "<script>
+    alert('Ukuran terlalu besar');
+          </script>";
+    return false;
+  }
+
+  // ready for upload
+  // generate new name file
+  $new_name_file = uniqid();
+  $new_name_file .= '.';
+  $new_name_file .= $file_extension;
+  move_uploaded_file($tmp_file, '../img/article/' . $name_file);
+
+  return $new_name_file;
+}
+
 function inputArticle($data)
 {
   $db = connect();
 
   $title = htmlspecialchars($data['title']);
-  $img = htmlspecialchars($data['img']);
+  // $img = htmlspecialchars($data['img']);
   $content = $data['contentArticle'];
   $idAuthor = htmlspecialchars($data['idAuthor']);
+
+  $img = upload();
+  if (!$img) {
+    return false;
+  }
 
   $query = "INSERT INTO article VALUES (null,'$title','$img','$content', now(),DEFAULT,'$idAuthor');";
 
