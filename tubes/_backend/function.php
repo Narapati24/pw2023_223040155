@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Jakarta');
 
 function connect()
 {
@@ -193,7 +194,7 @@ function inputArticle($data)
     return false;
   }
   // article
-  $queryArticle = "INSERT INTO article VALUES (null,'$title','$img','$content', now(),DEFAULT,'$idAuthor');";
+  $queryArticle = "INSERT INTO article VALUES (null,'$title','$img','$content', now(),'$idAuthor');";
 
   mysqli_query($db, $queryArticle);
   echo mysqli_error($db);

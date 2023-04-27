@@ -3,8 +3,10 @@ session_start();
 
 require '_backend/function.php';
 // tampung ke variable
-$ids = $_SESSION['ids'];
-$profile = query("SELECT img FROM users WHERE id = $ids");
+if (isset($_SESSION['login'])) {
+  $ids = $_SESSION['ids'];
+  $profile = query("SELECT img FROM users WHERE id = $ids");
+}
 $article = query("SELECT * FROM article ORDER BY id DESC LIMIT 11");
 $hotArticle = query("SELECT * FROM article, popularity WHERE article.id = popularity.article_id ORDER BY popularity.monthly DESC");
 
@@ -55,7 +57,7 @@ $hotArticle = query("SELECT * FROM article, popularity WHERE article.id = popula
                 filter: brightness(0) invert(1);">
             </a>
             <a data-bs-toggle="collapse" href="#profileSetting" role="button" aria-expanded="false" aria-controls="collapseExample">
-              <img class="rounded-circle" src="img/profile/<?= $profile[0]['img']; ?>" width="40px" height="40px" alt="">
+              <img class="rounded-circle" src="img/profile/<?= $profile[0]['img']; ?>" width="40px" height="40px" alt="Profile">
             </a>
             <div class="position-absolute collapse mt-5" style="width: 100px; right: 100px;" id="profileSetting">
               <div class="card card-body">
@@ -67,7 +69,7 @@ $hotArticle = query("SELECT * FROM article, popularity WHERE article.id = popula
             </div>
           <?php } else { ?>
             <a class="d-flex btn btn-light" href="pages/account/login.php">
-              <img src="img/logo/loginLogo.png" alt="" width="22" height="24">
+              <img src="img/logo/loginLogo.png" alt="login logo" width="22" height="24">
               Login
             </a>
           <?php }; ?>
@@ -82,7 +84,7 @@ $hotArticle = query("SELECT * FROM article, popularity WHERE article.id = popula
     <h4>Hot This Week</h4>
     <div class="row g-0 bg-body-secondary position-relative mb-4" style="height: 450px;overflow: hidden;">
       <div class="col-md-6 mb-md-0 p-md-4">
-        <img src="img/article/<?= $hotArticle[0]['img']; ?>" class="w-100" alt="..." style="object-fit: cover;" height="400">
+        <img src="img/article/<?= $hotArticle[0]['img']; ?>" class="w-100" alt="<?= $hotArticle[0]['title']; ?>" style="object-fit: cover;" height="400">
       </div>
       <div class="col-md-6 p-4 ps-md-0">
         <h5 class="mt-0">
@@ -98,7 +100,7 @@ $hotArticle = query("SELECT * FROM article, popularity WHERE article.id = popula
     <h5>Other News</h5>
     <?php foreach ($article as $a) : ?>
       <div class="d-inline-block card ms-3 me-3 mb-4" style="width: 18rem; height: 400px; overflow: hidden;">
-        <img src="img/article/<?= $a['img']; ?>" class="card-img-top" alt="..." height="160px">
+        <img src="img/article/<?= $a['img']; ?>" class="card-img-top" alt="<?= $a['title']; ?>" height="160px">
         <div class="card-body">
           <h5 class="card-title"><?= substr($a['title'], 0, 38); ?> ...</h5>
           <p class="card-text"><?= substr($a['content'], 0, 90); ?> ...</p>
@@ -110,7 +112,7 @@ $hotArticle = query("SELECT * FROM article, popularity WHERE article.id = popula
     <div class="card d-inline-block ms-3 me-3 mb-4" style="width: 18rem; height: 400px; overflow: hidden;">
       <div class="d-flex" style="height: 100%; align-items: center; justify-content: center;">
         <a href="pages/news.php" style="text-align: center;">
-          <img src="img/logo/rightArrow.png" alt="" height="60" width="60">
+          <img src="img/logo/rightArrow.png" alt="more logo" height="60" width="60">
           <p>see more news</p>
         </a>
       </div>
