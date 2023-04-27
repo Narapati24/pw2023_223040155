@@ -6,7 +6,7 @@ require '_backend/function.php';
 $ids = $_SESSION['ids'];
 $profile = query("SELECT img FROM users WHERE id = $ids");
 $article = query("SELECT * FROM article ORDER BY id DESC LIMIT 11");
-$hotArticle = query("SELECT * FROM article ORDER BY clicks DESC");
+$hotArticle = query("SELECT * FROM article, popularity WHERE article.id = popularity.article_id ORDER BY popularity.monthly DESC");
 
 ?>
 

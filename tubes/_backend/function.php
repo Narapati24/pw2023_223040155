@@ -174,7 +174,7 @@ function upload()
   $new_name_file = uniqid();
   $new_name_file .= '.';
   $new_name_file .= $file_extension;
-  move_uploaded_file($tmp_file, '../img/article/' . $name_file);
+  move_uploaded_file($tmp_file, '../img/article/' . $new_name_file);
 
   return $new_name_file;
 }
@@ -192,10 +192,15 @@ function inputArticle($data)
   if (!$img) {
     return false;
   }
+  // article
+  $queryArticle = "INSERT INTO article VALUES (null,'$title','$img','$content', now(),DEFAULT,'$idAuthor');";
 
-  $query = "INSERT INTO article VALUES (null,'$title','$img','$content', now(),DEFAULT,'$idAuthor');";
+  mysqli_query($db, $queryArticle);
+  echo mysqli_error($db);
+  $article_id = mysqli_insert_id($db);
 
-  mysqli_query($db, $query);
+  $queryPopularity = "INSERT INTO popularity VALUES ('$article_id', DEFAULT, DEFAULT, now(), DEFAULT);";
+  mysqli_query($db, $queryPopularity);
   echo mysqli_error($db);
   return mysqli_affected_rows($db);
 }

@@ -11,7 +11,8 @@ if (!isset($_GET['id'])) {
 }
 
 $id = $_GET['id'];
-clicks("UPDATE article SET clicks = clicks + 1 WHERE id = $id")[0];
+updateClicks($id)[0];
+clicks("UPDATE popularity SET daily = daily + 1, monthly = monthly + 1, lifetime = lifetime + 1 WHERE article_id = $id");
 $article = query("SELECT * FROM article WHERE id = $id")[0];
 ?>
 
