@@ -2,6 +2,7 @@
 session_start();
 require '../../_backend/function.php';
 $idusers = $_SESSION['ids'];
+$profile = query("SELECT * FROM users WHERE id = $idusers");
 $query = query("SELECT * FROM users,article WHERE users.id = '$idusers' && users.id = article.user_id");
 ?>
 
@@ -74,18 +75,22 @@ $query = query("SELECT * FROM users,article WHERE users.id = '$idusers' && users
             <div class="col-sm-8">
                 <div class="tab-content" id="nav-tabContent" style="background-color: whitesmoke;">
                     <!-- Tab Profile -->
-                    <div class="tab-pane fade show active text-center" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-                        <img src="../../img/sample/sample.png" class="rounded-circle" width="200" height="200" alt="profile">
-                        <p>Username : <?= $query[0]['username']; ?></p>
-                        <p>Email Address : <?= $query[0]['email']; ?></p>
-                        <p>Name : <?= $query[0]['first_name']; ?> <?= $query[0]['last_name']; ?></p>
-                        <p>Gender : <?= $query[0]['gender']; ?></p>
-                        <p>Birthdate : <?= $query[0]['birthdate']; ?></p>
-                        <a href="#">
+                    <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                        <div class="tab-pane fade show active p-5" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p>Username : <?= $query[0]['username']; ?></p>
+                                    <p>Email Address : <?= $query[0]['email']; ?></p>
+                                    <p>Name : <?= $query[0]['first_name'] . ' ' . $query[0]['last_name']; ?></p>
+                                    <p>Gender : <?= $query[0]['gender']; ?></p>
+                                    <p>birthdate : <?= $query[0]['birthdate']; ?></p>
+                                </div>
+                                <img src="../../img/profile/<?= $profile[0]['img']; ?>" class="rounded-circle border border-success" width="200" height="200" alt="profile">
+                            </div>
                             <button type="button" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                 Edit
                             </button>
-                        </a>
+                        </div>
                     </div>
                     <!-- Tab Article -->
                     <div class="tab-pane fade" id="list-article" role="tabpanel" aria-labelledby="list-profile-list">
