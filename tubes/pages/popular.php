@@ -92,9 +92,9 @@ $articleTrendingMonth = query("SELECT * FROM article,popularity WHERE article.id
         <div class="d-inline-block card ms-3 me-3 mb-4" style="width: 18rem; height: 400px; overflow: hidden;">
           <img src="../img/article/<?= $a['img']; ?>" class="card-img-top" alt="<?= $a['title']; ?>" height="160px">
           <div class="card-body">
-            <h5 class="card-title"><?= substr($a['title'], 0, 38); ?></h5>
-            <p class="card-text"><?= substr($a['content'], 0, 90); ?> ...</p>
-            <a href="../pages/detail.php?id=<?= $a['id']; ?>" style="position: absolute; bottom: 10px;" class="btn btn-primary stretched-link">More Details</a>
+            <h5 class="card-title"><?= substr($a['title'], 0, 38); ?>...</h5>
+            <p class="card-text"><?= substr($a['content'], 0, 90); ?>...</p>
+            <a href="detail.php?id=<?= $a['id']; ?>" style="position: absolute; bottom: 10px;" class="btn btn-primary stretched-link">More Details</a>
           </div>
         </div>
       <?php }; ?>
@@ -120,9 +120,9 @@ $articleTrendingMonth = query("SELECT * FROM article,popularity WHERE article.id
         <div class="d-inline-block card ms-3 me-3 mb-4" style="width: 18rem; height: 400px; overflow: hidden;">
           <img src="../img/article/<?= $a['img']; ?>" class="card-img-top" alt="<?= $a['title']; ?>" height="160px">
           <div class="card-body">
-            <h5 class="card-title"><?= substr($a['title'], 0, 38); ?></h5>
-            <p class="card-text"><?= substr($a['content'], 0, 90); ?> ...</p>
-            <a href="../pages/detail.php?id=<?= $a['id']; ?>" style="position: absolute; bottom: 10px;" class="btn btn-primary stretched-link">More Details</a>
+            <h5 class="card-title"><?= substr($a['title'], 0, 38); ?>...</h5>
+            <p class="card-text"><?= substr($a['content'], 0, 90); ?>...</p>
+            <a href="detail.php?id=<?= $a['id']; ?>" style="position: absolute; bottom: 10px;" class="btn btn-primary stretched-link">More Details</a>
           </div>
         </div>
       <?php }; ?>

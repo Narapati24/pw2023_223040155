@@ -11,7 +11,7 @@ if (!isset($_GET['id'])) {
 }
 
 $id = $_GET['id'];
-$up = updateClicks($id)[0];
+$up = updateClicks($id);
 clicks("UPDATE popularity SET daily = daily + 1, monthly = monthly + 1, lifetime = lifetime + 1, update_data = now() WHERE article_id = $id");
 $article = query("SELECT * FROM article WHERE id = $id")[0];
 ?>
@@ -45,7 +45,7 @@ $article = query("SELECT * FROM article WHERE id = $id")[0];
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="news.php">News</a>
+            <a class="nav-link" aria-current="page" href="news.php">News</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="popular.php">Popular</a>

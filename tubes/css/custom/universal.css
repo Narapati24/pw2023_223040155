@@ -8,7 +8,12 @@
   
   10%
   #CFE0C3*/
-
+h4 {
+  font-family: 'Montserrat', sans-serif;
+}
+.navbar a {
+  font-family: 'Kanit', sans-serif;
+}
 body {
   height: 100%;
   background-image: url("../../img/background/white_abstract.png");
