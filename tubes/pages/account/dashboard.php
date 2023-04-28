@@ -18,6 +18,7 @@ if (isset($_POST['search'])) {
     $query = findAdminArticle($_POST['keyword']);
 }
 
+$profile = query("SELECT * FROM users WHERE id = $id");
 $query = query("SELECT * FROM users, article WHERE users.id = '$id' && article.user_id = '$id'");
 $users = query("SELECT * FROM users, roles WHERE users.id_role = roles.id");
 
@@ -80,26 +81,32 @@ $users = query("SELECT * FROM users, roles WHERE users.id_role = roles.id");
                     <a class="list-group-item list-group-item-action" id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">Settings</a>
                 </div>
                 <!-- User Info -->
-                <div class="collapse text-center border border-primary pt-2" id="profileUser" role="tabpanel">
-                    <img src="../../img/sample/sample.png" class="rounded-circle" width="100" height="100" alt="profile">
-                    <p>Username : lio_keysa24</p>
-                    <p>Email Address : lioingrid2016@gmail.com</p>
-                    <p>Name : Narapati Anandi</p>
-                    <p>Gender : Male</p>
-                    <p>Age : 19</p>
-                </div>
+                <?php foreach ($users as $u) { ?>
+                    <div class="collapse text-center border border-primary pt-2" id="profileUser-<?= $u['username']; ?>" role="tabpanel">
+                        <img src="../../img/profile/<?= $u['img']; ?>" class="rounded-circle" width="100" height="100" alt="profile">
+                        <p>Username : <?= $u['username']; ?></p>
+                        <p>Email Address : <?= $u['email']; ?></p>
+                        <p>Name : <?= $u['first_name'] . ' ' . $u['last_name']; ?></p>
+                        <p>Gender : <?= $u['gender']; ?></p>
+                        <p>Birthdate : <?= $u['birthdate']; ?></p>
+                    </div>
+                <?php }; ?>
             </div>
             <div class="col-sm-8">
                 <div class="tab-content" style="background-color: whitesmoke;" id="nav-tabContent">
                     <!-- tabs profile -->
-                    <div class="tab-pane fade show active text-center" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-                        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-                            <img src="../../img/profile/<?= $query[0]['users.img']; ?>" class="rounded-circle" width="200" height="200" alt="profile">
-                            <p>Username : <?= $query[0]['username']; ?></p>
-                            <p>Email Address : <?= $query[0]['email']; ?></p>
-                            <p>Name : <?= $query[0]['first_name'] . ' ' . $query[0]['last_name']; ?></p>
-                            <p>Gender : <?= $query[0]['gender']; ?></p>
-                            <p>birthdate : <?= $query[0]['birthdate']; ?></p>
+                    <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                        <div class="tab-pane fade show active p-5" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p>Username : <?= $query[0]['username']; ?></p>
+                                    <p>Email Address : <?= $query[0]['email']; ?></p>
+                                    <p>Name : <?= $query[0]['first_name'] . ' ' . $query[0]['last_name']; ?></p>
+                                    <p>Gender : <?= $query[0]['gender']; ?></p>
+                                    <p>birthdate : <?= $query[0]['birthdate']; ?></p>
+                                </div>
+                                <img src="../../img/profile/<?= $profile[0]['img']; ?>" class="rounded-circle border border-success" width="200" height="200" alt="profile">
+                            </div>
                             <button type="button" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                 Edit
                             </button>
@@ -127,15 +134,20 @@ $users = query("SELECT * FROM users, roles WHERE users.id_role = roles.id");
                     </div>
                     <!-- Users -->
                     <div class="tab-pane fade" id="list-users" role="tabpanel" aria-labelledby="list-messages-list">
-                        <?php foreach ($users as $u) { ?>
-                            <div class="d-inline-block text-center col-sm-2">
-                                <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#profileUser" role="tab" aria-expanded="false" aria-controls="collapseExample">
-                                    <img src="../../img/profile/<?= $u['img']; ?>" class="rounded-circle" width="100" height="100" alt="profile">
-                                </button>
-                                <p><?= $u['username']; ?></p>
-                                <p style="font-size: 12px; margin-top: -10px;"><?= $u['role_name']; ?></p>
-                            </div>
-                        <?php }; ?>
+                        <div class="p-2">
+                            <form class="d-flex mb-3" role="search" method="post">
+                                <input name="keyword" class="form-control me-2 keywordArticle" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
+                            </form>
+                            <?php foreach ($users as $u) { ?>
+                                <div class="d-inline-block text-center col-sm-2">
+                                    <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#profileUser-<?= $u['username']; ?>" role="tab" aria-expanded="false" aria-controls="collapseExample">
+                                        <img src="../../img/profile/<?= $u['img']; ?>" class="rounded-circle border border-success" width="100" height="100" alt="profile">
+                                    </button>
+                                    <p><?= $u['username']; ?></p>
+                                    <p style="font-size: 12px; margin-top: -10px;"><?= $u['role_name']; ?></p>
+                                </div>
+                            <?php }; ?>
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">Lorem ipsum dolor sit amet.</div>
                 </div>
