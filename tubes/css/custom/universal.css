@@ -23,6 +23,26 @@ nav {
   background-color: #40798C;
 }
 
+.login-form {
+  position: absolute;
+  width: 50%;
+  overflow: hidden;
+  transition: 600ms ease-in;
+}
+
+.hidden-form {
+  position: absolute;
+  width: 0%;
+  overflow: hidden;
+  transition: 600ms ease-in;
+}
+
+.register-form {
+  position: absolute;
+  width: 50%;
+  transition: 600ms ease-in;
+}
+
 footer {
   background-color: #1F363D;
   color: #fff;

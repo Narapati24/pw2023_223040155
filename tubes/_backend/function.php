@@ -1,15 +1,7 @@
-<!-- font -->
-<!-- monserrat 700 bold italic -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,700&display=swap" rel="stylesheet">
-<!-- kanit regular 400 -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
-
 <?php
 date_default_timezone_set('Asia/Jakarta');
+session_start();
+
 
 function connect()
 {
@@ -33,6 +25,16 @@ function query($query)
   }
 
   return $rows;
+}
+
+function base_url($url = null)
+{
+  $base_url = "http://localhost:81/pw2023_223040155/tubes";
+  if ($url != null) {
+    return $base_url . "/" . $url;
+  } else {
+    return $base_url;
+  }
 }
 
 function registerAccount($data)
