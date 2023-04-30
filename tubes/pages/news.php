@@ -9,6 +9,7 @@ if (isset($_POST['search'])) {
   $article = find($_POST['keyword']);
 }
 
+// header
 $title = 'PeNEWS';
 require_once '../_header.php';
 ?>
@@ -33,15 +34,6 @@ require_once '../_header.php';
   <?php endforeach; ?>
 </div>
 <br>
+
 <!-- footer -->
-<footer>
-  <div class="footer">
-    <p>&copy; 2023 My Company. All Rights Reserved.</p>
-  </div>
-</footer>
-
-<!-- Java Script -->
-<script src="../js/bootstrap/bootstrap.min.js"></script>
-</body>
-
-</html>
+<?php require_once '../_footer.php'; ?>

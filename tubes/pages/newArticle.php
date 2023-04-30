@@ -9,6 +9,7 @@ if (isset($_POST['submit'])) {
   }
 }
 
+// header
 $title = 'New Article';
 require_once '../_header.php';
 ?>
@@ -33,18 +34,9 @@ require_once '../_header.php';
   </form>
 </div>
 
-<div style="height: 110px;"></div>
-
-<!-- footer -->
-<div class="container" style="height: 115px;"></div>
-<footer>
-  <div class="footer">
-    <p>&copy; 2023 My Company. All Rights Reserved.</p>
-  </div>
-</footer>
+<div style="height: 223px;"></div>
 
 <!-- Java Script -->
-<script src="../js/bootstrap/bootstrap.min.js"></script>
 <script src="../js/CKEditor/ckeditor.js"></script>
 <script>
   ClassicEditor
@@ -53,6 +45,6 @@ require_once '../_header.php';
       console.error(error);
     });
 </script>
-</body>
 
-</html>
+<!-- footer -->
+<?php require_once '../_footer.php'; ?>

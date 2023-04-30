@@ -13,6 +13,7 @@ $up = updateClicks($id);
 clicks("UPDATE popularity SET daily = daily + 1, monthly = monthly + 1, lifetime = lifetime + 1, update_data = now() WHERE article_id = $id");
 $article = query("SELECT * FROM article WHERE id = $id")[0];
 
+// header
 $title = $article['title'];
 require_once '../_header.php';
 ?>
@@ -28,14 +29,4 @@ require_once '../_header.php';
 </div>
 
 <!-- footer -->
-<footer>
-  <div class="footer">
-    <p>&copy; 2023 My Company. All Rights Reserved.</p>
-  </div>
-</footer>
-
-<!-- Java Script -->
-<script src="../js/bootstrap/bootstrap.min.js"></script>
-</body>
-
-</html>
+<?php require_once '../_footer.php'; ?>

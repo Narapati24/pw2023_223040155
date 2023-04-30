@@ -11,6 +11,7 @@ if (isset($_POST['search'])) {
 $articleTrendingToday = query("SELECT * FROM article,popularity WHERE article.id = popularity.article_id ORDER BY popularity.daily DESC LIMIT 4");
 $articleTrendingMonth = query("SELECT * FROM article,popularity WHERE article.id = popularity.article_id ORDER BY popularity.monthly DESC LIMIT 4");
 
+// header
 $title = 'PeNEWS';
 require_once '../_header.php';
 ?>
@@ -67,14 +68,4 @@ require_once '../_header.php';
 </div>
 
 <!-- footer -->
-<footer>
-  <div class="footer">
-    <p>&copy; 2023 My Company. All Rights Reserved.</p>
-  </div>
-</footer>
-
-<!-- Java Script -->
-<script src="../js/bootstrap/bootstrap.min.js"></script>
-</body>
-
-</html>
+<?php require_once '../_footer.php'; ?>
