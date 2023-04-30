@@ -1,5 +1,8 @@
 <?php
 require '_backend/function.php';
+require '_backend/updateClicks.php';
+
+updateClicks();
 // tampung ke variable
 $article = query("SELECT * FROM article ORDER BY id DESC LIMIT 11");
 $hotArticle = query("SELECT * FROM article, popularity WHERE article.id = popularity.article_id ORDER BY popularity.monthly DESC");
