@@ -101,7 +101,7 @@ function registerAccount($data)
 
 function loginAccount($data)
 {
-  $db = connect();
+  connect();
 
   $username = htmlspecialchars($data['username']);
   $password = htmlspecialchars($data['password']);
