@@ -35,5 +35,9 @@ require_once '../_header.php';
 </div>
 <br>
 
+<script>
+  document.getElementById('news').classList.add('active')
+</script>
+
 <!-- footer -->
 <?php require_once '../_footer.php'; ?>

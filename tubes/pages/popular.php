@@ -67,5 +67,9 @@ require_once '../_header.php';
   </div>
 </div>
 
+<script>
+  document.getElementById('popular').classList.add('active')
+</script>
+
 <!-- footer -->
 <?php require_once '../_footer.php'; ?>

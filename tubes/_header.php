@@ -43,10 +43,10 @@ if (isset($_SESSION['login'])) {
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="<?= base_url('pages/news.php'); ?>">News</a>
+            <a class="nav-link" id="news" aria-current="page" href="<?= base_url('pages/news.php'); ?>">News</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('pages/popular.php'); ?>">Popular</a>
+            <a class="nav-link" id="popular" href="<?= base_url('pages/popular.php'); ?>">Popular</a>
           </li>
         </ul>
         <div class="d-flex ms-auto">
