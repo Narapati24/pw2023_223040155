@@ -1,7 +1,7 @@
 <?php
 require '../function.php';
 require '../searchBar.php';
-$query = findAdminArticle($_GET['keyword']);
+$query = findAdminArticle($_GET['keyword'], $_GET['keyword2']);
 ?>
 
 <?php foreach ($query as $a) { ?>

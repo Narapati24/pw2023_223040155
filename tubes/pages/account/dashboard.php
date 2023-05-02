@@ -14,7 +14,7 @@ $id = $_SESSION['ids'];
 
 // Search bar
 if (isset($_POST['search'])) {
-    $query = findAdminArticle($_POST['keyword']);
+    $query = findAdminArticle($_POST['keyword'], $_POST['keyword2']);
 }
 
 $profile = query("SELECT * FROM users WHERE id = $id");
@@ -72,7 +72,8 @@ require_once '_header.php';
                 <!-- Article -->
                 <div class="tab-pane fade" id="list-article" role="tabpanel" aria-labelledby="list-profile-list">
                     <form class="d-flex mb-3" role="search" method="post">
-                        <input name="keyword" class="form-control me-2 keywordArticle" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
+                        <input name="keyword" class="form-control me-2 keywordArticle" type="text" placeholder="Search" autocomplete="off">
+                        <input name="keyword2" class="form-control me-2 keywordArticle2" type="text" placeholder="Editor Name" autocomplete="off">
                     </form>
                     <div class="articleContainer">
                         <?php foreach ($query as $a) { ?>
