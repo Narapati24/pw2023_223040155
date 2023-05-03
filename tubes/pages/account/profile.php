@@ -64,7 +64,7 @@ require_once '_header.php';
                                 <div style="line-height: 3px; margin-top: 12px;">
                                     <p><?= $a['title']; ?></p>
                                     <p>Editor : <?= $a['first_name'] . ' ' . $a['last_name']; ?></p>
-                                    <p><?= $a['insert_date']; ?></p>
+                                    <p style="font-size: 12px; margin-top: 20px;"><?= $a['insert_date']; ?></p>
                                 </div>
                             </div>
                         <?php }; ?>

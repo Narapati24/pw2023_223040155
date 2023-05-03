@@ -18,7 +18,7 @@ if (isset($_POST['search'])) {
 }
 
 $profile = query("SELECT * FROM users WHERE id = $id");
-$query = query("SELECT * FROM users, article WHERE users.id = '$id' && article.user_id = '$id'");
+$query = query("SELECT * FROM users, article WHERE users.id = '$id' && article.user_id = '$id' ORDER BY article.id DESC");
 $users = query("SELECT * FROM users, roles WHERE users.id_role = roles.id");
 
 $title = 'Profile';
@@ -73,7 +73,7 @@ require_once '_header.php';
                 <div class="tab-pane fade" id="list-article" role="tabpanel" aria-labelledby="list-profile-list">
                     <form class="d-flex mb-3" role="search" method="post">
                         <input name="keyword" class="form-control me-2 keywordArticle" type="text" placeholder="Search" autocomplete="off">
-                        <input name="keyword2" class="form-control me-2 keywordArticle2" type="text" placeholder="Editor Name" autocomplete="off">
+                        <input name="keyword2" value="<?= $query[0]['first_name']; ?>" class="form-control me-2 keywordArticle2" type="text" placeholder="Editor Name" autocomplete="off">
                     </form>
                     <div class="articleContainer">
                         <?php foreach ($query as $a) { ?>
@@ -84,7 +84,7 @@ require_once '_header.php';
                                 <div style="line-height: 3px; margin-top: 12px;">
                                     <p><?= $a['title']; ?></p>
                                     <p>Editor : <?= $a['first_name'] . ' ' . $a['last_name']; ?></p>
-                                    <p><?= $a['insert_date']; ?></p>
+                                    <p style="font-size: 12px; margin-top: 20px;"><?= $a['insert_date']; ?></p>
                                 </div>
                             </div>
                         <?php }; ?>
@@ -94,17 +94,25 @@ require_once '_header.php';
                 <div class="tab-pane fade" id="list-users" role="tabpanel" aria-labelledby="list-messages-list">
                     <div class="p-2">
                         <form class="d-flex mb-3" role="search" method="post">
-                            <input name="keyword" class="form-control me-2 keywordArticle" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
+                            <input name="keyword" class="form-control me-2 keywordUsers" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
+                            <select name="keyword2" class="form-select keywordUsers2" aria-label="Default select example">
+                                <option selected>All</option>
+                                <option value="1">Admin</option>
+                                <option value="2">Author</option>
+                                <option value="3">User</option>
+                            </select>
                         </form>
-                        <?php foreach ($users as $u) { ?>
-                            <div class="d-inline-block text-center col-sm-2">
-                                <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#profileUser-<?= $u['username']; ?>" role="tab" aria-expanded="false" aria-controls="collapseExample">
-                                    <img src="../../img/profile/<?= $u['img']; ?>" class="rounded-circle border border-success" width="100" height="100" alt="profile">
-                                </button>
-                                <p><?= $u['username']; ?></p>
-                                <p style="font-size: 12px; margin-top: -10px;"><?= $u['role_name']; ?></p>
-                            </div>
-                        <?php }; ?>
+                        <div class="usersContainer">
+                            <?php foreach ($users as $u) { ?>
+                                <div class="d-inline-block text-center col-sm-2" style="width: min-content;">
+                                    <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#profileUser-<?= $u['username']; ?>" role="tab" aria-expanded="false" aria-controls="collapseExample">
+                                        <img src="../../img/profile/<?= $u['img']; ?>" class="rounded-circle border border-success" width="100" height="100" alt="profile">
+                                    </button>
+                                    <p><?= $u['username']; ?></p>
+                                    <p style="font-size: 12px; margin-top: -10px;"><?= $u['role_name']; ?></p>
+                                </div>
+                            <?php }; ?>
+                        </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">Lorem ipsum dolor sit amet.</div>

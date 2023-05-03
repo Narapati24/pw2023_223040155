@@ -48,6 +48,22 @@ function findAdminArticle($data, $data2)
   return $rows;
 }
 
+function findAdminUsers($data, $data2)
+{
+
+  $db = connect();
+
+  $query = "SELECT * FROM users, roles WHERE users.id_role = roles.id && (users.username LIKE '%$data%' && users.id_role LIKE '$data2')";
+
+  $result = mysqli_query($db, $query);
+  $rows = [];
+  while ($row = mysqli_fetch_assoc($result)) {
+    $rows[] = $row;
+  }
+
+  return $rows;
+}
+
 function findUserArticle($data)
 {
   session_start();

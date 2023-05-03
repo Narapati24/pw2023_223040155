@@ -1,6 +1,6 @@
 <?php
-require '../function.php';
-require '../searchBar.php';
+require '../../function.php';
+require '../../searchBar.php';
 $query = findAdminArticle($_GET['keyword'], $_GET['keyword2']);
 ?>
 
@@ -12,7 +12,7 @@ $query = findAdminArticle($_GET['keyword'], $_GET['keyword2']);
     <div style="line-height: 3px; margin-top: 12px;">
       <p><?= $a['title']; ?></p>
       <p>Editor : <?= $a['first_name'] . ' ' . $a['last_name']; ?></p>
-      <p><?= $a['insert_date']; ?></p>
+      <p style="font-size: 12px; margin-top: 20px;"><?= $a['insert_date']; ?></p>
     </div>
   </div>
 <?php }; ?>
