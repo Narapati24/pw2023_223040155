@@ -5,7 +5,7 @@ require '_backend/updateClicks.php';
 updateClicks();
 // tampung ke variable
 $article = query("SELECT * FROM article ORDER BY id DESC LIMIT 11");
-$hotArticle = query("SELECT * FROM article, popularity WHERE article.id = popularity.article_id ORDER BY popularity.monthly DESC");
+$hotArticle = query("SELECT * FROM article, popularity WHERE article.id = popularity.article_id ORDER BY popularity.daily DESC");
 
 // header
 $title = 'PeNEWS';
@@ -15,15 +15,15 @@ require_once '_header.php';
 <!-- content -->
 <div class="container" style="height: 70px;"></div>
 <div class="container">
-  <h4>Hot This Week</h4>
+  <h4>Hot Today</h4>
   <div class="row g-0 bg-body-secondary position-relative mb-4" style="height: 450px;overflow: hidden;">
     <div class="col-md-6 mb-md-0 p-md-4">
       <img src="img/article/<?= $hotArticle[0]['img']; ?>" class="w-100" alt="<?= $hotArticle[0]['title']; ?>" style="object-fit: cover;" height="400">
     </div>
     <div class="col-md-6 p-4 ps-md-0">
-      <h5 class="mt-0">
+      <h3 class="mt-0">
         <?= $hotArticle[0]['title']; ?>
-      </h5>
+      </h3>
       <p>
         <?= substr($hotArticle[0]['content'], 0, 500); ?>...
       </p>

@@ -66,7 +66,6 @@ function findAdminUsers($data, $data2)
 
 function findUserArticle($data)
 {
-  session_start();
   $db = connect();
   $idusers = $_SESSION['ids'];
 

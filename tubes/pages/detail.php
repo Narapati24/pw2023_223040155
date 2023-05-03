@@ -34,7 +34,7 @@ require_once '../_header.php';
 </style>
 <!-- content -->
 <div class="container" style="height: 70px;"></div>
-<div class="container w-50">
+<div class="container w-50 rounded" style="background-color: white; border: 5px solid whitesmoke;">
   <h1>
     <?= $article['title']; ?>
   </h1>
@@ -75,12 +75,16 @@ require_once '../_header.php';
       <p class="user-time text-end" style="margin-top: -15px;">2023-5-2 14.00</p>
     </section>
   </div>
-  <form action="" method="post" style="position: absolute; bottom: 0; text-align: center;">
-    <input name="idUser" type="hidden" value="<?= $_SESSION['ids']; ?>">
-    <input name="idArticle" type="hidden" value="<?= $id; ?>">
-    <textarea type="text" placeholder="comment here" style="width: 260px; border-radius: 10px; resize: none; margin-bottom: -20px;"></textarea>
-    <button style="border-radius: 50%; background-color: lightskyblue; margin-bottom: 14px;"><img src="../img/logo/sentLogo.png" width="30" height="30" alt="sent Logo"></button>
-  </form>
+  <?php if (isset($_SESSION['login'])) { ?>
+    <form action="" method="post" style="position: absolute; bottom: 0; text-align: center;">
+      <input name="idUser" type="hidden" value="<?= $_SESSION['ids']; ?>">
+      <input name="idArticle" type="hidden" value="<?= $id; ?>">
+      <textarea type="text" placeholder="comment here" style="width: 260px; border-radius: 10px; resize: none; margin-bottom: -20px;"></textarea>
+      <button style="border-radius: 50%; background-color: lightskyblue; margin-bottom: 14px;"><img src="../img/logo/sentLogo.png" width="30" height="30" alt="sent Logo"></button>
+    </form>
+  <?php } else {; ?>
+    <p style="text-align: center; margin-top: 30px;">Login For Comment</p>
+  <?php }; ?>
 </div>
 
 <!-- footer -->

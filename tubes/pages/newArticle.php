@@ -40,7 +40,14 @@ require_once '../_header.php';
 <script src="../js/CKEditor/ckeditor.js"></script>
 <script>
   ClassicEditor
-    .create(document.querySelector('.text-editor'))
+    .create(document.querySelector('.text-editor'), {
+      ckfinder: {
+        uploadUrl: '../_backend/fileupload.php'
+      }
+    })
+    .then(editor => {
+      console.log(editor);
+    })
     .catch(error => {
       console.error(error);
     });

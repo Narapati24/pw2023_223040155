@@ -58,6 +58,14 @@ function registerAccount($data)
     return false;
   }
 
+  // username terlalu panjang
+  if (strlen($username) > 20) {
+    echo "<script>
+    alert('username terlalu panjang');
+          </script>";
+    return false;
+  }
+
   // username sudah ada
   if (query("SELECT * FROM users WHERE username ='$username'")) {
     echo "<script>
@@ -200,6 +208,13 @@ function inputArticle($data)
   // $img = htmlspecialchars($data['img']);
   $content = $data['contentArticle'];
   $idAuthor = htmlspecialchars($data['idAuthor']);
+
+  if (strlen($title) >= 100) {
+    echo "<script>
+    alert('judul terlalu panjang');
+          </script>";
+    return false;
+  }
 
   $img = upload();
   if (!$img) {
