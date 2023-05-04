@@ -232,3 +232,11 @@ function inputArticle($data)
   echo mysqli_error($db);
   return mysqli_affected_rows($db);
 }
+
+function dd($data)
+{
+  echo '<pre>';
+  var_dump($data);
+  echo '</pre>';
+  die;
+}
