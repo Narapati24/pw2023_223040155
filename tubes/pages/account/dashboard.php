@@ -96,7 +96,7 @@ require_once '_header.php';
                         <form class="d-flex mb-3" role="search" method="post">
                             <input name="keyword" class="form-control me-2 keywordUsers" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
                             <select name="keyword2" class="form-select keywordUsers2" aria-label="Default select example">
-                                <option selected>All</option>
+                                <option value=" " selected>All</option>
                                 <option value="1">Admin</option>
                                 <option value="2">Author</option>
                                 <option value="3">User</option>
