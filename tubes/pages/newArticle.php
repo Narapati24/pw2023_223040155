@@ -28,6 +28,10 @@ require_once '../_header.php';
       <label for="floatingInput">img</label>
     </div>
     <div class="form-floating mb-3">
+      <input name="shortContentArticle" type="text" class="form-control" id="floatingInput" placeholder="Short Description" required maxlength="90">
+      <label for="floatingInput">Short Description</label>
+    </div>
+    <div class="form-floating mb-3">
       <textarea name="contentArticle" type="textarea" class="form-control text-editor" id="floatingInput" placeholder="Description"></textarea>
     </div>
     <button name="submit" type="submit" class="btn btn-primary mb-3">Submit</button>

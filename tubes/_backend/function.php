@@ -206,6 +206,7 @@ function inputArticle($data)
 
   $title = htmlspecialchars($data['title']);
   // $img = htmlspecialchars($data['img']);
+  $shortContent = htmlspecialchars($data['shortContentArticle']);
   $content = $data['contentArticle'];
   $idAuthor = htmlspecialchars($data['idAuthor']);
 
@@ -216,12 +217,19 @@ function inputArticle($data)
     return false;
   }
 
+  if (strlen($shortContent) > 90) {
+    echo "<script>
+    alert('descripsi terlalu panjang');
+          </script>";
+    return false;
+  }
+
   $img = upload();
   if (!$img) {
     return false;
   }
   // article
-  $queryArticle = "INSERT INTO article VALUES (null,'$title','$img','$content', now(),'$idAuthor');";
+  $queryArticle = "INSERT INTO article VALUES (null,'$title','$img','$shortContent','$content', now(),'$idAuthor');";
 
   mysqli_query($db, $queryArticle);
   echo mysqli_error($db);

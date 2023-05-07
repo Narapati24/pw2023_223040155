@@ -18,6 +18,20 @@ require_once '../_header.php';
 ?>
 
 <style>
+  .images {
+    margin: auto;
+    text-align: center;
+  }
+
+  .image {
+    margin: auto;
+    text-align: center;
+  }
+
+  .image img {
+    height: 400px;
+  }
+
   #comment {
     position: fixed;
     background-color: #e6e1e1;
@@ -34,13 +48,16 @@ require_once '../_header.php';
 </style>
 <!-- content -->
 <div class="container" style="height: 70px;"></div>
-<div class="container w-50 rounded" style="background-color: white; border: 5px solid whitesmoke;">
+<div class="container w-50 rounded article" style="background-color: white; border: 5px solid whitesmoke;">
   <h1>
     <?= $article['title']; ?>
   </h1>
-  <img src="../img/article/<?= $article['img']; ?>" alt="<?= $article['title']; ?>" width="730">
+  <div class="images">
+    <img src="../img/article/<?= $article['img']; ?>" alt="<?= $article['title']; ?>" width="730">
+  </div>
   <p><?= $article['content']; ?></p>
 </div>
+<!-- comment -->
 <div class="container" id="comment">
   <h4 style="text-align: center;">Comment</h4>
   <div style="max-height: 400px; overflow-y: scroll;">
