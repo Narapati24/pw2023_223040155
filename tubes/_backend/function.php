@@ -209,6 +209,7 @@ function inputArticle($data)
   $shortContent = htmlspecialchars($data['shortContentArticle']);
   $content = $data['contentArticle'];
   $idAuthor = htmlspecialchars($data['idAuthor']);
+  $visibility = $data['visibility'];
 
   if (strlen($title) >= 100) {
     echo "<script>
@@ -229,7 +230,7 @@ function inputArticle($data)
     return false;
   }
   // article
-  $queryArticle = "INSERT INTO article VALUES (null,'$title','$img','$shortContent','$content', now(),'$idAuthor');";
+  $queryArticle = "INSERT INTO article VALUES (null,'$title','$img','$shortContent','$content', now(),'$idAuthor','$visibility');";
 
   mysqli_query($db, $queryArticle);
   echo mysqli_error($db);

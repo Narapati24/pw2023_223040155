@@ -24,8 +24,9 @@ require_once '../_header.php';
       <label for="floatingInput">Title</label>
     </div>
     <div class="form-floating mb-3">
-      <input name="img" type="file" class="form-control" id="floatingInput" placeholder="img" required>
+      <input name="img" type="file" class="form-control img" id="floatingInput" placeholder="img" onchange="previewImage()" required>
       <label for="floatingInput">img</label>
+      <img src="../img/" alt="" style="max-height: 300px;" class="d-block m-auto img-preview">
     </div>
     <div class="form-floating mb-3">
       <input name="shortContentArticle" type="text" class="form-control" id="floatingInput" placeholder="Short Description" required maxlength="90">
@@ -34,6 +35,11 @@ require_once '../_header.php';
     <div class="form-floating mb-3">
       <textarea name="contentArticle" type="textarea" class="form-control text-editor" id="floatingInput" placeholder="Description"></textarea>
     </div>
+    <select name="visibility" class="form-select mb-3" aria-label="Default select example" required>
+      <option value="1" selected>Private</option>
+      <option value="2">Unlisted</option>
+      <option value="3">Public</option>
+    </select>
     <button name="submit" type="submit" class="btn btn-primary mb-3">Submit</button>
   </form>
 </div>
@@ -41,6 +47,9 @@ require_once '../_header.php';
 <div style="height: 223px;"></div>
 
 <!-- Java Script -->
+<!-- img Preview -->
+<script src="../js/custom/previewImg/newArticlePage.js"></script>
+<!-- ckEditor -->
 <script src="../js/CKEditor/ckeditor.js"></script>
 <script>
   ClassicEditor

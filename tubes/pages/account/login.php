@@ -19,6 +19,8 @@ if (isset($_POST['register'])) {
     }
 }
 
+$title = 'login';
+
 require_once '../../_header.php';
 ?>
 
