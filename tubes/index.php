@@ -4,8 +4,8 @@ require '_backend/updateClicks.php';
 
 updateClicks();
 // tampung ke variable
-$article = query("SELECT * FROM article ORDER BY id DESC LIMIT 11");
-$hotArticle = query("SELECT * FROM article, popularity WHERE article.id = popularity.article_id ORDER BY popularity.daily DESC");
+$article = query("SELECT * FROM article WHERE visibility_id = 3 ORDER BY id DESC LIMIT 11");
+$hotArticle = query("SELECT * FROM article, popularity WHERE visibility_id = 3 && article.id = popularity.article_id ORDER BY popularity.daily DESC");
 
 // header
 $title = 'PeNEWS';

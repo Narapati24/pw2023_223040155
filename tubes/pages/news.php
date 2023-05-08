@@ -2,7 +2,7 @@
 require '../_backend/function.php';
 require '../_backend/searchBar.php';
 
-$article = query("SELECT * FROM article ORDER BY id DESC");
+$article = query("SELECT * FROM article WHERE visibility_id = 3 ORDER BY id DESC");
 
 // Search bar
 if (isset($_POST['search'])) {
