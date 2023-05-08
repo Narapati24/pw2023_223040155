@@ -1,51 +1,59 @@
 // Article SearchBar
-      const containerArticle = document.querySelector('.articleContainer');
+const containerArticle = document.querySelector('.articleContainer');
 
-      const keywordArticle = document.querySelector(".keywordArticle");
-      keywordArticle.addEventListener("keyup", function () {
-        checkInputs();
-      });
+const keywordArticle = document.querySelector(".keywordArticle");
+keywordArticle.addEventListener("input", function () {
+  checkInputsArticle();
+});
 
-      const keywordArticle2 = document.querySelector(".keywordArticle2");
-      keywordArticle2.addEventListener("keyup", function () {
-        checkInputs();
-      });
+const keywordArticle2 = document.querySelector(".keywordArticle2");
+keywordArticle2.addEventListener("keyup", function () {
+  checkInputsArticle();
+});
 
-      function checkInputs() {
-        const input1 = keywordArticle.value;
-        const input2 = keywordArticle2.value;
-        fetch(
-          "../../_backend/ajax/adminPage/article.php ?keyword=" +
-            input1 +
-            "&keyword2=" +
-            input2
-        )
-          .then((Response) => Response.text())
-          .then((Response) => (containerArticle.innerHTML = Response));
-      }
+const keywordArticle3 = document.querySelector(".keywordArticle3");
+keywordArticle3.addEventListener("keyup", function () {
+  checkInputsArticle();
+});
+
+function checkInputsArticle() {
+  const input1 = keywordArticle.value;
+  const input2 = keywordArticle2.value;
+  const input3 = keywordArticle3.value;
+  fetch(
+  "../../_backend/ajax/adminPage/article.php ?keyword=" +
+    input1 +
+    "&keyword2=" +
+    input2 +
+    "&keyword3=" +
+    input3
+  )
+    .then((Response) => Response.text())
+    .then((Response) => (containerArticle.innerHTML = Response));
+};
 
 // Users SearchBar
-      const containerUsers = document.querySelector('.usersContainer');
+const containerUsers = document.querySelector('.usersContainer');
 
-      const keywordUsers = document.querySelector(".keywordUsers");
-      keywordUsers.addEventListener("keyup", function () {
-        checkInputsUsers();
-      });
+const keywordUsers = document.querySelector(".keywordUsers");
+keywordUsers.addEventListener("keyup", function () {
+  checkInputsUsers();
+});
 
-      const keywordUsers2 = document.querySelector(".keywordUsers2");
-      keywordUsers2.addEventListener("input", function () {
-        checkInputsUsers();
-      });
+const keywordUsers2 = document.querySelector(".keywordUsers2");
+keywordUsers2.addEventListener("input", function () {
+  checkInputsUsers();
+});
 
-      function checkInputsUsers() {
-        const input1 = keywordUsers.value;
-        const input2 = keywordUsers2.value;
-        fetch(
-          "../../_backend/ajax/adminPage/user.php?keyword=" +
-            input1 +
-            "&keyword2=" +
-            input2
-        )
-          .then((Response) => Response.text())
-          .then((Response) => (containerUsers.innerHTML = Response));
-      }
+function checkInputsUsers() {
+  const input1 = keywordUsers.value;
+  const input2 = keywordUsers2.value;
+  fetch(
+    "../../_backend/ajax/adminPage/user.php?keyword=" +
+      input1 +
+      "&keyword2=" +
+      input2
+  )
+    .then((Response) => Response.text())
+    .then((Response) => (containerUsers.innerHTML = Response));
+};

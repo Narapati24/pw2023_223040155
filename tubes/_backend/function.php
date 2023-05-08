@@ -218,7 +218,7 @@ function inputArticle($data)
     return false;
   }
 
-  if (strlen($shortContent) > 90) {
+  if (strlen($shortContent) > 500) {
     echo "<script>
     alert('descripsi terlalu panjang');
           </script>";

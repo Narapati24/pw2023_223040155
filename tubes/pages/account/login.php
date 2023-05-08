@@ -62,8 +62,8 @@ require_once '../../_header.php';
         </div>
         <select name="gender" class="form-select mb-3" aria-label="Default select example" required>
             <option selected>Gender</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
         </select>
         <div class="form-floating mb-3">
             <input name="username" type="text" class="form-control" id="floatingInput" placeholder="Username" autocomplete="off" required>

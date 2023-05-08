@@ -12,11 +12,6 @@ if ($_SESSION['roles'] === 'Author' || $_SESSION['roles'] === 'User') {
 
 $id = $_SESSION['ids'];
 
-// Search bar
-if (isset($_POST['search'])) {
-    $query = findAdminArticle($_POST['keyword'], $_POST['keyword2']);
-}
-
 $profile = query("SELECT * FROM users WHERE id = $id");
 $query = query("SELECT * FROM users, article WHERE users.id = '$id' && article.user_id = '$id' ORDER BY article.id DESC");
 $users = query("SELECT * FROM users, roles WHERE users.id_role = roles.id");
@@ -71,9 +66,15 @@ require_once '_header.php';
                 </div>
                 <!-- Article -->
                 <div class="tab-pane fade" id="list-article" role="tabpanel" aria-labelledby="list-profile-list">
-                    <form class="d-flex mb-3" role="search" method="post">
-                        <input name="keyword" class="form-control me-2 keywordArticle" type="text" placeholder="Search" autocomplete="off">
-                        <input name="keyword2" value="<?= $query[0]['first_name']; ?>" class="form-control me-2 keywordArticle2" type="text" placeholder="Editor Name" autocomplete="off">
+                    <form class="d-flex mb-2 pt-2" role="search" method="post">
+                        <select name="keyword" class="form-select ms-2 me-2 keywordArticle" aria-label="Default select example" style="width: 100px;">
+                            <option value="" selected>All</option>
+                            <option value="1">Private</option>
+                            <option value="2">Unlisted</option>
+                            <option value="3">Public</option>
+                        </select>
+                        <input name="keyword2" class="form-control me-2 keywordArticle2" type="text" placeholder="Search" autocomplete="off">
+                        <input name="keyword3" value="<?= $query[0]['first_name']; ?>" class="form-control me-2 keywordArticle3" type="text" placeholder="Editor Name" autocomplete="off">
                     </form>
                     <div class="articleContainer">
                         <?php foreach ($query as $a) { ?>
@@ -96,7 +97,7 @@ require_once '_header.php';
                         <form class="d-flex mb-3" role="search" method="post">
                             <input name="keyword" class="form-control me-2 keywordUsers" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
                             <select name="keyword2" class="form-select keywordUsers2" aria-label="Default select example">
-                                <option value=" " selected>All</option>
+                                <option value="" selected>All</option>
                                 <option value="1">Admin</option>
                                 <option value="2">Author</option>
                                 <option value="3">User</option>

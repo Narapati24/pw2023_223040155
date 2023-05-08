@@ -32,12 +32,12 @@ function findPopular($data)
   return $rows;
 }
 
-function findAdminArticle($data, $data2)
+function findAdminArticle($data, $data2, $data3)
 {
 
   $db = connect();
 
-  $query = "SELECT * FROM users, article WHERE users.id = article.user_id && (article.title LIKE '%$data%' || article.content LIKE '%$data%') && (users.first_name LIKE '%$data2%' || users.last_name LIKE '%$data2%') ORDER BY article.id DESC";
+  $query = "SELECT * FROM users, article WHERE users.id = article.user_id && article.visibility_id LIKE '%$data%' && (article.title LIKE '%$data2%' || article.content LIKE '%$data2%') && (users.first_name LIKE '%$data3%' || users.last_name LIKE '%$data3%') ORDER BY article.id DESC";
 
   $result = mysqli_query($db, $query);
   $rows = [];
@@ -64,12 +64,12 @@ function findAdminUsers($data, $data2)
   return $rows;
 }
 
-function findUserArticle($data)
+function findUserArticle($data, $data2)
 {
   $db = connect();
   $idusers = $_SESSION['ids'];
 
-  $query = "SELECT * FROM users, article WHERE users.id = '$idusers' && users.id = article.user_id && (users.first_name LIKE '%$data%' || users.last_name LIKE '%$data%' || article.title LIKE '%$data%' || article.content LIKE '%$data%') ORDER BY article.id DESC";
+  $query = "SELECT * FROM users, article WHERE users.id = '$idusers' && users.id = article.user_id && article.visibility_id LIKE '%$data%' && (article.title LIKE '%$data2%' || article.content LIKE '%$data2%') ORDER BY article.id DESC";
 
   $result = mysqli_query($db, $query);
   $rows = [];

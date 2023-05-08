@@ -1,7 +1,7 @@
 <?php
 require '../function.php';
 require '../searchBar.php';
-$query = findUserArticle($_GET['keyword']);
+$query = findUserArticle($_GET['keyword'], $_GET['keyword2']);
 ?>
 
 <?php foreach ($query as $a) { ?>

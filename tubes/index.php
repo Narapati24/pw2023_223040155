@@ -25,7 +25,7 @@ require_once '_header.php';
         <?= $hotArticle[0]['title']; ?>
       </h3>
       <p>
-        <?= substr($hotArticle[0]['content'], 0, 500); ?>...
+        <?= substr($hotArticle[0]['short_content'], 0, 500); ?>...
       </p>
       <a href="pages/detail.php?id=<?= $hotArticle[0]['id']; ?>" class="stretched-link">see more</a>
     </div>

@@ -52,8 +52,14 @@ require_once '_header.php';
                 </div>
                 <!-- Tab Article -->
                 <div class="tab-pane fade" id="list-article" role="tabpanel" aria-labelledby="list-profile-list">
-                    <form class="d-flex mb-3" role="search" method="post">
-                        <input name="keywordArticle" class="form-control me-2 keywordArticle" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
+                    <form class="d-flex mb-2 pt-2" role="search" method="post">
+                        <select name="keywordArticle" class="form-select ms-2 me-2 keywordArticle" aria-label="Default select example" style="width: 100px;">
+                            <option value="" selected>All</option>
+                            <option value="1">Private</option>
+                            <option value="2">Unlisted</option>
+                            <option value="3">Public</option>
+                        </select>
+                        <input name="keywordArticle2" class="form-control me-2 keywordArticle2" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
                     </form>
                     <div class="articleContainer">
                         <?php foreach ($query as $a) { ?>
