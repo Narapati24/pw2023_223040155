@@ -27,9 +27,9 @@ require_once '_header.php';
     <div class="row">
         <div class="col-sm-4">
             <div class="list-group pe-2 mb-3" id="list-tab" role="tablist">
-                <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">Profile</a>
-                <a class="list-group-item list-group-item-action id=" list-profile-list" data-bs-toggle="list" href="#list-article" role="tab" aria-controls="list-profile">Article</a>
-                <a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list" href="#list-users" role="tab" aria-controls="list-messages">Users</a>
+                <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">Profile</a>
+                <a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="#list-article" role="tab" aria-controls="list-article">Article</a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list" href="#list-users" role="tab" aria-controls="list-users">Users</a>
                 <a class="list-group-item list-group-item-action" id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">Settings</a>
             </div>
             <!-- User Info -->
@@ -47,21 +47,42 @@ require_once '_header.php';
         <div class="col-sm-8">
             <div class="tab-content" style="background-color: whitesmoke;" id="nav-tabContent">
                 <!-- tabs profile -->
-                <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                <div class="tab-pane fade show active" id="list-profile" role="tabpanel" aria-labelledby="list-home-list">
                     <div class="tab-pane fade show active p-5" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-                        <div class="d-flex justify-content-between">
-                            <div>
-                                <p>Username : <?= $query[0]['username']; ?></p>
-                                <p>Email Address : <?= $query[0]['email']; ?></p>
-                                <p>Name : <?= $query[0]['first_name'] . ' ' . $query[0]['last_name']; ?></p>
-                                <p>Gender : <?= $query[0]['gender']; ?></p>
-                                <p>birthdate : <?= $query[0]['birthdate']; ?></p>
+                        <div id="viewProfile">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p>Username : <?= $query[0]['username']; ?></p>
+                                    <p>Email Address : <?= $query[0]['email']; ?></p>
+                                    <p>Name : <?= $query[0]['first_name'] . ' ' . $query[0]['last_name']; ?></p>
+                                    <p>Gender : <?= $query[0]['gender']; ?></p>
+                                    <p>birthdate : <?= $query[0]['birthdate']; ?></p>
+                                </div>
+                                <img src="../../img/profile/<?= $profile[0]['img']; ?>" class="rounded-circle border border-success" width="200" height="200" alt="profile">
                             </div>
-                            <img src="../../img/profile/<?= $profile[0]['img']; ?>" class="rounded-circle border border-success" width="200" height="200" alt="profile">
+                            <button id="editButton" type="button" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                Edit
+                            </button>
                         </div>
-                        <button type="button" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                            Edit
-                        </button>
+                        <form id="editProfile" class="d-none">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <input type="text" value="<?= $profile[0]['id']; ?>" hidden>
+                                    <p>Username : <input type="text" value="<?= $query[0]['username']; ?>"></p>
+                                    <p>Email Address : <input type="text" value="<?= $query[0]['email']; ?>"></p>
+                                    <p>Name : <input type="text" value="<?= $query[0]['first_name']; ?>"> <input type="text" value="<?= $query[0]['last_name']; ?>"></p>
+                                    <p>Gender : <?= $query[0]['gender']; ?></p>
+                                    <p>birthdate : <input type="date" value="<?= $query[0]['birthdate']; ?>"></p>
+                                </div>
+                                <img src="../../img/profile/<?= $profile[0]['img']; ?>" class="rounded-circle border border-success" width="200" height="200" alt="profile">
+                            </div>
+                            <button type="button" class="btn btn-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                Apply
+                            </button>
+                            <button id="cancelProfileButton" type="button" class="btn btn-danger" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                Cancel
+                            </button>
+                        </form>
                     </div>
                 </div>
                 <!-- Article -->
@@ -106,7 +127,7 @@ require_once '_header.php';
                         <div class="usersContainer">
                             <?php foreach ($users as $u) { ?>
                                 <div class="d-inline-block text-center col-sm-2" style="width: min-content;">
-                                    <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#profileUser-<?= $u['username']; ?>" role="tab" aria-expanded="false" aria-controls="collapseExample">
+                                    <button class="btn" type="button" data-bs-toggle="collapse" href="#profileUser-<?= $u['username']; ?>" role="tablist" aria-expanded="false" aria-controls="collapseExample">
                                         <img src="../../img/profile/<?= $u['img']; ?>" class="rounded-circle border border-success" width="100" height="100" alt="profile">
                                     </button>
                                     <p><?= $u['username']; ?></p>
@@ -125,6 +146,18 @@ require_once '_header.php';
 <!-- Java Script -->
 <script src="../../js/bootstrap/bootstrap.min.js"></script>
 <script src="../../js/custom/searchBar/adminPage.js"></script>
+<script>
+    document.getElementById('editButton').onclick = function() {
+        document.getElementById('viewProfile').classList.add("d-none");
+        document.getElementById('editProfile').classList.remove("d-none");
+    };
+    document.getElementById('cancelProfileButton').onclick = function() {
+        if (confirm("Are you sure?")) {
+            document.getElementById('viewProfile').classList.remove("d-none");
+            document.getElementById('editProfile').classList.add("d-none");
+        }
+    }
+</script>
 </body>
 
 </html>

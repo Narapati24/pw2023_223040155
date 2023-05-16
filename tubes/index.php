@@ -8,7 +8,7 @@ $article = query("SELECT * FROM article WHERE visibility_id = 3 ORDER BY id DESC
 $hotArticle = query("SELECT * FROM article, popularity WHERE visibility_id = 3 && article.id = popularity.article_id ORDER BY popularity.daily DESC");
 
 // header
-$title = 'PeNEWS';
+$title = 'Home';
 require_once '_header.php';
 ?>
 
@@ -25,7 +25,7 @@ require_once '_header.php';
         <?= $hotArticle[0]['title']; ?>
       </h3>
       <p>
-        <?= substr($hotArticle[0]['short_content'], 0, 500); ?>...
+        <?= substr($hotArticle[0]['shortContent'], 0, 500); ?>...
       </p>
       <a href="pages/detail.php?id=<?= $hotArticle[0]['id']; ?>" class="stretched-link">see more</a>
     </div>
@@ -37,7 +37,7 @@ require_once '_header.php';
       <img src="img/article/<?= $a['img']; ?>" class="card-img-top" alt="<?= $a['title']; ?>" height="160px">
       <div class="card-body">
         <h5 class="card-title"><?= substr($a['title'], 0, 38); ?>...</h5>
-        <p class="card-text"><?= substr($a['short_content'], 0, 90); ?>...</p>
+        <p class="card-text"><?= substr($a['shortContent'], 0, 90); ?>...</p>
         <a href="pages/detail.php?id=<?= $a['id']; ?>" style="position: absolute; bottom: 10px;" class="btn btn-primary stretched-link">More Details</a>
       </div>
     </div>

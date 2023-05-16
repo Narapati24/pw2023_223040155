@@ -12,7 +12,7 @@ $articleTrendingToday = query("SELECT * FROM article,popularity WHERE visibility
 $articleTrendingMonth = query("SELECT * FROM article,popularity WHERE visibility_id = 3 && article.id = popularity.article_id ORDER BY popularity.monthly DESC LIMIT 4");
 
 // header
-$title = 'PeNEWS';
+$title = 'Popular';
 require_once '../_header.php';
 ?>
 
@@ -31,7 +31,7 @@ require_once '../_header.php';
         <img src="../img/article/<?= $a['img']; ?>" class="card-img-top" alt="<?= $a['title']; ?>" height="160px">
         <div class="card-body">
           <h5 class="card-title"><?= substr($a['title'], 0, 38); ?>...</h5>
-          <p class="card-text"><?= substr($a['short_content'], 0, 90); ?>...</p>
+          <p class="card-text"><?= substr($a['shortContent'], 0, 90); ?>...</p>
           <a href="detail.php?id=<?= $a['id']; ?>" style="position: absolute; bottom: 10px;" class="btn btn-primary stretched-link">More Details</a>
         </div>
       </div>
@@ -59,7 +59,7 @@ require_once '../_header.php';
         <img src="../img/article/<?= $a['img']; ?>" class="card-img-top" alt="<?= $a['title']; ?>" height="160px">
         <div class="card-body">
           <h5 class="card-title"><?= substr($a['title'], 0, 38); ?>...</h5>
-          <p class="card-text"><?= substr($a['short_content'], 0, 90); ?>...</p>
+          <p class="card-text"><?= substr($a['shortContent'], 0, 90); ?>...</p>
           <a href="detail.php?id=<?= $a['id']; ?>" style="position: absolute; bottom: 10px;" class="btn btn-primary stretched-link">More Details</a>
         </div>
       </div>
