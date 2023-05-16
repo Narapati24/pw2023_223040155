@@ -211,13 +211,6 @@ function inputArticle($data)
   $idAuthor = htmlspecialchars($data['idAuthor']);
   $visibility = $data['visibility'];
 
-  if (strlen($title) >= 100) {
-    echo "<script>
-    alert('judul terlalu panjang');
-          </script>";
-    return false;
-  }
-
   if (strlen($shortContent) > 500) {
     echo "<script>
     alert('descripsi terlalu panjang');

@@ -16,12 +16,30 @@ function find($data)
   return $rows;
 }
 
-function findPopular($data)
+function findPopularToday($data)
 {
 
   $db = connect();
 
-  $query = "SELECT * FROM article WHERE title LIKE '%$data%' || content LIKE '%$data%' ORDER BY clicks DESC";
+  $query = "SELECT * FROM article, popularity WHERE visibility_id = 3 && article.id = popularity.article_id &&
+                                                    (title LIKE '%$data%' || content LIKE '%$data%') ORDER BY popularity.daily DESC";
+
+  $result = mysqli_query($db, $query);
+  $rows = [];
+  while ($row = mysqli_fetch_assoc($result)) {
+    $rows[] = $row;
+  }
+
+  return $rows;
+}
+
+function findPopularMonth($data)
+{
+
+  $db = connect();
+
+  $query = "SELECT * FROM article, popularity WHERE visibility_id = 3 && article.id = popularity.article_id &&
+                                                    (title LIKE '%$data%' || content LIKE '%$data%') ORDER BY popularity.monthly DESC";
 
   $result = mysqli_query($db, $query);
   $rows = [];

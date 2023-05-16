@@ -2,14 +2,14 @@
 require '../_backend/function.php';
 require '../_backend/searchBar.php';
 
-// Search bar
-if (isset($_POST['search'])) {
-  $articleTrendingToday = findPopular($_POST['keyword']);
-  $articleTrendingMonth = findPopular($_POST['keyword']);
-}
-
 $articleTrendingToday = query("SELECT * FROM article,popularity WHERE visibility_id = 3 && article.id = popularity.article_id ORDER BY popularity.daily DESC LIMIT 4");
 $articleTrendingMonth = query("SELECT * FROM article,popularity WHERE visibility_id = 3 && article.id = popularity.article_id ORDER BY popularity.monthly DESC LIMIT 4");
+
+// Search bar
+if (isset($_POST['search'])) {
+  $articleTrendingToday = findPopularToday($_POST['keyword']);
+  $articleTrendingMonth = findPopularMonth($_POST['keyword']);
+}
 
 // header
 $title = 'Popular';
