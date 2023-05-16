@@ -82,6 +82,7 @@ require_once '../../_header.php';
             <label for="floatingPassword">Confirmation Password</label>
         </div>
         <button name="register" type="submit" class="btn btn-primary mb-3">Register</button>
+        <p class="d-inline-block ms-auto">Already have account? <b><span id="loginButton" style="cursor: pointer;">Login</span></b> here</p>
     </form>
 </div>
 
@@ -98,6 +99,10 @@ require_once '../../_header.php';
     document.getElementById("registerButton").onclick = function() {
         document.getElementById("loginForm").classList.add("hidden-form")
         document.getElementById("registerForm").classList.add("register-form");
+    }
+    document.getElementById("loginButton").onclick = function() {
+        document.getElementById("loginForm").classList.remove("hidden-form")
+        document.getElementById("registerForm").classList.remove("register-form");
     }
 </script>
 </body>

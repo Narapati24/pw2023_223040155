@@ -64,17 +64,45 @@ require_once '_header.php';
                                 Edit
                             </button>
                         </div>
-                        <form id="editProfile" class="d-none">
+                        <!-- edit menu -->
+                        <form id="editProfile" class="d-none" enctype="multipart/form-data">
                             <div class="d-flex justify-content-between">
                                 <div>
                                     <input type="text" value="<?= $profile[0]['id']; ?>" hidden>
-                                    <p>Username : <input type="text" value="<?= $query[0]['username']; ?>"></p>
-                                    <p>Email Address : <input type="text" value="<?= $query[0]['email']; ?>"></p>
-                                    <p>Name : <input type="text" value="<?= $query[0]['first_name']; ?>"> <input type="text" value="<?= $query[0]['last_name']; ?>"></p>
-                                    <p>Gender : <?= $query[0]['gender']; ?></p>
-                                    <p>birthdate : <input type="date" value="<?= $query[0]['birthdate']; ?>"></p>
+                                    <div class="form-floating mb-3">
+                                        <input name="username" type="text" class="form-control" id="floatingInput" value="<?= $query[0]['username']; ?>" placeholder="Username" autocomplete="off" required>
+                                        <label for="floatingInput">Username</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input name="email" type="email" class="form-control" id="floatingInput" value="<?= $query[0]['email']; ?>" placeholder=" name@example.com" autocomplete="off" required>
+                                        <label for="floatingInput">Email Address</label>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col form-floating">
+                                            <input name="first_name" type="text" class="form-control" id="firstName" value="<?= $query[0]['first_name']; ?>" placeholder="First name" autocomplete="off" required autofocus>
+                                            <label style="margin-left: 12px;" for="firstName">First Name</label>
+                                        </div>
+                                        <div class="col form-floating">
+                                            <input name="last_name" type="text" class="form-control" id="lastName" value="<?= $query[0]['last_name']; ?>" placeholder="Last name" autocomplete="off" required>
+                                            <label style="margin-left: 12px;" for="lastName">Last Name</label>
+                                        </div>
+                                    </div>
+                                    <select name="gender" class="form-select mb-3" aria-label="Default select example" required>
+                                        <option value="<?= $query[0]['gender']; ?>" selected><?= $query[0]['gender']; ?></option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                    <div class="form-floating mb-3">
+                                        <input name="birthdate" type="date" class="form-control" id="floatingInput" value="<?= $query[0]['birthdate']; ?>" placeholder="Username" required>
+                                        <label for="floatingInput">Date of birth</label>
+                                    </div>
                                 </div>
-                                <img src="../../img/profile/<?= $profile[0]['img']; ?>" class="rounded-circle border border-success" width="200" height="200" alt="profile">
+                                <input class="img-lama" type="hidden" value="<?= $profile[0]['img']; ?>">
+                                <label for="photo-edit">
+                                    <img src="../../img/profile/<?= $profile[0]['img']; ?>" class="rounded-circle border border-success img-preview" width="200" height="200" alt="profile">
+                                    <!-- <img id="editLogo" src="../../img/logo/editLogo.png" class="rounded-circle border border-success" width="50" height="50" alt="profile"> -->
+                                </label>
+                                <input class="d-none img" id="photo-edit" type="file" onchange="previewImage()">
                             </div>
                             <button type="button" class="btn btn-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                 Apply
@@ -146,6 +174,7 @@ require_once '_header.php';
 <!-- Java Script -->
 <script src="../../js/bootstrap/bootstrap.min.js"></script>
 <script src="../../js/custom/searchBar/adminPage.js"></script>
+<script src="../../js/custom/previewImg/dashboardPage.js"></script>
 <script>
     document.getElementById('editButton').onclick = function() {
         document.getElementById('viewProfile').classList.add("d-none");
@@ -155,6 +184,7 @@ require_once '_header.php';
         if (confirm("Are you sure?")) {
             document.getElementById('viewProfile').classList.remove("d-none");
             document.getElementById('editProfile').classList.add("d-none");
+            document.getElementsByClassName('img-preview').src = "../../img/profile/<?= $profile[0]['img']; ?>";
         }
     }
 </script>

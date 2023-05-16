@@ -28,6 +28,7 @@ nav {
   width: 50%;
   overflow: hidden;
   transition: 600ms ease-in;
+  margin: auto;
 }
 
 .hidden-form {
@@ -41,6 +42,17 @@ nav {
   position: absolute;
   width: 50%;
   transition: 600ms ease-in;
+}
+
+#editLogo {
+  position: absolute;
+  opacity: 0;
+  transition: 300ms ease-in;
+}
+
+#editLogo:hover {
+  opacity: 1;
+  transition: 300ms ease-in;
 }
 
 footer {
