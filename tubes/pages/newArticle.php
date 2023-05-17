@@ -29,7 +29,7 @@ require_once '../_header.php';
       <img src="../img/" alt="" style="max-height: 300px;" class="d-block m-auto img-preview">
     </div>
     <div class="form-floating mb-3">
-      <input name="shortContentArticle" type="text" class="form-control" id="floatingInput" placeholder="Short Description" required maxlength="500" autocomplete="off">
+      <input name="shortContentArticle" type="text" class="form-control" id="floatingInput" placeholder="Short Description" required maxlength="490" autocomplete="off">
       <label for="floatingInput">Short Description</label>
     </div>
     <div class="form-floating mb-3">

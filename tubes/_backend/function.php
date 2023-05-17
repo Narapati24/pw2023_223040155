@@ -118,12 +118,11 @@ function updateAccount($data)
   $gender = htmlspecialchars($data['gender']);
   $username = htmlspecialchars(strtolower($data['username']));
   $email = htmlspecialchars($data['email']);
-  $password1 = mysqli_real_escape_string($db, $data['password1']);
-  $password2 = mysqli_real_escape_string($db, $data['password2']);
+  $password =  htmlspecialchars($data['password']);
 
 
   // username / password kosong
-  if (empty($username) || empty($password1) || empty($password2)) {
+  if (empty($username) || empty($password)) {
     echo "<script>
           alert('username / password need to fill');
           </script>";
@@ -139,7 +138,7 @@ function updateAccount($data)
   }
 
   // username sudah ada
-  if (query("SELECT * FROM users WHERE username ='$username'")) {
+  if (query("SELECT * FROM users WHERE username = '$username' && id != '$id'")) {
     echo "<script>
           alert('username sudah dipakai');
           </script>";
@@ -147,30 +146,19 @@ function updateAccount($data)
   }
 
   // email sudah dipakai
-  if (query("SELECT * FROM users WHERE email ='$email'")) {
+  if (query("SELECT * FROM users WHERE email = '$email' && id != '$id'")) {
     echo "<script>
           alert('email sudah dipakai');
           </script>";
     return false;
   }
 
-  // konfirmasi password
-  if ($password1 !== $password2) {
-    echo "<script>
-          alert('konfirmasi password tidak sesuai');
-          </script>";
-    return false;
+  $img = uploadProfile();
+  if (!$img) {
+    $img = $data['former-img'];
+  } else {
+    unlink("../../img/profile/" . $data['former-img']);
   }
-
-  // panjang password
-  if (strlen($password1) < 5) {
-    echo "<script>
-          alert('password terlalu pendek');
-          </script>";
-    return false;
-  }
-
-  $realPassword = password_hash($password1, PASSWORD_DEFAULT);
 
   if ($user = query("SELECT * FROM users
                                 WHERE id = '$id'
@@ -178,6 +166,7 @@ function updateAccount($data)
     if ($password = $user['password']) {
 
       $query = "UPDATE users SET
+                img = '$img',
                 first_name = '$first_name',
                 last_name = '$last_name',
                 birthdate = '$birthdate',
@@ -193,6 +182,7 @@ function updateAccount($data)
     } elseif (password_verify($password, $user['password'])) {
 
       $query = "UPDATE users SET
+                img = '$img',
                 first_name = '$first_name',
                 last_name = '$last_name',
                 birthdate = '$birthdate',
@@ -298,6 +288,60 @@ function upload()
   $new_name_file .= '.';
   $new_name_file .= $file_extension;
   move_uploaded_file($tmp_file, '../img/article/' . $new_name_file);
+
+  return $new_name_file;
+}
+
+function uploadProfile()
+{
+  $name_file = $_FILES['new-img']['name'];
+  $type_file = $_FILES['new-img']['type'];
+  $size_file = $_FILES['new-img']['size'];
+  $error = $_FILES['new-img']['error'];
+  $tmp_file = $_FILES['new-img']['tmp_name'];
+
+  // check file existence
+  if ($error == 4) {
+    echo "<script>
+            alert('pilih gambar terlebih dahulu');
+          </script>";
+    return false;
+  }
+
+  // chect name file
+  $list_type = ['jpg', 'jpeg', 'png'];
+  $file_extension = explode('.', $name_file);
+  $file_extension = strtolower(end($file_extension));
+  if (!in_array($file_extension, $list_type)) {
+    echo "<script>
+            alert('Harus File Gambar');
+          </script>";
+    return false;
+  }
+
+  // check type file
+  if ($type_file != 'image/jpeg' && $type_file != 'image/png') {
+    echo "<script>
+    alert('Harus File Gambar');
+          </script>";
+    return false;
+  }
+
+  // check size file
+  // 5mb
+  if ($size_file > 5000000) {
+    echo "<script>
+    alert('Ukuran terlalu besar');
+          </script>";
+    return false;
+  }
+
+  // ready for upload
+  // generate new name file
+  $new_name_file = uniqid();
+  $new_name_file .= '.';
+  $new_name_file .= $file_extension;
+  move_uploaded_file($tmp_file, '../../img/profile/' . $new_name_file);
 
   return $new_name_file;
 }

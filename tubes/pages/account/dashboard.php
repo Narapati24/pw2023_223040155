@@ -105,7 +105,7 @@ require_once '_header.php';
                                         <label for="floatingInput">Date of birth</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <input name="password2" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                                        <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
                                         <label for="floatingPassword">Confirmation Password</label>
                                     </div>
                                 </div>
@@ -116,10 +116,10 @@ require_once '_header.php';
                                 </label>
                                 <input name="new-img" class="d-none img" id="photo-edit" type="file" onchange="previewImage()">
                             </div>
-                            <button name="updateAccount" type="button" class="btn btn-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                            <button name="updateAccount" type="submit" class="btn btn-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                 Apply
                             </button>
-                            <button id="cancelProfileButton" type="button" class="btn btn-danger" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                            <button name="cancelButton" id="cancelProfileButton" type="button" class="btn btn-danger" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                 Cancel
                             </button>
                         </form>
@@ -197,6 +197,7 @@ require_once '_header.php';
             document.getElementById('viewProfile').classList.remove("d-none");
             document.getElementById('editProfile').classList.add("d-none");
             document.querySelector('form').reset();
+            location.reload();
         }
     }
 </script>
