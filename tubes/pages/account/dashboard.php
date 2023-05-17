@@ -10,6 +10,14 @@ if ($_SESSION['roles'] === 'Author' || $_SESSION['roles'] === 'User') {
     header("Location: profile.php");
 }
 
+if (isset($_POST['updateAccount'])) {
+    if (updateAccount($_POST) > 0) {
+        echo "Change Success";
+    } else {
+        echo "Failed to Change";
+    }
+}
+
 $id = $_SESSION['ids'];
 
 $profile = query("SELECT * FROM users WHERE id = $id");
@@ -65,10 +73,10 @@ require_once '_header.php';
                             </button>
                         </div>
                         <!-- edit menu -->
-                        <form id="editProfile" class="d-none" enctype="multipart/form-data">
+                        <form method="post" id="editProfile" class="d-none" enctype="multipart/form-data">
                             <div class="d-flex justify-content-between">
                                 <div>
-                                    <input type="text" value="<?= $profile[0]['id']; ?>" hidden>
+                                    <input name="id" type="text" value="<?= $profile[0]['id']; ?>" hidden>
                                     <div class="form-floating mb-3">
                                         <input name="username" type="text" class="form-control" id="floatingInput" value="<?= $query[0]['username']; ?>" placeholder="Username" autocomplete="off" required>
                                         <label for="floatingInput">Username</label>
@@ -96,15 +104,19 @@ require_once '_header.php';
                                         <input name="birthdate" type="date" class="form-control" id="floatingInput" value="<?= $query[0]['birthdate']; ?>" placeholder="Username" required>
                                         <label for="floatingInput">Date of birth</label>
                                     </div>
+                                    <div class="form-floating mb-3">
+                                        <input name="password2" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                                        <label for="floatingPassword">Confirmation Password</label>
+                                    </div>
                                 </div>
-                                <input class="img-lama" type="hidden" value="<?= $profile[0]['img']; ?>">
+                                <input name="former-img" class="img-lama" type="hidden" value="<?= $profile[0]['img']; ?>">
                                 <label for="photo-edit">
                                     <img src="../../img/profile/<?= $profile[0]['img']; ?>" class="rounded-circle border border-success img-preview" width="200" height="200" alt="profile">
                                     <!-- <img id="editLogo" src="../../img/logo/editLogo.png" class="rounded-circle border border-success" width="50" height="50" alt="profile"> -->
                                 </label>
-                                <input class="d-none img" id="photo-edit" type="file" onchange="previewImage()">
+                                <input name="new-img" class="d-none img" id="photo-edit" type="file" onchange="previewImage()">
                             </div>
-                            <button type="button" class="btn btn-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                            <button name="updateAccount" type="button" class="btn btn-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                 Apply
                             </button>
                             <button id="cancelProfileButton" type="button" class="btn btn-danger" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
@@ -184,7 +196,7 @@ require_once '_header.php';
         if (confirm("Are you sure?")) {
             document.getElementById('viewProfile').classList.remove("d-none");
             document.getElementById('editProfile').classList.add("d-none");
-            document.getElementsByClassName('img-preview').src = "../../img/profile/<?= $profile[0]['img']; ?>";
+            document.querySelector('form').reset();
         }
     }
 </script>

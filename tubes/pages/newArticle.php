@@ -3,7 +3,7 @@ require '../_backend/function.php';
 
 if (isset($_POST['submit'])) {
   if (inputArticle($_POST) > 0) {
-    echo "succest";
+    echo "success";
   } else {
     echo "Failed to Register";
   }

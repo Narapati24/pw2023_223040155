@@ -107,6 +107,108 @@ function registerAccount($data)
   return mysqli_affected_rows($db);
 }
 
+function updateAccount($data)
+{
+  $db = connect();
+
+  $id = $data['id'];
+  $first_name = htmlspecialchars($data['first_name']);
+  $last_name = htmlspecialchars($data['last_name']);
+  $birthdate = htmlspecialchars($data['birthdate']);
+  $gender = htmlspecialchars($data['gender']);
+  $username = htmlspecialchars(strtolower($data['username']));
+  $email = htmlspecialchars($data['email']);
+  $password1 = mysqli_real_escape_string($db, $data['password1']);
+  $password2 = mysqli_real_escape_string($db, $data['password2']);
+
+
+  // username / password kosong
+  if (empty($username) || empty($password1) || empty($password2)) {
+    echo "<script>
+          alert('username / password need to fill');
+          </script>";
+    return false;
+  }
+
+  // username terlalu panjang
+  if (strlen($username) > 20) {
+    echo "<script>
+    alert('username terlalu panjang');
+          </script>";
+    return false;
+  }
+
+  // username sudah ada
+  if (query("SELECT * FROM users WHERE username ='$username'")) {
+    echo "<script>
+          alert('username sudah dipakai');
+          </script>";
+    return false;
+  }
+
+  // email sudah dipakai
+  if (query("SELECT * FROM users WHERE email ='$email'")) {
+    echo "<script>
+          alert('email sudah dipakai');
+          </script>";
+    return false;
+  }
+
+  // konfirmasi password
+  if ($password1 !== $password2) {
+    echo "<script>
+          alert('konfirmasi password tidak sesuai');
+          </script>";
+    return false;
+  }
+
+  // panjang password
+  if (strlen($password1) < 5) {
+    echo "<script>
+          alert('password terlalu pendek');
+          </script>";
+    return false;
+  }
+
+  $realPassword = password_hash($password1, PASSWORD_DEFAULT);
+
+  if ($user = query("SELECT * FROM users
+                                WHERE id = '$id'
+                                ")[0]) {
+    if ($password = $user['password']) {
+
+      $query = "UPDATE users SET
+                first_name = '$first_name',
+                last_name = '$last_name',
+                birthdate = '$birthdate',
+                gender = '$gender',
+                username = '$username',
+                email = '$email'
+                WHERE id = '$id'";
+
+      mysqli_query($db, $query);
+
+      header('Refresh:0');
+      exit;
+    } elseif (password_verify($password, $user['password'])) {
+
+      $query = "UPDATE users SET
+                first_name = '$first_name',
+                last_name = '$last_name',
+                birthdate = '$birthdate',
+                gender = '$gender',
+                username = '$username',
+                email = '$email'
+                WHERE id = '$id'";
+
+      mysqli_query($db, $query);
+
+      header('Refresh:0');
+      exit;
+    }
+  }
+}
+
 function loginAccount($data)
 {
   connect();
@@ -118,7 +220,7 @@ function loginAccount($data)
     if ($user = query("SELECT * FROM users
                                 WHERE username = '$username'
                                 || email = '$username'")[0]) {
-      if (query("SELECT * FROM users WHERE password = '$password'")) {
+      if ($password == $user['password']) {
 
         // set session
         $_SESSION['roles'] = $query['role_name'];

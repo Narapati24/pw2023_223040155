@@ -2,7 +2,7 @@
 require '../../_backend/function.php';
 
 if (isset($_SESSION['login'])) {
-    echo '<script>history.back();</script>';
+    header('Location:' .  base_url('index.php'));
 }
 // login system
 if (isset($_POST['login'])) {
