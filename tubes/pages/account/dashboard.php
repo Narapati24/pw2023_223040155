@@ -116,12 +116,20 @@ require_once '_header.php';
                                 </label>
                                 <input name="new-img" class="d-none img" id="photo-edit" type="file" onchange="previewImage()">
                             </div>
-                            <button name="updateAccount" type="submit" class="btn btn-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                                Apply
-                            </button>
-                            <button name="cancelButton" id="cancelProfileButton" type="button" class="btn btn-danger" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                                Cancel
-                            </button>
+                            <div class="d-flex" style="width: 58%;">
+                                <button name="updateAccount" type="submit" class="btn btn-success m-2" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                    Apply
+                                </button>
+                                <div class="d-flex w-100 justify-content-between">
+
+                                    <button name="cancelButton" id="cancelProfileButton" type="button" class="btn btn-danger m-2" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                        Cancel
+                                    </button>
+                                    <button name="cancelPassword" id="changePasswordButton" type="button" class="btn btn-primary m-2" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                        Change Password
+                                    </button>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>

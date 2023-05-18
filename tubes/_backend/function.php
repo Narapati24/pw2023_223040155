@@ -381,6 +381,18 @@ function inputArticle($data)
   return mysqli_affected_rows($db);
 }
 
+function comment($data)
+{
+  $db = connect();
+
+  $description = htmlspecialchars($data['description']);
+  $user = $data['idUser'];
+  $article = $data['idArticle'];
+
+  $query = "INSERT INTO commentar VALUES (null, '$description', now(), '$user', '$article')";
+  mysqli_query($db, $query);
+}
+
 function dd($data)
 {
   echo '<pre>';

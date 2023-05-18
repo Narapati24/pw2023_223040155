@@ -4,7 +4,7 @@ require '../_backend/searchBar.php';
 
 // pagination
 // konfigurasi
-$jumlahDataPerhalaman = 2;
+$jumlahDataPerhalaman = 8;
 $jumlahData = count(query("SELECT * FROM article WHERE visibility_id = 3"));
 $jumlahHalaman = ceil($jumlahData / $jumlahDataPerhalaman);
 $halamanAktif = (isset($_GET['page'])) ? $_GET['page'] : 1;
@@ -40,10 +40,12 @@ require_once '../_header.php';
       </div>
     </div>
   <?php endforeach; ?>
+
+  <!-- pagination -->
   <div aria-label="Page navigation">
-    <ul class="pagination">
+    <ul class="pagination justify-content-center">
       <li class="page-item">
-        <a class="page-link" href="?page=<?= $halamanAktif - 1; ?>" aria-label="Previous">
+        <a class="page-link" href="?page=<?= ($halamanAktif > 1) ? $halamanAktif - 1 : $halamanAktif . '#'; ?>" aria-label="Previous">
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
@@ -55,7 +57,7 @@ require_once '../_header.php';
         <?php }; ?>
       <?php }; ?>
       <li class="page-item">
-        <a class="page-link" href="?page=<?= $halamanAktif + 1; ?>" aria-label="Next">
+        <a class="page-link" href="?page=<?= ($halamanAktif < $jumlahHalaman) ? $halamanAktif + 1 : $halamanAktif . '#'; ?>" aria-label="Next">
           <span aria-hidden="true">&raquo;</span>
         </a>
       </li>

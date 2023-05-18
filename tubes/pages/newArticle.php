@@ -14,6 +14,12 @@ $title = 'New Article';
 require_once '../_header.php';
 ?>
 
+<style>
+  .ck-editor__editable {
+    height: 30vh;
+  }
+</style>
+
 <!-- content -->
 <div class="container" style="height: 70px;"></div>
 <div class="container">
@@ -33,7 +39,7 @@ require_once '../_header.php';
       <label for="floatingInput">Short Description</label>
     </div>
     <div class="form-floating mb-3">
-      <textarea name="contentArticle" type="textarea" class="form-control text-editor" id="floatingInput" placeholder="Description"></textarea>
+      <textarea name="contentArticle" type="textarea" class="form-control text-editor" id="floatingInput" placeholder="Description" cols="80" rows="100"></textarea>
     </div>
     <select name="visibility" class="form-select mb-3" aria-label="Default select example" required>
       <option value="3" selected>Public</option>
@@ -43,8 +49,6 @@ require_once '../_header.php';
     <button name="submit" type="submit" class="btn btn-primary mb-3">Submit</button>
   </form>
 </div>
-
-<div style="height: 223px;"></div>
 
 <!-- Java Script -->
 <!-- img Preview -->
