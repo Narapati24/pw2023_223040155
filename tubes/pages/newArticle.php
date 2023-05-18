@@ -26,7 +26,7 @@ require_once '../_header.php';
   <form action="" method="post" enctype="multipart/form-data">
     <input name="idAuthor" type="hidden" value="<?= $_SESSION['ids']; ?>">
     <div class="form-floating mb-3">
-      <input name="title" type="text" class="form-control" id="floatingInput" placeholder="Title" required>
+      <input name="title" type="text" class="form-control" id="floatingInput" placeholder="Title" required maxlength="490">
       <label for="floatingInput">Title</label>
     </div>
     <div class="form-floating mb-3">

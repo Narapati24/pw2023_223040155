@@ -5,7 +5,7 @@ session_start();
 
 function connect()
 {
-  return mysqli_connect('localhost', 'root', '', 'tubes');
+  return mysqli_connect('localhost', 'root', '', 'tubespw2023');
 }
 
 function query($query)
@@ -29,7 +29,7 @@ function query($query)
 
 function base_url($url = null)
 {
-  $base_url = "http://localhost:81/pw2023_223040155/tubes";
+  $base_url = "http://localhost/pw2023_223040155/tubes";
   if ($url != null) {
     return $base_url . "/" . $url;
   } else {
@@ -353,9 +353,16 @@ function inputArticle($data)
   $title = htmlspecialchars($data['title']);
   // $img = htmlspecialchars($data['img']);
   $shortContent = htmlspecialchars($data['shortContentArticle']);
-  $content = $data['contentArticle'];
+  $content = htmlspecialchars($data['contentArticle'], ENT_QUOTES);
   $idAuthor = htmlspecialchars($data['idAuthor']);
   $visibility = $data['visibility'];
+
+  if (strlen($title) > 500) {
+    echo "<script>
+    alert('title terlalu panjang');
+          </script>";
+    return false;
+  }
 
   if (strlen($shortContent) > 500) {
     echo "<script>

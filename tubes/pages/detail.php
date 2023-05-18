@@ -67,7 +67,7 @@ require_once '../_header.php';
   <div class="images">
     <img src="../img/article/<?= $article['img']; ?>" alt="<?= $article['title']; ?>" width="730">
   </div>
-  <p><?= $article['content']; ?></p>
+  <p><?= html_entity_decode($article['content'], ENT_QUOTES); ?></p>
 </div>
 <!-- comment -->
 <div class="container" id="comment">
