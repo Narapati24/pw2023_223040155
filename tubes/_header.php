@@ -58,7 +58,7 @@ if (isset($_SESSION['login'])) {
                 filter: brightness(0) invert(1);">
             </a>
             <a data-bs-toggle="collapse" href="#profileSetting" role="button" aria-expanded="false" aria-controls="collapseExample">
-              <img class="rounded-circle" src="<?= base_url('img/profile/') . $profile[0]['img']; ?>" width="40px" height="40px" alt="Profile">
+              <img class="rounded-circle border border-success" src="<?= base_url('img/profile/') . $profile[0]['img']; ?>" style="object-fit: cover;" width="40px" height="40px" alt="Profile">
             </a>
             <div class="position-absolute collapse mt-5" style="width: 100px; right: 100px;" id="profileSetting">
               <div class="card card-body">

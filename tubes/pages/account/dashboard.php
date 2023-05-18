@@ -66,7 +66,7 @@ require_once '_header.php';
                                     <p>Gender : <?= $query[0]['gender']; ?></p>
                                     <p>birthdate : <?= $query[0]['birthdate']; ?></p>
                                 </div>
-                                <img src="../../img/profile/<?= $profile[0]['img']; ?>" class="rounded-circle border border-success" width="200" height="200" alt="profile">
+                                <img src="../../img/profile/<?= $profile[0]['img']; ?>" class="rounded-circle border border-success" style="object-fit: cover;" width="200" height="200" alt="profile">
                             </div>
                             <button id="editButton" type="button" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                 Edit
@@ -111,7 +111,7 @@ require_once '_header.php';
                                 </div>
                                 <input name="former-img" class="img-lama" type="hidden" value="<?= $profile[0]['img']; ?>">
                                 <label for="photo-edit">
-                                    <img src="../../img/profile/<?= $profile[0]['img']; ?>" class="rounded-circle border border-success img-preview" width="200" height="200" alt="profile">
+                                    <img src="../../img/profile/<?= $profile[0]['img']; ?>" class="rounded-circle border border-success img-preview" style="object-fit: cover;" width="200" height="200" alt="profile">
                                     <!-- <img id="editLogo" src="../../img/logo/editLogo.png" class="rounded-circle border border-success" width="50" height="50" alt="profile"> -->
                                 </label>
                                 <input name="new-img" class="d-none img" id="photo-edit" type="file" onchange="previewImage()">

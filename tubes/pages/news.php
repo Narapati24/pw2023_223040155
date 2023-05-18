@@ -2,7 +2,15 @@
 require '../_backend/function.php';
 require '../_backend/searchBar.php';
 
-$article = query("SELECT * FROM article WHERE visibility_id = 3 ORDER BY id DESC");
+// pagination
+// konfigurasi
+$jumlahDataPerhalaman = 2;
+$jumlahData = count(query("SELECT * FROM article WHERE visibility_id = 3"));
+$jumlahHalaman = ceil($jumlahData / $jumlahDataPerhalaman);
+$halamanAktif = (isset($_GET['page'])) ? $_GET['page'] : 1;
+$awalData = ($jumlahDataPerhalaman * $halamanAktif) - $jumlahDataPerhalaman;
+
+$article = query("SELECT * FROM article WHERE visibility_id = 3 ORDER BY id DESC LIMIT $awalData, $jumlahDataPerhalaman");
 
 // Search bar
 if (isset($_POST['search'])) {
@@ -32,6 +40,27 @@ require_once '../_header.php';
       </div>
     </div>
   <?php endforeach; ?>
+  <div aria-label="Page navigation">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="?page=<?= $halamanAktif - 1; ?>" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <?php for ($i = 1; $i <= $jumlahHalaman; $i++) { ?>
+        <?php if ($halamanAktif == $i) { ?>
+          <li class="page-item"><a class="page-link active" href="?page=<?= $i; ?>"><?= $i; ?></a></li>
+        <?php } else { ?>
+          <li class="page-item"><a class="page-link" href="?page=<?= $i; ?>"><?= $i; ?></a></li>
+        <?php }; ?>
+      <?php }; ?>
+      <li class="page-item">
+        <a class="page-link" href="?page=<?= $halamanAktif + 1; ?>" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>
 <br>
 
