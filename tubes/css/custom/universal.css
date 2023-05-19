@@ -24,23 +24,30 @@ nav {
 }
 
 .login-form {
-  position: absolute;
-  width: 50%;
+  position: relative;
+  width: 80%;
+  height: 80vh;
   overflow: hidden;
+  transition: 600ms ease-in;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-form {
+  position: relative;
+  width: 80%;
+  height: 80vh;
   transition: 600ms ease-in;
   margin: auto;
 }
 
 .hidden-form {
-  position: absolute;
-  width: 0%;
+  position: relative;
+  width: 80%;
+  height: 0vh;
   overflow: hidden;
-  transition: 600ms ease-in;
-}
-
-.register-form {
-  position: absolute;
-  width: 50%;
   transition: 600ms ease-in;
 }
 

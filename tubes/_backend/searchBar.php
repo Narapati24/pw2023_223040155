@@ -82,12 +82,12 @@ function findAdminUsers($data, $data2)
   return $rows;
 }
 
-function findUserArticle($data, $data2)
+function findUserArticle($data, $data2, $data3, $data4)
 {
   $db = connect();
-  $idusers = $_SESSION['ids'];
+  $id = $_SESSION['ids'];
 
-  $query = "SELECT * FROM users, article WHERE users.id = '$idusers' && users.id = article.user_id && article.visibility_id LIKE '%$data%' && (article.title LIKE '%$data2%' || article.content LIKE '%$data2%') ORDER BY article.id DESC";
+  $query = "SELECT * FROM users, article WHERE users.id = '$id' && users.id = article.user_id && article.visibility_id LIKE '%$data%' && (article.title LIKE '%$data2%' || article.content LIKE '%$data2%') ORDER BY article.id DESC LIMIT $data3, $data4";
 
   $result = mysqli_query($db, $query);
   $rows = [];

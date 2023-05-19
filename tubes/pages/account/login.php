@@ -8,15 +8,10 @@ if (isset($_SESSION['login'])) {
 if (isset($_POST['login'])) {
     $login = loginAccount($_POST);
 }
+
 // register system
 if (isset($_POST['register'])) {
-    if (registerAccount($_POST) > 0) {
-        echo "<script>
-                document.location.href = 'login.php';
-            </script>";
-    } else {
-        echo "Failed to Register";
-    }
+    $login = registerAccount($_POST);
 }
 
 $title = 'login';
@@ -26,26 +21,36 @@ require_once '../../_header.php';
 
 <!-- content -->
 <div class="container" style="height: 70px;"></div>
-<div class="container w-50" style="height: 550px; overflow: hidden; background-color: whitesmoke;">
+<div class="container border w-50" style="overflow: hidden; background-color: whitesmoke;">
     <!-- info error -->
-    <?php if (isset($login['error'])) : ?>
-        <p><?= $login['pesan']; ?></p>
+    <?php if (isset($login['error']) && !$login['error']) : ?>
+        <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+            <strong><?= $login['massage']; ?></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php elseif (isset($login['error']) && $login['error']) : ?>
+        <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+            <strong><?= $login['massage']; ?></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     <?php endif; ?>
     <!-- form kogin -->
-    <form action="" method="post" id="loginForm" class="login-form">
-        <div class="form-floating mb-3">
-            <input name="username" type="text" class="form-control" id="floatingInput" placeholder="Username/name@example.com" autofocus autocomplete="off" required>
-            <label for="floatingInput">Username</label>
+    <form action="" method="post" id="loginForm" class="login-form pt-2">
+        <div>
+            <div class="form-floating mb-3">
+                <input name="username" type="text" class="form-control" id="floatingInput" placeholder="Username/name@example.com" autofocus autocomplete="off" required>
+                <label for="floatingInput">Username</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                <label for="floatingPassword">Password</label>
+            </div>
+            <button name="login" type="submit" class="btn btn-primary mb-3">Login</button>
+            <p>dont have account? <b><span id="registerButton" style="cursor: pointer;">Register</span></b> here</p>
         </div>
-        <div class="form-floating mb-3">
-            <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
-            <label for="floatingPassword">Password</label>
-        </div>
-        <button name="login" type="submit" class="btn btn-primary mb-3">Login</button>
-        <p>dont have account? <b><span id="registerButton" style="cursor: pointer;">Register</span></b> here</p>
     </form>
     <!-- form register -->
-    <form action="" method="post" id="registerForm" class="hidden-form">
+    <form action="" method="post" id="registerForm" class="register-form hidden-form pt-2">
         <div class="row mb-3">
             <div class="col form-floating">
                 <input name="first_name" type="text" class="form-control" id="firstName" placeholder="First name" autocomplete="off" required autofocus>
@@ -86,25 +91,16 @@ require_once '../../_header.php';
     </form>
 </div>
 
-<!-- footer -->
-<footer style="position: absolute; bottom: 0;">
-    <div class="footer">
-        <p>&copy; 2023 My Company. All Rights Reserved.</p>
-    </div>
-</footer>
-
 <!-- Java Script -->
-<script src="../../js/bootstrap/bootstrap.min.js"></script>
 <script>
     document.getElementById("registerButton").onclick = function() {
         document.getElementById("loginForm").classList.add("hidden-form")
-        document.getElementById("registerForm").classList.add("register-form");
+        document.getElementById("registerForm").classList.remove("hidden-form");
     }
     document.getElementById("loginButton").onclick = function() {
         document.getElementById("loginForm").classList.remove("hidden-form")
-        document.getElementById("registerForm").classList.remove("register-form");
+        document.getElementById("registerForm").classList.add("hidden-form");
     }
 </script>
-</body>
 
-</html>
+<?php require '../../_footer.php' ?>

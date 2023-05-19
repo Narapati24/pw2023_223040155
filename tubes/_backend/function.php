@@ -50,52 +50,76 @@ function registerAccount($data)
   $password1 = mysqli_real_escape_string($db, $data['password1']);
   $password2 = mysqli_real_escape_string($db, $data['password2']);
 
+  // gender undifine
+  if (empty($gender)) {
+    return [
+      'error' => true,
+      'massage' => 'SELECT GENDER'
+    ];
+    exit;
+  }
+
+  // gender other than man and women
+  if (query("SELECT gender from users WHERE gender != '$gender'")) {
+    return [
+      'error' => true,
+      'massage' => 'PLEASE, ONLY MAN AND WOMEN HERE'
+    ];
+    exit;
+  }
+
   // username / password kosong
   if (empty($username) || empty($password1) || empty($password2)) {
-    echo "<script>
-          alert('username / password need to fill');
-          </script>";
-    return false;
+    return [
+      'error' => true,
+      'massage' => 'USERNAME / PASSWORD NEED TO FILL'
+    ];
+    exit;
   }
 
   // username terlalu panjang
   if (strlen($username) > 20) {
-    echo "<script>
-    alert('username terlalu panjang');
-          </script>";
-    return false;
+    return [
+      'error' => true,
+      'massage' => 'USERNAME TOO LONG'
+    ];
+    exit;
   }
 
   // username sudah ada
   if (query("SELECT * FROM users WHERE username ='$username'")) {
-    echo "<script>
-          alert('username sudah dipakai');
-          </script>";
-    return false;
+    return [
+      'error' => true,
+      'massage' => 'USERNAME ALREADY EXIST'
+    ];
+    exit;
   }
 
   // email sudah dipakai
   if (query("SELECT * FROM users WHERE email ='$email'")) {
-    echo "<script>
-          alert('email sudah dipakai');
-          </script>";
-    return false;
+    return [
+      'error' => true,
+      'massage' => 'EMAIL ALREADY EXIST'
+    ];
+    exit;
   }
 
   // konfirmasi password
   if ($password1 !== $password2) {
-    echo "<script>
-          alert('konfirmasi password tidak sesuai');
-          </script>";
-    return false;
+    return [
+      'error' => true,
+      'massage' => 'CONFIRMATION PASSWORD DIDN\'T SAME'
+    ];
+    exit;
   }
 
   // panjang password
   if (strlen($password1) < 5) {
-    echo "<script>
-          alert('password terlalu pendek');
-          </script>";
-    return false;
+    return [
+      'error' => true,
+      'massage' => 'NEED LONGER PASSWORD'
+    ];
+    exit;
   }
 
   $realPassword = password_hash($password1, PASSWORD_DEFAULT);
@@ -104,7 +128,11 @@ function registerAccount($data)
 
   mysqli_query($db, $query);
   echo mysqli_error($db);
-  return mysqli_affected_rows($db);
+  return [
+    'error' => false,
+    'massage' => 'REGISTER SUCCESS'
+  ];
+  exit;
 }
 
 function updateAccount($data)
@@ -121,49 +149,67 @@ function updateAccount($data)
   $password =  htmlspecialchars($data['password']);
 
 
+  $img = uploadProfile();
+
+
   // username / password kosong
-  if (empty($username) || empty($password)) {
-    echo "<script>
-          alert('username / password need to fill');
-          </script>";
-    return false;
+  if (empty($username)) {
+    if ($img) {
+      unlink("../../img/profile/" . $img);
+    };
+    return [
+      'error' => true,
+      'massage' => 'USERNAME NEEDED'
+    ];
+    exit;
   }
 
   // username terlalu panjang
   if (strlen($username) > 20) {
-    echo "<script>
-    alert('username terlalu panjang');
-          </script>";
-    return false;
+    if ($img) {
+      unlink("../../img/profile/" . $img);
+    };
+    return [
+      'error' => true,
+      'massage' => 'USERNAME TOO LONG'
+    ];
+    exit;
   }
 
   // username sudah ada
   if (query("SELECT * FROM users WHERE username = '$username' && id != '$id'")) {
-    echo "<script>
-          alert('username sudah dipakai');
-          </script>";
-    return false;
+    if ($img) {
+      unlink("../../img/profile/" . $img);
+    };
+    return [
+      'error' => true,
+      'massage' => 'USERNAME ALREADY EXIST'
+    ];
+    exit;
   }
 
   // email sudah dipakai
   if (query("SELECT * FROM users WHERE email = '$email' && id != '$id'")) {
-    echo "<script>
-          alert('email sudah dipakai');
-          </script>";
-    return false;
+    if ($img) {
+      unlink("../../img/profile/" . $img);
+    };
+    return [
+      'error' => true,
+      'massage' => 'EMAIL ALREADY EXIST'
+    ];
+    exit;
   }
 
-  $img = uploadProfile();
-  if (!$img) {
-    $img = $data['former-img'];
-  } else {
-    unlink("../../img/profile/" . $data['former-img']);
-  }
 
   if ($user = query("SELECT * FROM users
                                 WHERE id = '$id'
                                 ")[0]) {
-    if ($password = $user['password']) {
+    if ($password === $user['password']) {
+      if (!$img) {
+        $img = $data['former-img'];
+      } else {
+        unlink("../../img/profile/" . $data['former-img']);
+      }
 
       $query = "UPDATE users SET
                 img = '$img',
@@ -177,9 +223,17 @@ function updateAccount($data)
 
       mysqli_query($db, $query);
 
-      header('Refresh:0');
+      return [
+        'error' => false,
+        'massage' => 'DATA UPDATED'
+      ];
       exit;
     } elseif (password_verify($password, $user['password'])) {
+      if (!$img) {
+        $img = $data['former-img'];
+      } else {
+        unlink("../../img/profile/" . $data['former-img']);
+      }
 
       $query = "UPDATE users SET
                 img = '$img',
@@ -193,9 +247,28 @@ function updateAccount($data)
 
       mysqli_query($db, $query);
 
-      header('Refresh:0');
+      return [
+        'error' => false,
+        'massage' => 'DATA UPDATED'
+      ];
+      exit;
+    } else {
+      unlink("../../img/profile/" . $img);
+      return [
+        'error' => true,
+        'massage' => 'PASSWORD WRONG'
+      ];
       exit;
     }
+  } else {
+    if ($img) {
+      unlink("../../img/profile/" . $img);
+    };
+    return [
+      'error' => true,
+      'massage' => 'ID ERROR'
+    ];
+    exit;
   }
 }
 
@@ -232,9 +305,16 @@ function loginAccount($data)
     } else {
       return [
         'error' => true,
-        'pesan' => 'Username / Password salah!'
+        'massage' => 'Username / Password salah!'
       ];
+      exit;
     }
+  } else {
+    return [
+      'error' => true,
+      'massage' => 'NO MATCH USERNAME'
+    ];
+    exit;
   }
 }
 
@@ -248,9 +328,6 @@ function upload()
 
   // check file existence
   if ($error == 4) {
-    echo "<script>
-            alert('pilih gambar terlebih dahulu');
-          </script>";
     return false;
   }
 
@@ -259,26 +336,17 @@ function upload()
   $file_extension = explode('.', $name_file);
   $file_extension = strtolower(end($file_extension));
   if (!in_array($file_extension, $list_type)) {
-    echo "<script>
-            alert('Harus File Gambar');
-          </script>";
     return false;
   }
 
   // check type file
   if ($type_file != 'image/jpeg' && $type_file != 'image/png') {
-    echo "<script>
-    alert('Harus File Gambar');
-          </script>";
     return false;
   }
 
   // check size file
   // 5mb
   if ($size_file > 5000000) {
-    echo "<script>
-    alert('Ukuran terlalu besar');
-          </script>";
     return false;
   }
 
@@ -302,9 +370,6 @@ function uploadProfile()
 
   // check file existence
   if ($error == 4) {
-    echo "<script>
-            alert('pilih gambar terlebih dahulu');
-          </script>";
     return false;
   }
 
@@ -313,26 +378,17 @@ function uploadProfile()
   $file_extension = explode('.', $name_file);
   $file_extension = strtolower(end($file_extension));
   if (!in_array($file_extension, $list_type)) {
-    echo "<script>
-            alert('Harus File Gambar');
-          </script>";
     return false;
   }
 
   // check type file
   if ($type_file != 'image/jpeg' && $type_file != 'image/png') {
-    echo "<script>
-    alert('Harus File Gambar');
-          </script>";
     return false;
   }
 
   // check size file
   // 5mb
   if ($size_file > 5000000) {
-    echo "<script>
-    alert('Ukuran terlalu besar');
-          </script>";
     return false;
   }
 
@@ -358,22 +414,28 @@ function inputArticle($data)
   $visibility = $data['visibility'];
 
   if (strlen($title) > 500) {
-    echo "<script>
-    alert('title terlalu panjang');
-          </script>";
-    return false;
+    return [
+      'error' => true,
+      'massage' => 'TITLE TOO LONG'
+    ];
+    exit;
   }
 
   if (strlen($shortContent) > 500) {
-    echo "<script>
-    alert('descripsi terlalu panjang');
-          </script>";
-    return false;
+    return [
+      'error' => true,
+      'massage' => 'DESCRIPTION TOO LONG'
+    ];
+    exit;
   }
 
   $img = upload();
   if (!$img) {
-    return false;
+    return [
+      'error' => true,
+      'massage' => 'NEED IMG'
+    ];
+    exit;
   }
   // article
   $queryArticle = "INSERT INTO article VALUES (null,'$title','$img','$shortContent','$content', now(),'$idAuthor','$visibility');";
@@ -385,7 +447,11 @@ function inputArticle($data)
   $queryPopularity = "INSERT INTO popularity VALUES ('$article_id', DEFAULT, DEFAULT, now(), DEFAULT);";
   mysqli_query($db, $queryPopularity);
   echo mysqli_error($db);
-  return mysqli_affected_rows($db);
+  return [
+    'error' => false,
+    'massage' => 'ARTICLE BEEN INPUTED'
+  ];
+  exit;
 }
 
 function comment($data)

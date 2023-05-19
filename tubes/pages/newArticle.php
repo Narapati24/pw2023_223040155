@@ -2,12 +2,8 @@
 require '../_backend/function.php';
 
 if (isset($_POST['submit'])) {
-  if (inputArticle($_POST) > 0) {
-    echo "success";
-  } else {
-    echo "Failed to Register";
-  }
-}
+  $article = inputArticle($_POST);
+};
 
 // header
 $title = 'New Article';
@@ -23,6 +19,17 @@ require_once '../_header.php';
 <!-- content -->
 <div class="container" style="height: 70px;"></div>
 <div class="container">
+  <?php if (isset($article['error']) && !$article['error']) : ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong><?= $article['massage']; ?></strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <?php elseif (isset($article['error']) && $article['error']) : ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong><?= $article['massage']; ?></strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <?php endif; ?>
   <form action="" method="post" enctype="multipart/form-data">
     <input name="idAuthor" type="hidden" value="<?= $_SESSION['ids']; ?>">
     <div class="form-floating mb-3">
@@ -60,7 +67,10 @@ require_once '../_header.php';
     .create(document.querySelector('.text-editor'), {
       ckfinder: {
         uploadUrl: '../_backend/fileupload.php'
-      }
+      },
+      mediaEmbed: {
+        previewsInData: true
+      },
     })
     .then(editor => {
       console.log(editor);

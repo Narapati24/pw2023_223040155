@@ -2,16 +2,20 @@
 require '../../_backend/function.php';
 
 if (isset($_POST['updateAccount'])) {
-    if (updateAccount($_POST) > 0) {
-        echo "Change Success";
-    } else {
-        echo "Failed to Change";
-    }
+    $edit = updateAccount($_POST);
 }
 
-$idusers = $_SESSION['ids'];
-$profile = query("SELECT * FROM users WHERE id = $idusers");
-$query = query("SELECT * FROM users,article WHERE users.id = '$idusers' && users.id = article.user_id");
+$id = $_SESSION['ids'];
+$profile = query("SELECT * FROM users WHERE id = $id");
+$query = query("SELECT * FROM users,article WHERE users.id = '$id' && users.id = article.user_id ORDER BY article.id LIMIT 0, 7");
+
+// pagination
+// konfigurasi
+$jumlahDataPerhalaman = 7;
+$jumlahData = count(query("SELECT * FROM users, article WHERE users.id = '$id' && users.id = article.user_id"));
+$jumlahHalaman = ceil($jumlahData / $jumlahDataPerhalaman);
+$halamanAktif = (isset($_GET['page'])) ? $_GET['page'] : 1;
+$awalData = ($jumlahDataPerhalaman * $halamanAktif) - $jumlahDataPerhalaman;
 
 $title = 'Profile';
 require_once '_header.php';
@@ -43,6 +47,18 @@ require_once '_header.php';
             <div class="tab-content" id="nav-tabContent" style="background-color: whitesmoke;">
                 <!-- Tab Profile -->
                 <div class="tab-pane fade show active" id="list-profile" role="tabpanel" aria-labelledby="list-home-list">
+                    <!-- info error -->
+                    <?php if (isset($edit['error']) && !$edit['error']) : ?>
+                        <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                            <strong><?= $edit['massage']; ?></strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php elseif (isset($edit['error']) && $edit['error']) : ?>
+                        <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+                            <strong><?= $edit['massage']; ?></strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif; ?>
                     <div class="tab-pane fade show active p-5" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
                         <div id="viewProfile">
                             <div class="d-flex justify-content-between">
@@ -103,12 +119,20 @@ require_once '_header.php';
                                 </label>
                                 <input name="new-img" class="d-none img" id="photo-edit" type="file" onchange="previewImage()">
                             </div>
-                            <button name="updateAccount" type="submit" class="btn btn-success" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                                Apply
-                            </button>
-                            <button name="cancelButton" id="cancelProfileButton" type="button" class="btn btn-danger" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                                Cancel
-                            </button>
+                            <div class="d-flex" style="width: 58%;">
+                                <button name="updateAccount" type="submit" class="btn btn-success m-2" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                    Apply
+                                </button>
+                                <div class="d-flex w-100 justify-content-between">
+
+                                    <button name="cancelButton" id="cancelProfileButton" type="button" class="btn btn-danger m-2" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                        Cancel
+                                    </button>
+                                    <button name="cancelPassword" id="changePasswordButton" type="button" class="btn btn-primary m-2" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                        Change Password
+                                    </button>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -131,12 +155,34 @@ require_once '_header.php';
                                 </button>
                                 <div style="line-height: 3px; margin-top: 12px;">
                                     <p><?= substr($a['title'], 0, 90) ?>
-                                        <?= strlen($a['title']) > 90 ? '...' : true; ?></p>
+                                        <?= strlen($a['title']) > 90 ? '...' : ''; ?></p>
                                     <p>Editor : <?= $a['first_name'] . ' ' . $a['last_name']; ?></p>
                                     <p style="font-size: 12px; margin-top: 20px;"><?= $a['insert_date']; ?></p>
                                 </div>
                             </div>
                         <?php }; ?>
+                        <!-- pagination -->
+                        <div aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous" onclick="pageClick(<?= ($halamanAktif > 1) ? $halamanAktif - 1 : $halamanAktif . '#';; ?>)">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <?php for ($i = 1; $i <= $jumlahHalaman; $i++) { ?>
+                                    <?php if ($halamanAktif == $i) { ?>
+                                        <li class="page-item"><a class="page-link active" href="#" onclick="pageClick(<?= $i; ?>)"><?= $i; ?></a></li>
+                                    <?php } else { ?>
+                                        <li class="page-item"><a class="page-link" href="#" onclick="pageClick(<?= $i; ?>)"><?= $i; ?></a></li>
+                                    <?php }; ?>
+                                <?php }; ?>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next" onclick="pageClick(<?= ($halamanAktif < $jumlahHalaman) ? $halamanAktif + 1 : $halamanAktif . '#'; ?>)">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <!-- Tab Setting -->

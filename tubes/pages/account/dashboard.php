@@ -11,11 +11,7 @@ if ($_SESSION['roles'] === 'Author' || $_SESSION['roles'] === 'User') {
 }
 
 if (isset($_POST['updateAccount'])) {
-    if (updateAccount($_POST) > 0) {
-        echo "Change Success";
-    } else {
-        echo "Failed to Change";
-    }
+    $edit = updateAccount($_POST);
 }
 
 $id = $_SESSION['ids'];
@@ -64,6 +60,18 @@ require_once '_header.php';
             <div class="tab-content" style="background-color: whitesmoke;" id="nav-tabContent">
                 <!-- tabs profile -->
                 <div class="tab-pane fade show active" id="list-profile" role="tabpanel" aria-labelledby="list-home-list">
+                    <!-- info error -->
+                    <?php if (isset($edit['error']) && !$edit['error']) : ?>
+                        <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                            <strong><?= $edit['massage']; ?></strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php elseif (isset($edit['error']) && $edit['error']) : ?>
+                        <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+                            <strong><?= $edit['massage']; ?></strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif; ?>
                     <div class="tab-pane fade show active p-5" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
                         <div id="viewProfile">
                             <div class="d-flex justify-content-between">
