@@ -16,17 +16,31 @@ keywordArticle3.addEventListener("keyup", function () {
   checkInputsArticle();
 });
 
-function checkInputsArticle() {
+let pageArticle;
+
+function pageClick(data) {
+  checkInputsArticle(data);
+}
+
+function checkInputsArticle(data) {
   const input1 = keywordArticle.value;
   const input2 = keywordArticle2.value;
   const input3 = keywordArticle3.value;
+  let input4 = 1;
+  if (!data) {
+    false;
+  } else {
+    input4 = data;
+  }
   fetch(
   "../../_backend/ajax/adminPage/article.php ?keyword=" +
     input1 +
     "&keyword2=" +
     input2 +
     "&keyword3=" +
-    input3
+    input3 +
+    "&page=" +
+    input4
   )
     .then((Response) => Response.text())
     .then((Response) => (containerArticle.innerHTML = Response));

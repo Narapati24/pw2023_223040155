@@ -16,6 +16,7 @@ if (isset($_SESSION['login'])) {
   <link rel="stylesheet" href="<?= base_url('css/reset.css'); ?>">
   <!-- bootstrap -->
   <link rel="stylesheet" href="<?= base_url('css/bootstrap/bootstrap.min.css'); ?>">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <!-- Custom css -->
   <link rel="stylesheet" href="<?= base_url('css/custom/universal.css'); ?>">
   <link rel="icon" href="<?= base_url('img/logo/P-news-logo.png'); ?>">

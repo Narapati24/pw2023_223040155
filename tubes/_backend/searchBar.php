@@ -50,12 +50,12 @@ function findPopularMonth($data)
   return $rows;
 }
 
-function findAdminArticle($data, $data2, $data3)
+function findAdminArticle($data, $data2, $data3, $data4, $data5)
 {
 
   $db = connect();
 
-  $query = "SELECT * FROM users, article WHERE users.id = article.user_id && article.visibility_id LIKE '%$data%' && (article.title LIKE '%$data2%' || article.content LIKE '%$data2%') && (users.first_name LIKE '%$data3%' || users.last_name LIKE '%$data3%') ORDER BY article.id DESC";
+  $query = "SELECT * FROM users, article WHERE users.id = article.user_id && article.visibility_id LIKE '%$data%' && (article.title LIKE '%$data2%' || article.content LIKE '%$data2%') && (users.first_name LIKE '%$data3%' || users.last_name LIKE '%$data3%') ORDER BY article.id DESC LIMIT $data4, $data5";
 
   $result = mysqli_query($db, $query);
   $rows = [];

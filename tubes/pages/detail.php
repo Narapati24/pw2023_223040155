@@ -68,6 +68,13 @@ require_once '../_header.php';
     <img src="../img/article/<?= $article['img']; ?>" alt="<?= $article['title']; ?>" width="730">
   </div>
   <p><?= html_entity_decode($article['content'], ENT_QUOTES); ?></p>
+  <div class="rating text-center">
+    <h5>Rate</h5>
+    <?php for ($i = 1; $i <= 5; $i++) { ?>
+      <input class="d-none ratingInput" type="radio" id="star<?= $i; ?>" name="rating" value="<?= $i; ?>">
+      <label class="bi bi-star stars-rating" for="star<?= $i; ?>"></label>
+    <?php }; ?>
+  </div>
 </div>
 <!-- comment -->
 <div class="container" id="comment">
@@ -75,7 +82,7 @@ require_once '../_header.php';
   <div style="max-height: 400px; overflow-y: scroll;">
     <?php foreach ($comment as $c) { ?>
       <section class="container user-comment" style="border-radius: 10px;">
-        <img class="d-inline-block mt-1" src="../img/profile/<?= $c['img']; ?>" alt="" height="30" width="30">
+        <img class="d-inline-block mt-1" style="object-fit: cover;" src="../img/profile/<?= $c['img']; ?>" alt="" height="30" width="30">
         <p class="user-name d-inline-block"><strong><?= $c['username']; ?></strong></p>
         <p class="user-commentar" style="margin-top: -15px;"><?= $c['description']; ?></p>
         <p class="user-time text-end" style="margin-top: -15px;"><?= $c['insert_date']; ?></p>
@@ -86,13 +93,37 @@ require_once '../_header.php';
     <form action="" method="post" style="position: absolute; bottom: 0; text-align: center;">
       <input name="idUser" type="hidden" value="<?= $_SESSION['ids']; ?>">
       <input name="idArticle" type="hidden" value="<?= $id; ?>">
-      <textarea name="description" type="text" placeholder="comment here" style="width: 260px; border-radius: 10px; resize: none; margin-bottom: -20px;"></textarea>
+      <textarea name="description" type="text" placeholder="comment here" style="width: 260px; border-radius: 10px; resize: none; margin-bottom: -20px;" maxlength="100"></textarea>
       <button name="submit" type="submit" style="border-radius: 50%; background-color: lightskyblue; margin-bottom: 14px;"><img src="../img/logo/sentLogo.png" width="30" height="30" alt="sent Logo"></button>
     </form>
   <?php } else {; ?>
     <p style="text-align: center; margin-top: 30px;">Login For Comment</p>
   <?php }; ?>
 </div>
+
+<script>
+  var checkboxes = document.querySelectorAll(".ratingInput");
+  var ratingLabels = document.querySelectorAll(".stars-rating");
+  var previousRating = 0;
+
+  checkboxes.forEach(function(checkbox, index) {
+    checkbox.addEventListener('change', function() {
+      var currentRating = index + 1;
+
+      for (var i = 0; i < ratingLabels.length; i++) {
+        if (currentRating <= i) {
+          ratingLabels[i].classList.remove("bi-star-fill");
+          ratingLabels[i].classList.add("bi-star");
+        } else {
+          ratingLabels[i].classList.remove("bi-star");
+          ratingLabels[i].classList.add("bi-star-fill");
+        }
+      }
+      previousRating = currentRating;
+      console.log(previousRating);
+    });
+  });
+</script>
 
 <!-- footer -->
 <?php require_once '../_footer.php'; ?>

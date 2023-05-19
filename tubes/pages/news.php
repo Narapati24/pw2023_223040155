@@ -4,7 +4,7 @@ require '../_backend/searchBar.php';
 
 // pagination
 // konfigurasi
-$jumlahDataPerhalaman = 8;
+$jumlahDataPerhalaman = 16;
 $jumlahData = count(query("SELECT * FROM article WHERE visibility_id = 3"));
 $jumlahHalaman = ceil($jumlahData / $jumlahDataPerhalaman);
 $halamanAktif = (isset($_GET['page'])) ? $_GET['page'] : 1;

@@ -21,8 +21,16 @@ if (isset($_POST['updateAccount'])) {
 $id = $_SESSION['ids'];
 
 $profile = query("SELECT * FROM users WHERE id = $id");
-$query = query("SELECT * FROM users, article WHERE users.id = '$id' && article.user_id = '$id' ORDER BY article.id DESC");
+$query = query("SELECT * FROM users, article WHERE users.id = '$id' && article.user_id = '$id' ORDER BY article.id DESC LIMIT 0, 7");
 $users = query("SELECT * FROM users, roles WHERE users.id_role = roles.id");
+
+// pagination
+// konfigurasi
+$jumlahDataPerhalaman = 7;
+$jumlahData = count(query("SELECT * FROM users, article WHERE users.id = '$id' && article.user_id = '$id'"));
+$jumlahHalaman = ceil($jumlahData / $jumlahDataPerhalaman);
+$halamanAktif = (isset($_GET['page'])) ? $_GET['page'] : 1;
+$awalData = ($jumlahDataPerhalaman * $halamanAktif) - $jumlahDataPerhalaman;
 
 $title = 'Profile';
 require_once '_header.php';
@@ -30,7 +38,7 @@ require_once '_header.php';
 
 <!-- content -->
 <div class="container" style="height: 70px;"></div>
-<h4 class="container">Hello Admin <?= $query[0]['first_name']; ?>!</h4>
+<h4 class="container">Hello Admin <?= $profile[0]['first_name']; ?>!</h4>
 <div class="container">
     <div class="row">
         <div class="col-sm-4">
@@ -60,11 +68,11 @@ require_once '_header.php';
                         <div id="viewProfile">
                             <div class="d-flex justify-content-between">
                                 <div>
-                                    <p>Username : <?= $query[0]['username']; ?></p>
-                                    <p>Email Address : <?= $query[0]['email']; ?></p>
-                                    <p>Name : <?= $query[0]['first_name'] . ' ' . $query[0]['last_name']; ?></p>
-                                    <p>Gender : <?= $query[0]['gender']; ?></p>
-                                    <p>birthdate : <?= $query[0]['birthdate']; ?></p>
+                                    <p>Username : <?= $profile[0]['username']; ?></p>
+                                    <p>Email Address : <?= $profile[0]['email']; ?></p>
+                                    <p>Name : <?= $profile[0]['first_name'] . ' ' . $profile[0]['last_name']; ?></p>
+                                    <p>Gender : <?= $profile[0]['gender']; ?></p>
+                                    <p>birthdate : <?= $profile[0]['birthdate']; ?></p>
                                 </div>
                                 <img src="../../img/profile/<?= $profile[0]['img']; ?>" class="rounded-circle border border-success" style="object-fit: cover;" width="200" height="200" alt="profile">
                             </div>
@@ -78,30 +86,30 @@ require_once '_header.php';
                                 <div>
                                     <input name="id" type="text" value="<?= $profile[0]['id']; ?>" hidden>
                                     <div class="form-floating mb-3">
-                                        <input name="username" type="text" class="form-control" id="floatingInput" value="<?= $query[0]['username']; ?>" placeholder="Username" autocomplete="off" required>
+                                        <input name="username" type="text" class="form-control" id="floatingInput" value="<?= $profile[0]['username']; ?>" placeholder="Username" autocomplete="off" required>
                                         <label for="floatingInput">Username</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <input name="email" type="email" class="form-control" id="floatingInput" value="<?= $query[0]['email']; ?>" placeholder=" name@example.com" autocomplete="off" required>
+                                        <input name="email" type="email" class="form-control" id="floatingInput" value="<?= $profile[0]['email']; ?>" placeholder=" name@example.com" autocomplete="off" required>
                                         <label for="floatingInput">Email Address</label>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col form-floating">
-                                            <input name="first_name" type="text" class="form-control" id="firstName" value="<?= $query[0]['first_name']; ?>" placeholder="First name" autocomplete="off" required autofocus>
+                                            <input name="first_name" type="text" class="form-control" id="firstName" value="<?= $profile[0]['first_name']; ?>" placeholder="First name" autocomplete="off" required autofocus>
                                             <label style="margin-left: 12px;" for="firstName">First Name</label>
                                         </div>
                                         <div class="col form-floating">
-                                            <input name="last_name" type="text" class="form-control" id="lastName" value="<?= $query[0]['last_name']; ?>" placeholder="Last name" autocomplete="off" required>
+                                            <input name="last_name" type="text" class="form-control" id="lastName" value="<?= $profile[0]['last_name']; ?>" placeholder="Last name" autocomplete="off" required>
                                             <label style="margin-left: 12px;" for="lastName">Last Name</label>
                                         </div>
                                     </div>
                                     <select name="gender" class="form-select mb-3" aria-label="Default select example" required>
-                                        <option value="<?= $query[0]['gender']; ?>" selected><?= $query[0]['gender']; ?></option>
+                                        <option value="<?= $profile[0]['gender']; ?>" selected><?= $profile[0]['gender']; ?></option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                     </select>
                                     <div class="form-floating mb-3">
-                                        <input name="birthdate" type="date" class="form-control" id="floatingInput" value="<?= $query[0]['birthdate']; ?>" placeholder="Username" required>
+                                        <input name="birthdate" type="date" class="form-control" id="floatingInput" value="<?= $profile[0]['birthdate']; ?>" placeholder="Username" required>
                                         <label for="floatingInput">Date of birth</label>
                                     </div>
                                     <div class="form-floating mb-3">
@@ -134,7 +142,7 @@ require_once '_header.php';
                     </div>
                 </div>
                 <!-- Article -->
-                <div class="tab-pane fade" id="list-article" role="tabpanel" aria-labelledby="list-profile-list">
+                <div class="tab-pane fade pb-1" id="list-article" role="tabpanel" aria-labelledby="list-profile-list">
                     <form class="d-flex mb-2 pt-2" role="search" method="post">
                         <select name="keyword" class="form-select ms-2 me-2 keywordArticle" aria-label="Default select example" style="width: 100px;">
                             <option value="" selected>All</option>
@@ -143,7 +151,7 @@ require_once '_header.php';
                             <option value="3">Public</option>
                         </select>
                         <input name="keyword2" class="form-control me-2 keywordArticle2" type="text" placeholder="Search" autocomplete="off">
-                        <input name="keyword3" value="<?= $query[0]['first_name']; ?>" class="form-control me-2 keywordArticle3" type="text" placeholder="Editor Name" autocomplete="off">
+                        <input name="keyword3" value="<?= $profile[0]['first_name']; ?>" class="form-control me-2 keywordArticle3" type="text" placeholder="Editor Name" autocomplete="off">
                     </form>
                     <div class="articleContainer">
                         <?php foreach ($query as $a) { ?>
@@ -152,12 +160,35 @@ require_once '_header.php';
                                     <img src="../../img/article/<?= $a['img']; ?>" width="100" height="60" alt="profile">
                                 </button>
                                 <div style="line-height: 3px; margin-top: 12px;">
-                                    <p><?= $a['title']; ?></p>
+                                    <p><?= substr($a['title'], 0, 90) ?>
+                                        <?= strlen($a['title']) > 90 ? '...' : ''; ?></p>
                                     <p>Editor : <?= $a['first_name'] . ' ' . $a['last_name']; ?></p>
                                     <p style="font-size: 12px; margin-top: 20px;"><?= $a['insert_date']; ?></p>
                                 </div>
                             </div>
                         <?php }; ?>
+                        <!-- pagination -->
+                        <div aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous" onclick="pageClick(<?= ($halamanAktif > 1) ? $halamanAktif - 1 : $halamanAktif . '#';; ?>)">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <?php for ($i = 1; $i <= $jumlahHalaman; $i++) { ?>
+                                    <?php if ($halamanAktif == $i) { ?>
+                                        <li class="page-item"><a class="page-link active" href="#" onclick="pageClick(<?= $i; ?>)"><?= $i; ?></a></li>
+                                    <?php } else { ?>
+                                        <li class="page-item"><a class="page-link" href="#" onclick="pageClick(<?= $i; ?>)"><?= $i; ?></a></li>
+                                    <?php }; ?>
+                                <?php }; ?>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next" onclick="pageClick(<?= ($halamanAktif < $jumlahHalaman) ? $halamanAktif + 1 : $halamanAktif . '#'; ?>)">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <!-- Users -->
@@ -176,7 +207,7 @@ require_once '_header.php';
                             <?php foreach ($users as $u) { ?>
                                 <div class="d-inline-block text-center col-sm-2" style="width: min-content;">
                                     <button class="btn" type="button" data-bs-toggle="collapse" href="#profileUser-<?= $u['username']; ?>" role="tablist" aria-expanded="false" aria-controls="collapseExample">
-                                        <img src="../../img/profile/<?= $u['img']; ?>" class="rounded-circle border border-success" width="100" height="100" alt="profile">
+                                        <img src="../../img/profile/<?= $u['img']; ?>" class="rounded-circle border border-success" style="object-fit: cover;" width="100" height="100" alt="profile">
                                     </button>
                                     <p><?= $u['username']; ?></p>
                                     <p style="font-size: 12px; margin-top: -10px;"><?= $u['role_name']; ?></p>
