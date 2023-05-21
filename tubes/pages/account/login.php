@@ -45,7 +45,7 @@ require_once '../../_header.php';
                 <label for="floatingPassword">Password</label>
             </div>
             <div class="list-group-item mb-3">
-                <input name="remember" class="form-check-input me-1" type="checkbox" value=" " id="firstCheckbox">
+                <input name="remember" class="form-check-input me-1" type="checkbox" value="1" id="firstCheckbox">
                 <label class="form-check-label" for="firstCheckbox">Remember me</label>
             </div>
             <button name="login" type="submit" class="btn btn-primary mb-3">Login</button>

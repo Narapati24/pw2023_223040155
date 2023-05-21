@@ -53,6 +53,10 @@ nav {
   transition: 600ms ease-in;
 }
 
+.other-news img {
+  width: 290px;
+}
+
 #editLogo {
   position: absolute;
   opacity: 0;
@@ -62,6 +66,11 @@ nav {
 #editLogo:hover {
   opacity: 1;
   transition: 300ms ease-in;
+}
+
+.placeholder {
+  background-color: gray !important;
+  color: transparent;
 }
 
 footer {

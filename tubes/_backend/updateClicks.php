@@ -13,6 +13,12 @@ function updateClicks()
     clicks("UPDATE popularity SET daily = 0 WHERE update_data != '$rl_date'");
   }
 
+  // weekly
+  if (date('W') != date('W', strtotime($query[0]['update_data']))) {
+    clicks("UPDATE popularity SET weekly = 0 WHERE update_data != '$rl_date'");
+  }
+
+
   // monthly
   if (date('m') != $month) {
     clicks("UPDATE popularity SET monthly = 0 WHERE update_data != '$rl_date'");

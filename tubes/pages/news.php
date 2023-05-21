@@ -32,12 +32,14 @@ require_once '../_header.php';
   </form>
   <h4>Newes</h4>
   <?php foreach ($article as $a) : ?>
-    <div class="card d-inline-block ms-3 me-3 mb-4" style="width: 18rem; height: 400px; overflow: hidden;">
-      <img src="../img/article/<?= $a['img']; ?>" class="card-img-top" alt="..." height="160px">
+    <div class="d-inline-block card ms-3 me-3 mb-4 pl-wave" style="width: 18rem; height: 400px; overflow: hidden;">
+      <div class="other-news pl">
+        <img src="../img/article/<?= $a['img']; ?>" class="card-img-top" alt="<?= $a['title']; ?>" height="160px">
+      </div>
       <div class="card-body">
-        <h5 class="card-title"><?= substr($a['title'], 0, 38); ?>...</h5>
-        <p class="card-text"><?= substr($a['shortContent'], 0, 90); ?>...</p>
-        <a href="detail.php?id=<?= $a['id']; ?>" style="position: absolute; bottom: 10px;" class="btn btn-primary stretched-link">More Details</a>
+        <h5 class="card-title pl"><?= substr($a['title'], 0, 38); ?>...</h5>
+        <p class="card-text pl"><?= substr($a['shortContent'], 0, 90); ?>...</p>
+        <a href="detail.php?id=<?= $a['id']; ?>" style="position: absolute ;bottom: 10px; left: 15px;" class="btn btn-primary stretched-link pl">More Details</a>
       </div>
     </div>
   <?php endforeach; ?>
@@ -70,6 +72,7 @@ require_once '../_header.php';
 <script>
   document.getElementById('news').classList.add('active')
 </script>
+<script src="<?= base_url('js/custom/script.js'); ?>"></script>
 
 <!-- footer -->
 <?php require_once '../_footer.php'; ?>

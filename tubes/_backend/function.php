@@ -1,11 +1,14 @@
 <?php
-session_start();
 date_default_timezone_set('Asia/Jakarta');
-if (isset($_COOKIE['login']) == 'true') {
-  // set session
-  $_SESSION['roles'] = $role;
-  $_SESSION['ids'] = $id;
-  $_SESSION['login'] = true;
+session_start();
+
+if (isset($_COOKIE['login'])) {
+  if ($_COOKIE['login'] == 'true') {
+    // set session
+    $_SESSION['roles'] = $_COOKIE['role'];
+    $_SESSION['ids'] = $_COOKIE['id'];
+    $_SESSION['login'] = true;
+  }
 }
 
 
@@ -301,28 +304,26 @@ function loginAccount($data)
 
         // set cookies
         if (isset($data['remember'])) {
-          setcookie('login', 'true', date("Y-m-d", strtotime("+1 week")));
-          setcookie('id', "$id", date("Y-m-d", strtotime("+1 week")));
-          setcookie('role', "$role", date("Y-m-d", strtotime("+1 week")));
+          setcookie('login', 'true', time() + 60);
+          setcookie('id', "$id", time() + 60);
+          setcookie('role', "$role", time() + 60);
         }
 
         header('Location:' .  base_url('pages/account/dashboard.php'));
         exit;
       } elseif (password_verify($password, $user['password'])) {
-
-        $id = $query['id'];
         $role = $query['role_name'];
 
         // set session
         $_SESSION['roles'] = $role;
-        $_SESSION['ids'] = $id;
+        $_SESSION['ids'] = $query['id'];
         $_SESSION['login'] = true;
 
         // set cookies
         if (isset($data['remember'])) {
-          setcookie('login', 'true', date("Y-m-d", strtotime("+1 week")));
-          setcookie('id', "$id", date("Y-m-d", strtotime("+1 week")));
-          setcookie('role', "$role", date("Y-m-d", strtotime("+1 week")));
+          setcookie('login', 'true', time() + 60);
+          setcookie('id', $query['id'], time() + 60);
+          setcookie('role', "$role", time() + 60);
         }
 
         header('Location:' .  base_url('pages/account/dashboard.php'));
