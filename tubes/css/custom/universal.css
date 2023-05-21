@@ -8,9 +8,11 @@
   
   10%
   #CFE0C3*/
-h4 {
-  font-family: 'Montserrat', sans-serif;
+
+*{
+  font-family: 'Poppins', sans-serif;
 }
+
 .navbar a {
   font-family: 'Kanit', sans-serif;
 }

@@ -29,6 +29,10 @@ if (isset($_SESSION['login'])) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+  <!-- poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body">
@@ -79,3 +83,5 @@ if (isset($_SESSION['login'])) {
       </div>
     </div>
   </nav>
+
+  <div class="container" style="height: 70px;"></div>

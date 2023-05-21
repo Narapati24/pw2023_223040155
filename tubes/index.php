@@ -7,13 +7,18 @@ updateClicks();
 $article = query("SELECT * FROM article WHERE visibility_id = 3 ORDER BY id DESC LIMIT 7");
 $hotArticle = query("SELECT * FROM article, popularity WHERE visibility_id = 3 && article.id = popularity.article_id ORDER BY popularity.daily DESC");
 
+if ($hotArticle[0]['daily'] === '0') {
+  $hotArticle = query("SELECT * FROM article, popularity WHERE visibility_id = 3 && article.id = popularity.article_id ORDER BY RAND()");
+}
+
 // header
 $title = 'Home';
 require_once '_header.php';
 ?>
 
+<link rel="stylesheet" href="<?= base_url('css/custom/news.css'); ?>">
+
 <!-- content -->
-<div class="container" style="height: 70px;"></div>
 <div class="container">
   <h4>Hot Today</h4>
   <div class="row g-0 bg-body-secondary position-relative mb-4" style="height: 450px;overflow: hidden;">

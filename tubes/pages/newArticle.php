@@ -17,7 +17,6 @@ require_once '../_header.php';
 </style>
 
 <!-- content -->
-<div class="container" style="height: 70px;"></div>
 <div class="container">
   <?php if (isset($article['error']) && !$article['error']) : ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">

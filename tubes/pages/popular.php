@@ -17,7 +17,6 @@ require_once '../_header.php';
 ?>
 
 <!-- content -->
-<div class="container" style="height: 70px;"></div>
 <!-- today -->
 <div class="container">
   <form class="d-flex mb-3" role="search" method="post">

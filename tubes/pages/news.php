@@ -22,8 +22,9 @@ $title = 'Newest';
 require_once '../_header.php';
 ?>
 
+<link rel="stylesheet" href="<?= base_url('css/custom/news.css'); ?>">
+
 <!-- content -->
-<div class="container" style="height: 70px;"></div>
 <div class="container">
   <form class="d-flex mb-3" role="search" method="post">
     <input name="keyword" class="form-control me-2" type="text" placeholder="Search" aria-label="Search" autocomplete="off">

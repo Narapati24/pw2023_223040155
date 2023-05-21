@@ -1,6 +1,12 @@
 <?php
-date_default_timezone_set('Asia/Jakarta');
 session_start();
+date_default_timezone_set('Asia/Jakarta');
+if (isset($_COOKIE['login']) == 'true') {
+  // set session
+  $_SESSION['roles'] = $role;
+  $_SESSION['ids'] = $id;
+  $_SESSION['login'] = true;
+}
 
 
 function connect()
@@ -285,21 +291,41 @@ function loginAccount($data)
                                 || email = '$username'")[0]) {
       if ($password == $user['password']) {
 
+        $id = $query['id'];
+        $role = $query['role_name'];
+
         // set session
-        $_SESSION['roles'] = $query['role_name'];
-        $_SESSION['ids'] = $query['id'];
+        $_SESSION['roles'] = $role;
+        $_SESSION['ids'] = $id;
         $_SESSION['login'] = true;
 
-        echo '<script>history.back();</script>';
+        // set cookies
+        if (isset($data['remember'])) {
+          setcookie('login', 'true', date("Y-m-d", strtotime("+1 week")));
+          setcookie('id', "$id", date("Y-m-d", strtotime("+1 week")));
+          setcookie('role', "$role", date("Y-m-d", strtotime("+1 week")));
+        }
+
+        header('Location:' .  base_url('pages/account/dashboard.php'));
         exit;
       } elseif (password_verify($password, $user['password'])) {
 
+        $id = $query['id'];
+        $role = $query['role_name'];
+
         // set session
-        $_SESSION['roles'] = $query['role_name'];
-        $_SESSION['ids'] = $query['id'];
+        $_SESSION['roles'] = $role;
+        $_SESSION['ids'] = $id;
         $_SESSION['login'] = true;
 
-        echo '<script>history.back();</script>';
+        // set cookies
+        if (isset($data['remember'])) {
+          setcookie('login', 'true', date("Y-m-d", strtotime("+1 week")));
+          setcookie('id', "$id", date("Y-m-d", strtotime("+1 week")));
+          setcookie('role', "$role", date("Y-m-d", strtotime("+1 week")));
+        }
+
+        header('Location:' .  base_url('pages/account/dashboard.php'));
         exit;
       }
     } else {
@@ -462,8 +488,21 @@ function comment($data)
   $user = $data['idUser'];
   $article = $data['idArticle'];
 
+  if (!$description) {
+    return [
+      'error' => true,
+      'massage' => 'CANT ADD COMMENT'
+    ];
+    exit;
+  }
+
   $query = "INSERT INTO commentar VALUES (null, '$description', now(), '$user', '$article')";
   mysqli_query($db, $query);
+  return [
+    'error' => false,
+    'massage' => 'COMMENT INSERTED'
+  ];
+  exit;
 }
 
 function dd($data)

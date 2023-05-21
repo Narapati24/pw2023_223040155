@@ -22,7 +22,6 @@ require_once '_header.php';
 ?>
 
 <!-- content -->
-<div class="container" style="height: 70px;"></div>
 <h4 class="container">Hello <?= $profile[0]['first_name']; ?>!</h4>
 <div class="container">
     <div class="row">
