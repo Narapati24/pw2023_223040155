@@ -21,7 +21,7 @@ require_once '_header.php';
 <!-- content -->
 <section class="container">
   <h4>Hot Today</h4>
-  <div class="row g-0 bg-body-secondary position-relative mb-4 pl-wave" style="height: 450px;overflow: hidden;">
+  <div class="row g-0 bg-body-secondary position-relative mb-4 pl-wave" style="overflow: hidden;">
     <div class="col-md-6 mb-md-0 p-md-4">
       <div class="pl">
         <img src="img/article/<?= $hotArticle[0]['img']; ?>" class="w-100" alt="<?= $hotArticle[0]['title']; ?>" style="object-fit: cover;" height="400">
@@ -41,7 +41,7 @@ require_once '_header.php';
   <h4>Other News</h4>
   <section class="row justify-content-evenly">
     <?php foreach ($article as $a) : ?>
-      <div class="d-inline-block card col-4 mb-4 pl-wave" style="width: 18rem; height: 400px; overflow: hidden;">
+      <div class="d-inline-block card col-4 mb-4 pl-wave" style="width: 18rem; height: 420px; overflow: hidden;">
         <div class="other-news pl">
           <img src="<?= base_url('img/article/') . $a['img']; ?>" class="card-img-top" alt="<?= $a['title']; ?>" height="160px">
         </div>
@@ -53,7 +53,7 @@ require_once '_header.php';
       </div>
     <?php endforeach; ?>
     <!-- see more news -->
-    <div class="card d-inline-block col-4 mb-4" style="width: 18rem; height: 400px; overflow: hidden;">
+    <div class="card d-inline-block col-4 mb-4" style="width: 18rem; height: 420px; overflow: hidden;">
       <div class="d-flex" style="height: 100%; align-items: center; justify-content: center;">
         <a class="pl" href="pages/news.php" style="text-align: center;">
           <img src="img/logo/rightArrow.png" alt="more logo" height="60" width="60">

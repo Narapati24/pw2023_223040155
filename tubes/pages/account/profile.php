@@ -5,9 +5,13 @@ if (isset($_POST['updateAccount'])) {
     $edit = updateAccount($_POST);
 }
 
+if (isset($_POST['changePassword'])) {
+    $edit = changePassword($_POST);
+}
+
 $id = $_SESSION['ids'];
 $profile = query("SELECT * FROM users WHERE id = $id");
-$query = query("SELECT * FROM users,article WHERE users.id = '$id' && users.id = article.user_id ORDER BY article.id LIMIT 0, 7");
+$query = query("SELECT * FROM users,article WHERE users.id = '$id' && users.id = article.user_id ORDER BY article.id LIMIT 0, 6");
 
 // pagination
 // konfigurasi
@@ -123,13 +127,46 @@ require_once '_header.php';
                                     Apply
                                 </button>
                                 <div class="d-flex w-100 justify-content-between">
-
                                     <button name="cancelButton" id="cancelProfileButton" type="button" class="btn btn-danger m-2" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                         Cancel
                                     </button>
-                                    <button name="cancelPassword" id="changePasswordButton" type="button" class="btn btn-primary m-2" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#changePassword" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                         Change Password
                                     </button>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- change password -->
+                        <form action="" method="post">
+                            <!-- Modal -->
+                            <div class="modal fade" id="changePassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Change Password</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input name="id" type="hidden" value="<?= $profile[0]['id']; ?>">
+                                            <div class="form-floating mb-3">
+                                                <input name="password1" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                                                <label for="floatingPassword">Current password</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input name="password2" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                                                <label for="floatingPassword">New Password</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input name="password3" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                                                <label for="floatingPassword">Re-Type new password</label>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button name="changePassword" type="submit" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form>

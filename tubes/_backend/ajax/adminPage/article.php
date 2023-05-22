@@ -7,7 +7,7 @@ require '../../searchBar.php';
 $data = $_GET['keyword'];
 $data2 = $_GET['keyword2'];
 $data3 = $_GET['keyword3'];
-$jumlahDataPerhalaman = 7;
+$jumlahDataPerhalaman = 6;
 $jumlahData = count(query("SELECT * FROM users, article WHERE users.id = article.user_id && article.visibility_id LIKE '%$data%' && (article.title LIKE '%$data2%' || article.content LIKE '%$data2%') && (users.first_name LIKE '%$data3%' || users.last_name LIKE '%$data3%')"));
 $jumlahHalaman = ceil($jumlahData / $jumlahDataPerhalaman);
 $halamanAktif = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;

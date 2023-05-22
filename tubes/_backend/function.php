@@ -160,7 +160,7 @@ function updateAccount($data)
   $gender = htmlspecialchars($data['gender']);
   $username = htmlspecialchars(strtolower($data['username']));
   $email = htmlspecialchars($data['email']);
-  $password =  htmlspecialchars($data['password']);
+  $password =  mysqli_escape_string($db, $data['password']);
 
 
   $img = uploadProfile();
@@ -218,31 +218,7 @@ function updateAccount($data)
   if ($user = query("SELECT * FROM users
                                 WHERE id = '$id'
                                 ")[0]) {
-    if ($password === $user['password']) {
-      if (!$img) {
-        $img = $data['former-img'];
-      } else {
-        unlink("../../img/profile/" . $data['former-img']);
-      }
-
-      $query = "UPDATE users SET
-                img = '$img',
-                first_name = '$first_name',
-                last_name = '$last_name',
-                birthdate = '$birthdate',
-                gender = '$gender',
-                username = '$username',
-                email = '$email'
-                WHERE id = '$id'";
-
-      mysqli_query($db, $query);
-
-      return [
-        'error' => false,
-        'massage' => 'DATA UPDATED'
-      ];
-      exit;
-    } elseif (password_verify($password, $user['password'])) {
+    if (password_verify($password, $user['password'])) {
       if (!$img) {
         $img = $data['former-img'];
       } else {
@@ -286,6 +262,81 @@ function updateAccount($data)
   }
 }
 
+function changePassword($data)
+{
+  $db = connect();
+
+  $id = $data['id'];
+
+  $password1 = $data['password1'];
+  $password2 = mysqli_escape_string($db, $data['password2']);
+  $password3 = mysqli_escape_string($db, $data['password3']);
+
+  $profile = query("SELECT * FROM users WHERE id = '$id'")[0];
+
+  if (!isset($id)) {
+    return [
+      'error' => true,
+      'massage' => 'DO NOT CHANGE THE ID'
+    ];
+    exit;
+  }
+
+  if (!isset($password1)) {
+    return [
+      'error' => true,
+      'massage' => 'PLEASE FILL CURRENT PASSWORD'
+    ];
+    exit;
+  }
+
+  if (!isset($password2)) {
+    return [
+      'error' => true,
+      'massage' => 'PLEASE FILL NEW PASSWORD'
+    ];
+    exit;
+  }
+
+  if (!isset($password3)) {
+    return [
+      'error' => true,
+      'massage' => 'PLEASE RE-TYPE NEW PASSWORD'
+    ];
+    exit;
+  }
+
+  if ($password2 !== $password3) {
+    return [
+      'error' => true,
+      'massage' => 'NEW PASSWORD NOT SAME'
+    ];
+    exit;
+  }
+
+  if (password_verify($password3, $profile['password'])) {
+    return [
+      'error' => true,
+      'massage' => 'NEW PASSWORD SAME WITH THE CURRENT ONE'
+    ];
+    exit;
+  }
+
+  $realPassword = password_hash($password3, PASSWORD_DEFAULT);
+
+  $query = "UPDATE users SET
+                password = '$realPassword'
+                WHERE id = '$id'";
+
+  mysqli_query($db, $query);
+
+  return [
+    'error' => false,
+    'massage' => 'PASSWORD CHANGED'
+  ];
+  exit;
+}
+
 function loginAccount($data)
 {
   connect();
@@ -297,26 +348,7 @@ function loginAccount($data)
     if ($user = query("SELECT * FROM users
                                 WHERE username = '$username'
                                 || email = '$username'")[0]) {
-      if ($password == $user['password']) {
-
-        $id = $query['id'];
-        $role = $query['role_name'];
-
-        // set session
-        $_SESSION['roles'] = $role;
-        $_SESSION['ids'] = $id;
-        $_SESSION['login'] = true;
-
-        // set cookies
-        if (isset($data['remember'])) {
-          setcookie('key', hash('sha256', $user['username']), time() + 604800, '/');
-          setcookie('id', "$id", time() + 604800, '/');
-          setcookie('role', "$role", time() + 604800, '/');
-        }
-
-        header('Location:' .  base_url('pages/account/dashboard.php'));
-        exit;
-      } elseif (password_verify($password, $user['password'])) {
+      if (password_verify($password, $user['password'])) {
         $role = $query['role_name'];
 
         // set session
@@ -476,7 +508,7 @@ function inputArticle($data)
   echo mysqli_error($db);
   $article_id = mysqli_insert_id($db);
 
-  $queryPopularity = "INSERT INTO popularity VALUES ('$article_id', DEFAULT, DEFAULT, now(), DEFAULT);";
+  $queryPopularity = "INSERT INTO popularity VALUES ('$article_id', DEFAULT, DEFAULT, DEFAULT, now(), DEFAULT);";
   mysqli_query($db, $queryPopularity);
   echo mysqli_error($db);
   return [

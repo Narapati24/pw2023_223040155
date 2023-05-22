@@ -6,7 +6,7 @@ $id = $_SESSION['ids'];
 // konfigurasi
 $data = $_GET['keyword'];
 $data2 = $_GET['keyword2'];
-$jumlahDataPerhalaman = 7;
+$jumlahDataPerhalaman = 6;
 $jumlahData = count(query("SELECT * FROM users, article WHERE users.id = '$id' && users.id = article.user_id && article.visibility_id LIKE '%$data%' && (article.title LIKE '%$data2%' || article.content LIKE '%$data2%')"));
 $jumlahHalaman = ceil($jumlahData / $jumlahDataPerhalaman);
 $halamanAktif = (isset($_GET['page'])) ? (int)$_GET['page'] : 1;

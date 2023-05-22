@@ -33,7 +33,7 @@ require_once '../_header.php';
   <h4>Newes</h4>
   <section class="row justify-content-evenly">
     <?php foreach ($article as $a) : ?>
-      <div class="d-inline-block card col-4 mb-4 pl-wave" style="width: 18rem; height: 400px; overflow: hidden;">
+      <div class="d-inline-block card col-4 mb-4 pl-wave" style="width: 18rem; height: 420px; overflow: hidden;">
         <div class="other-news pl">
           <img src="<?= base_url('img/article/') . $a['img']; ?>" class="card-img-top" alt="<?= $a['title']; ?>" height="160px">
         </div>

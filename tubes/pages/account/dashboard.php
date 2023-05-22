@@ -14,10 +14,14 @@ if (isset($_POST['updateAccount'])) {
     $edit = updateAccount($_POST);
 }
 
+if (isset($_POST['changePassword'])) {
+    $edit = changePassword($_POST);
+}
+
 $id = $_SESSION['ids'];
 
 $profile = query("SELECT * FROM users WHERE id = $id");
-$query = query("SELECT * FROM users, article WHERE users.id = '$id' && article.user_id = '$id' ORDER BY article.id DESC LIMIT 0, 7");
+$query = query("SELECT * FROM users, article WHERE users.id = '$id' && article.user_id = '$id' ORDER BY article.id DESC LIMIT 0, 6");
 $users = query("SELECT * FROM users, roles WHERE users.id_role = roles.id");
 
 // pagination
@@ -38,9 +42,9 @@ require_once '_header.php';
     <div class="row">
         <div class="col-sm-4">
             <div class="list-group pe-2 mb-3" id="list-tab" role="tablist">
-                <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">Profile</a>
-                <a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="#list-article" role="tab" aria-controls="list-article">Article</a>
-                <a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list" href="#list-users" role="tab" aria-controls="list-users">Users</a>
+                <a class="list-group-item list-group-item-action active" id="list-profile-list" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">Profile</a>
+                <a class="list-group-item list-group-item-action" id="list-article-list" data-bs-toggle="list" href="#list-article" role="tab" aria-controls="list-article">Article</a>
+                <a class="list-group-item list-group-item-action" id="list-users-list" data-bs-toggle="list" href="#list-users" role="tab" aria-controls="list-users">Users</a>
                 <a class="list-group-item list-group-item-action" id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">Settings</a>
             </div>
             <!-- User Info -->
@@ -89,7 +93,7 @@ require_once '_header.php';
                         </div>
                         <!-- edit menu -->
                         <form method="post" id="editProfile" class="d-none" enctype="multipart/form-data">
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between" style="overflow-y: auto;">
                                 <div>
                                     <input name="id" type="text" value="<?= $profile[0]['id']; ?>" hidden>
                                     <div class="form-floating mb-3">
@@ -140,9 +144,43 @@ require_once '_header.php';
                                     <button name="cancelButton" id="cancelProfileButton" type="button" class="btn btn-danger m-2" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                         Cancel
                                     </button>
-                                    <button name="cancelPassword" id="changePasswordButton" type="button" class="btn btn-primary m-2" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#changePassword" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                         Change Password
                                     </button>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- change password -->
+                        <form action="" method="post">
+                            <!-- Modal -->
+                            <div class="modal fade" id="changePassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Change Password</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input name="id" type="hidden" value="<?= $profile[0]['id']; ?>">
+                                            <div class="form-floating mb-3">
+                                                <input name="password1" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                                                <label for="floatingPassword">Current password</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input name="password2" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                                                <label for="floatingPassword">New Password</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input name="password3" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                                                <label for="floatingPassword">Re-Type new password</label>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button name="changePassword" type="submit" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -237,6 +275,9 @@ require_once '_header.php';
     document.getElementById('editButton').onclick = function() {
         document.getElementById('viewProfile').classList.add("d-none");
         document.getElementById('editProfile').classList.remove("d-none");
+        document.getElementById('list-article-list').classList.add("d-none");
+        document.getElementById('list-users-list').classList.add("d-none");
+        document.getElementById('list-settings-list').classList.add("d-none");
     };
     document.getElementById('cancelProfileButton').onclick = function() {
         if (confirm("Are you sure?")) {
