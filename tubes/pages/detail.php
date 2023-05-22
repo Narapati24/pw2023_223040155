@@ -1,5 +1,6 @@
 <?php
 require '../_backend/function.php';
+require '../_backend/config.php';
 require '../_backend/updateClicks.php';
 
 // return pages if no id
@@ -65,7 +66,7 @@ require_once '../_header.php';
   </div>
 
   <div class="image">
-    <img class="rounded" src="../img/article/<?= $article['img']; ?>" alt="<?= $article['title']; ?>" width="730">
+    <img class="rounded" src="<?= base_url('_asset/img/article/') . $article['img']; ?>" alt="<?= $article['title']; ?>" width="730">
   </div>
 
   <p><?= html_entity_decode($article['content'], ENT_QUOTES); ?></p>
@@ -99,7 +100,7 @@ require_once '../_header.php';
       <?php else : ?>
         <?php foreach ($comment as $c) { ?>
           <section class="container user-comment" style="border-radius: 10px;">
-            <img class="d-inline-block mt-1 rounded-circle" style="object-fit: cover;" src="../img/profile/<?= $c['img']; ?>" alt="" height="30" width="30">
+            <img class="d-inline-block mt-1 rounded-circle" style="object-fit: cover;" src="<?= base_url('_asset/img/profile/') . $c['img']; ?>" alt="" height="30" width="30">
             <!-- check id comment -->
             <?php if (isset($_SESSION['ids']) && $c['id'] == $_SESSION['ids']) : ?>
               <p class="user-name d-inline-block rounded ps-1 pe-1" style="background-color: #40798C; color: white;"><strong><?= $c['username']; ?></strong></p>

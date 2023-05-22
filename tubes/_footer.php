@@ -5,7 +5,7 @@
 </footer>
 
 <!-- Java Script -->
-<script src="<?= base_url('js/bootstrap/bootstrap.min.js'); ?>"></script>
+<script src="<?= base_url('_asset/js/bootstrap/bootstrap.min.js'); ?>"></script>
 </body>
 
 </html>

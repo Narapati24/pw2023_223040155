@@ -1,5 +1,6 @@
 <?php
 require '../../_backend/function.php';
+require '../../_backend/config.php';
 
 if (isset($_SESSION['login'])) {
     header('Location:' .  base_url('index.php'));

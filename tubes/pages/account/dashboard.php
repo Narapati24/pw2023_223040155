@@ -1,5 +1,6 @@
 <?php
 require '../../_backend/function.php';
+require '../../_backend/config.php';
 require '../../_backend/searchBar.php';
 
 if (!isset($_SESSION['login']) && !isset($_SESSION['roles'])) {
@@ -50,7 +51,7 @@ require_once '_header.php';
             <!-- User Info -->
             <?php foreach ($users as $u) { ?>
                 <div class="collapse text-center border border-primary pt-2" id="profileUser-<?= $u['username']; ?>" role="tabpanel">
-                    <img src="../../img/profile/<?= $u['img']; ?>" class="rounded-circle" width="100" height="100" alt="profile">
+                    <img src="<?= base_url('_asset/img/profile/') . $u['img']; ?>" class="rounded-circle" width="100" height="100" alt="profile">
                     <p>Username : <?= $u['username']; ?></p>
                     <p>Email Address : <?= $u['email']; ?></p>
                     <p>Name : <?= $u['first_name'] . ' ' . $u['last_name']; ?></p>
@@ -85,7 +86,7 @@ require_once '_header.php';
                                     <p>Gender : <?= $profile[0]['gender']; ?></p>
                                     <p>birthdate : <?= $profile[0]['birthdate']; ?></p>
                                 </div>
-                                <img src="../../img/profile/<?= $profile[0]['img']; ?>" class="rounded-circle border border-success" style="object-fit: cover;" width="200" height="200" alt="profile">
+                                <img src="<?= base_url('_asset/img/profile/') . $profile[0]['img']; ?>" class="rounded-circle border border-success" style="object-fit: cover;" width="200" height="200" alt="profile">
                             </div>
                             <button id="editButton" type="button" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                                 Edit
@@ -130,8 +131,7 @@ require_once '_header.php';
                                 </div>
                                 <input name="former-img" class="img-lama" type="hidden" value="<?= $profile[0]['img']; ?>">
                                 <label for="photo-edit">
-                                    <img src="../../img/profile/<?= $profile[0]['img']; ?>" class="rounded-circle border border-success img-preview" style="object-fit: cover;" width="200" height="200" alt="profile">
-                                    <!-- <img id="editLogo" src="../../img/logo/editLogo.png" class="rounded-circle border border-success" width="50" height="50" alt="profile"> -->
+                                    <img src="<?= base_url('_asset/img/profile/') . $profile[0]['img']; ?>" class="rounded-circle border border-success img-preview" style="object-fit: cover;" width="200" height="200" alt="profile">
                                 </label>
                                 <input name="new-img" class="d-none img" id="photo-edit" type="file" onchange="previewImage()">
                             </div>
@@ -202,7 +202,7 @@ require_once '_header.php';
                         <?php foreach ($query as $a) { ?>
                             <div class="d-flex">
                                 <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#articleInfo" aria-expanded="false" aria-controls="collapseExample">
-                                    <img src="../../img/article/<?= $a['img']; ?>" width="100" height="60" alt="profile">
+                                    <img src="<?= base_url('_asset/img/article/') . $a['img']; ?>" width="100" height="60" alt="profile">
                                 </button>
                                 <div style="line-height: 3px; margin-top: 12px;">
                                     <p><?= substr($a['title'], 0, 90) ?>
@@ -252,7 +252,7 @@ require_once '_header.php';
                             <?php foreach ($users as $u) { ?>
                                 <div class="d-inline-block text-center col-sm-2" style="width: min-content;">
                                     <button class="btn" type="button" data-bs-toggle="collapse" href="#profileUser-<?= $u['username']; ?>" role="tablist" aria-expanded="false" aria-controls="collapseExample">
-                                        <img src="../../img/profile/<?= $u['img']; ?>" class="rounded-circle border border-success" style="object-fit: cover;" width="100" height="100" alt="profile">
+                                        <img src="<?= base_url('_asset/img/profile/') . $u['img']; ?>" class="rounded-circle border border-success" style="object-fit: cover;" width="100" height="100" alt="profile">
                                     </button>
                                     <p><?= $u['username']; ?></p>
                                     <p style="font-size: 12px; margin-top: -10px;"><?= $u['role_name']; ?></p>
@@ -268,9 +268,9 @@ require_once '_header.php';
 </div>
 
 <!-- Java Script -->
-<script src="../../js/bootstrap/bootstrap.min.js"></script>
-<script src="../../js/custom/searchBar/adminPage.js"></script>
-<script src="../../js/custom/previewImg/dashboardPage.js"></script>
+<script src="<?= base_url('_asset/js/bootstrap/bootstrap.min.js'); ?>"></script>
+<script src="<?= base_url('_asset/js/custom/searchBar/adminPage.js'); ?>"></script>
+<script src="<?= base_url('_asset/js/custom/previewImg/dashboardPage.js'); ?>"></script>
 <script>
     document.getElementById('editButton').onclick = function() {
         document.getElementById('viewProfile').classList.add("d-none");

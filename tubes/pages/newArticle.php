@@ -1,5 +1,6 @@
 <?php
 require '../_backend/function.php';
+require '../_backend/config.php';
 
 if (isset($_POST['submit'])) {
   $article = inputArticle($_POST);
@@ -38,7 +39,7 @@ require_once '../_header.php';
     <div class="form-floating mb-3">
       <input name="img" type="file" class="form-control img" id="floatingInput" placeholder="img" onchange="previewImage()" required>
       <label for="floatingInput">img</label>
-      <img src="../img/" alt="" style="max-height: 300px;" class="d-block m-auto img-preview">
+      <img src="<?= base_url('_asset/img/'); ?>" alt="" style="max-height: 300px;" class="d-block m-auto img-preview">
     </div>
     <div class="form-floating mb-3">
       <input name="shortContentArticle" type="text" class="form-control" id="floatingInput" placeholder="Short Description" required maxlength="490" autocomplete="off">
@@ -58,14 +59,14 @@ require_once '../_header.php';
 
 <!-- Java Script -->
 <!-- img Preview -->
-<script src="../js/custom/previewImg/newArticlePage.js"></script>
+<script src="<?= base_url('_asset/js/custom/previewImg/newArticlePage.js'); ?>"></script>
 <!-- ckEditor -->
-<script src="../js/CKEditor/ckeditor.js"></script>
+<script src="<?= base_url('_asset/js/CKEditor/ckeditor.js'); ?>"></script>
 <script>
   ClassicEditor
     .create(document.querySelector('.text-editor'), {
       ckfinder: {
-        uploadUrl: '../_backend/fileupload.php'
+        uploadUrl: '<?= base_url('_backend/fileupload.php'); ?>'
       },
       mediaEmbed: {
         previewsInData: true

@@ -1,22 +1,4 @@
 <?php
-date_default_timezone_set('Asia/Jakarta');
-session_start();
-
-if (isset($_COOKIE['key']) && isset($_COOKIE['id'])) {
-  $id = $_COOKIE['id'];
-  $role = $_COOKIE['role'];
-  $key = $_COOKIE['key'];
-  $user = query("SELECT username FROM users WHERE id = '$id'")[0];
-
-  if ($key === hash('sha256', $user['username'])) {
-    // set session
-    $_SESSION['login'] = true;
-    $_SESSION['roles'] = $role;
-    $_SESSION['ids'] = $id;
-  }
-}
-
-
 function connect()
 {
   return mysqli_connect('localhost', 'root', '', 'tubespw2023');
@@ -169,7 +151,7 @@ function updateAccount($data)
   // username / password kosong
   if (empty($username)) {
     if ($img) {
-      unlink("../../img/profile/" . $img);
+      unlink(base_url('_asset/img/profile/') . $img);
     };
     return [
       'error' => true,
@@ -181,7 +163,7 @@ function updateAccount($data)
   // username terlalu panjang
   if (strlen($username) > 20) {
     if ($img) {
-      unlink("../../img/profile/" . $img);
+      unlink(base_url('_asset/img/profile/') . $img);
     };
     return [
       'error' => true,
@@ -193,7 +175,7 @@ function updateAccount($data)
   // username sudah ada
   if (query("SELECT * FROM users WHERE username = '$username' && id != '$id'")) {
     if ($img) {
-      unlink("../../img/profile/" . $img);
+      unlink(base_url('_asset/img/profile/') . $img);
     };
     return [
       'error' => true,
@@ -205,7 +187,7 @@ function updateAccount($data)
   // email sudah dipakai
   if (query("SELECT * FROM users WHERE email = '$email' && id != '$id'")) {
     if ($img) {
-      unlink("../../img/profile/" . $img);
+      unlink(base_url('_asset/img/profile/') . $img);
     };
     return [
       'error' => true,
@@ -222,7 +204,7 @@ function updateAccount($data)
       if (!$img) {
         $img = $data['former-img'];
       } else {
-        unlink("../../img/profile/" . $data['former-img']);
+        unlink(base_url('_asset/img/profile/') . $data['former-img']);
       }
 
       $query = "UPDATE users SET
@@ -243,7 +225,7 @@ function updateAccount($data)
       ];
       exit;
     } else {
-      unlink("../../img/profile/" . $img);
+      unlink(base_url('_asset/img/profile/') . $img);
       return [
         'error' => true,
         'massage' => 'PASSWORD WRONG'
@@ -252,7 +234,7 @@ function updateAccount($data)
     }
   } else {
     if ($img) {
-      unlink("../../img/profile/" . $img);
+      unlink(base_url('_asset/img/profile/') . $img);
     };
     return [
       'error' => true,
@@ -419,7 +401,7 @@ function upload()
   $new_name_file = uniqid();
   $new_name_file .= '.';
   $new_name_file .= $file_extension;
-  move_uploaded_file($tmp_file, '../img/article/' . $new_name_file);
+  move_uploaded_file($tmp_file, base_url('_asset/img/article/') . $new_name_file);
 
   return $new_name_file;
 }
@@ -461,7 +443,7 @@ function uploadProfile()
   $new_name_file = uniqid();
   $new_name_file .= '.';
   $new_name_file .= $file_extension;
-  move_uploaded_file($tmp_file, '../../img/profile/' . $new_name_file);
+  move_uploaded_file($tmp_file, base_url('_asset/img/profile/') . $new_name_file);
 
   return $new_name_file;
 }

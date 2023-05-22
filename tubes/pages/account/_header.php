@@ -13,13 +13,13 @@ if (isset($_SESSION['login'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PeNEWS | <?= $title; ?></title>
   <!-- reset css -->
-  <link rel="stylesheet" href="<?= base_url('css/reset.css'); ?>">
+  <link rel="stylesheet" href="<?= base_url('_asset/css/reset.css'); ?>">
   <!-- bootstrap -->
-  <link rel="stylesheet" href="<?= base_url('css/bootstrap/bootstrap.min.css'); ?>">
+  <link rel="stylesheet" href="<?= base_url('_asset/css/bootstrap/bootstrap.min.css'); ?>">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <!-- Custom css -->
-  <link rel="stylesheet" href="<?= base_url('css/custom/universal.css'); ?>">
-  <link rel="icon" href="<?= base_url('img/logo/P-news-logo.png'); ?>">
+  <link rel="stylesheet" href="<?= base_url('_asset/css/custom/universal.css'); ?>">
+  <link rel="icon" href="<?= base_url('_asset/img/logo/P-news-logo.png'); ?>">
   <!-- font -->
   <!-- monserrat 700 bold italic -->
   <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -1,5 +1,6 @@
 <?php
 require '../_backend/function.php';
+require '../_backend/config.php';
 require '../_backend/searchBar.php';
 
 // pagination
@@ -22,7 +23,7 @@ $title = 'Newest';
 require_once '../_header.php';
 ?>
 
-<link rel="stylesheet" href="<?= base_url('css/custom/news.css'); ?>">
+<link rel="stylesheet" href="<?= base_url('_asset/css/custom/news.css'); ?>">
 
 <!-- content -->
 <div class="container">
@@ -35,12 +36,12 @@ require_once '../_header.php';
     <?php foreach ($article as $a) : ?>
       <div class="d-inline-block card col-4 mb-4 pl-wave" style="width: 18rem; height: 420px; overflow: hidden;">
         <div class="other-news pl">
-          <img src="<?= base_url('img/article/') . $a['img']; ?>" class="card-img-top" alt="<?= $a['title']; ?>" height="160px">
+          <img src="<?= base_url('_asset/img/article/') . $a['img']; ?>" class="card-img-top" alt="<?= $a['title']; ?>" height="160px">
         </div>
         <div class="card-body" style="width: 290px; margin-left: -15px;">
           <h5 class="card-title pl"><?= substr($a['title'], 0, 38); ?>...</h5>
           <p class="card-text pl"><?= substr($a['shortContent'], 0, 90); ?>...</p>
-          <a href="pages/detail.php?id=<?= $a['id']; ?>" style="position: absolute ;bottom: 10px; left: 15px;" class="btn btn-primary stretched-link pl">More Details</a>
+          <a href="detail.php?id=<?= $a['id']; ?>" style="position: absolute ;bottom: 10px; left: 15px;" class="btn btn-primary stretched-link pl">More Details</a>
         </div>
       </div>
     <?php endforeach; ?>
@@ -74,7 +75,7 @@ require_once '../_header.php';
 <script>
   document.getElementById('news').classList.add('active')
 </script>
-<script src="<?= base_url('js/custom/script.js'); ?>"></script>
+<script src="<?= base_url('_asset/js/custom/script.js'); ?>"></script>
 
 <!-- footer -->
 <?php require_once '../_footer.php'; ?>

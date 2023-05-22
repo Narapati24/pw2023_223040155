@@ -8,9 +8,9 @@ if (isset($_FILES['upload']['name'])) {
   $new_name_file = uniqid();
   $new_name_file .= '.';
   $new_name_file .= $file_extension;
-  $file_path = base_url('img/article/') . $new_name_file;
+  $file_path = base_url('_asset/img/article/sub/') . $new_name_file;
   if ($file_extension == 'jpg' || $file_extension == 'jpeg' || $file_extension == 'png') {
-    if (move_uploaded_file($_FILES['upload']['tmp_name'], '../img/article/' . $new_name_file)) {
+    if (move_uploaded_file($_FILES['upload']['tmp_name'], base_url('_asset/img/article/sub/') . $new_name_file)) {
       $data['file'] = $new_name_file;
       $data['url'] = $file_path;
       $data['uploaded'] = 1;

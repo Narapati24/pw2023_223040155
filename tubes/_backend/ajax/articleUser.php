@@ -1,5 +1,6 @@
 <?php
 require '../function.php';
+require '../config.php';
 require '../searchBar.php';
 $id = $_SESSION['ids'];
 // pagination
@@ -17,7 +18,7 @@ $query = findUserArticle($_GET['keyword'], $_GET['keyword2'], $awalData, $jumlah
 <?php foreach ($query as $a) { ?>
   <div class="d-flex">
     <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#articleInfo" aria-expanded="false" aria-controls="collapseExample">
-      <img src="../../img/article/<?= $a['img']; ?>" width="100" height="60" alt="profile">
+      <img src="<?= base_url('_asset/img/article/') . $a['img']; ?>" width="100" height="60" alt="profile">
     </button>
     <div style="line-height: 3px; margin-top: 12px;">
       <p><?= substr($a['title'], 0, 90) ?>

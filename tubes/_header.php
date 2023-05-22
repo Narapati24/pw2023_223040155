@@ -13,13 +13,13 @@ if (isset($_SESSION['login'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PeNEWS | <?= $title; ?></title>
   <!-- reset css -->
-  <link rel="stylesheet" href="<?= base_url('css/reset.css'); ?>">
+  <link rel="stylesheet" href="<?= base_url('_asset/css/reset.css'); ?>">
   <!-- bootstrap -->
-  <link rel="stylesheet" href="<?= base_url('css/bootstrap/bootstrap.min.css'); ?>">
+  <link rel="stylesheet" href="<?= base_url('_asset/css/bootstrap/bootstrap.min.css'); ?>">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <!-- Custom css -->
-  <link rel="stylesheet" href="<?= base_url('css/custom/universal.css'); ?>">
-  <link rel="icon" href="<?= base_url('img/logo/P-news-logo.png'); ?>">
+  <link rel="stylesheet" href="<?= base_url('_asset/css/custom/universal.css'); ?>">
+  <link rel="icon" href="<?= base_url('_asset/img/logo/P-news-logo.png'); ?>">
   <!-- font -->
   <!-- monserrat 700 bold italic -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,7 +40,7 @@ if (isset($_SESSION['login'])) {
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
     <div class="container">
       <a href="<?= base_url(); ?>">
-        <img src="<?= base_url('img/logo/P-news-logo.png'); ?>" alt="Logo" height="40">
+        <img src="<?= base_url('_asset/img/logo/P-news-logo.png'); ?>" alt="Logo" height="40">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -59,11 +59,11 @@ if (isset($_SESSION['login'])) {
           <!-- if login or not -->
           <?php if (isset($_SESSION['login'])) { ?>
             <a class="mt-1 me-2" href="<?= base_url('pages/newArticle.php'); ?>">
-              <img src="<?= base_url('img/logo/uploadLogo.png'); ?>" alt="New Article" width="22" height="24" style="
+              <img src="<?= base_url('_asset/img/logo/uploadLogo.png'); ?>" alt="New Article" width="22" height="24" style="
                 filter: brightness(0) invert(1);">
             </a>
             <a data-bs-toggle="collapse" href="#profileSetting" role="button" aria-expanded="false" aria-controls="collapseExample">
-              <img class="rounded-circle border border-success" src="<?= base_url('img/profile/') . $profile[0]['img']; ?>" style="object-fit: cover;" width="40px" height="40px" alt="Profile">
+              <img class="rounded-circle border border-success" src="<?= base_url('_asset/img/profile/') . $profile[0]['img']; ?>" style="object-fit: cover;" width="40px" height="40px" alt="Profile">
             </a>
             <div class="position-absolute collapse mt-5" style="width: 100px; right: 100px;" id="profileSetting">
               <div class="card card-body">
@@ -75,7 +75,7 @@ if (isset($_SESSION['login'])) {
             </div>
           <?php } else { ?>
             <a class="d-flex btn btn-light" href="<?= base_url('pages/account/login.php'); ?>" style="font-family: Arial, Helvetica, sans-serif;">
-              <img src="<?= base_url('img/logo/loginLogo.png'); ?>" alt="login logo" width="22" height="24">
+              <img src="<?= base_url('_asset/img/logo/loginLogo.png'); ?>" alt="login logo" width="22" height="24">
               Login
             </a>
           <?php }; ?>

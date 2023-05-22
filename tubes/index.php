@@ -1,5 +1,6 @@
 <?php
 require '_backend/function.php';
+require '_backend/config.php';
 require '_backend/updateClicks.php';
 
 updateClicks();
@@ -16,7 +17,7 @@ $title = 'Home';
 require_once '_header.php';
 ?>
 
-<link rel="stylesheet" href="<?= base_url('css/custom/news.css'); ?>">
+<link rel="stylesheet" href="<?= base_url('_asset/css/custom/news.css'); ?>">
 
 <!-- content -->
 <section class="container">
@@ -24,7 +25,7 @@ require_once '_header.php';
   <div class="row g-0 bg-body-secondary position-relative mb-4 pl-wave" style="overflow: hidden;">
     <div class="col-md-6 mb-md-0 p-md-4">
       <div class="pl">
-        <img src="img/article/<?= $hotArticle[0]['img']; ?>" class="w-100" alt="<?= $hotArticle[0]['title']; ?>" style="object-fit: cover;" height="400">
+        <img src="_asset/img/article/<?= $hotArticle[0]['img']; ?>" class="w-100" alt="<?= $hotArticle[0]['title']; ?>" style="object-fit: cover;" height="400">
       </div>
     </div>
     <div class="col-md-6 p-4 ps-md-0">
@@ -43,7 +44,7 @@ require_once '_header.php';
     <?php foreach ($article as $a) : ?>
       <div class="d-inline-block card col-4 mb-4 pl-wave" style="width: 18rem; height: 420px; overflow: hidden;">
         <div class="other-news pl">
-          <img src="<?= base_url('img/article/') . $a['img']; ?>" class="card-img-top" alt="<?= $a['title']; ?>" height="160px">
+          <img src="<?= base_url('_asset/img/article/') . $a['img']; ?>" class="card-img-top" alt="<?= $a['title']; ?>" height="160px">
         </div>
         <div class="card-body" style="width: 290px; margin-left: -15px;">
           <h5 class="card-title pl"><?= substr($a['title'], 0, 38); ?>...</h5>
@@ -56,7 +57,7 @@ require_once '_header.php';
     <div class="card d-inline-block col-4 mb-4" style="width: 18rem; height: 420px; overflow: hidden;">
       <div class="d-flex" style="height: 100%; align-items: center; justify-content: center;">
         <a class="pl" href="pages/news.php" style="text-align: center;">
-          <img src="img/logo/rightArrow.png" alt="more logo" height="60" width="60">
+          <img src="_asset/img/logo/rightArrow.png" alt="more logo" height="60" width="60">
           <p>see more news</p>
         </a>
       </div>
@@ -64,7 +65,7 @@ require_once '_header.php';
   </section>
 </section>
 
-<script src="<?= base_url('js/custom/script.js'); ?>"></script>
+<script src="<?= base_url('_asset/js/custom/script.js'); ?>"></script>
 
 <!-- footer -->
 <?php require_once '_footer.php'; ?>
