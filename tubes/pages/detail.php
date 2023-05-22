@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
 }
 
 $id = $_GET['id'];
-clicks("UPDATE popularity SET daily = daily + 1, monthly = monthly + 1, lifetime = lifetime + 1, update_data = now() WHERE article_id = $id");
+clicks("UPDATE popularity SET daily = daily + 1, weekly = weekly + 1, monthly = monthly + 1, lifetime = lifetime + 1, update_data = now() WHERE article_id = $id");
 $article = query("SELECT * FROM article WHERE id = $id")[0];
 $editor = query("SELECT * FROM users INNER JOIN article WHERE article.user_id = users.id && article.id = $id")[0];
 
@@ -31,18 +31,13 @@ require_once '../_header.php';
     line-height: 6px;
   }
 
-  .images {
-    margin: auto;
-    text-align: center;
-  }
-
   .image {
     margin: auto;
     text-align: center;
   }
 
   .image img {
-    height: 400px;
+    width: 100%;
   }
 
   #comment {
@@ -69,7 +64,7 @@ require_once '../_header.php';
     <p><?= $article['insert_date']; ?></p>
   </div>
 
-  <div class="images">
+  <div class="image">
     <img class="rounded" src="../img/article/<?= $article['img']; ?>" alt="<?= $article['title']; ?>" width="730">
   </div>
 
@@ -106,7 +101,7 @@ require_once '../_header.php';
           <section class="container user-comment" style="border-radius: 10px;">
             <img class="d-inline-block mt-1 rounded-circle" style="object-fit: cover;" src="../img/profile/<?= $c['img']; ?>" alt="" height="30" width="30">
             <!-- check id comment -->
-            <?php if ($c['id'] == $_SESSION['ids']) : ?>
+            <?php if (isset($_SESSION['ids']) && $c['id'] == $_SESSION['ids']) : ?>
               <p class="user-name d-inline-block rounded ps-1 pe-1" style="background-color: #40798C; color: white;"><strong><?= $c['username']; ?></strong></p>
             <?php else : ?>
               <p class="user-name d-inline-block"><strong><?= $c['username']; ?></strong></p>

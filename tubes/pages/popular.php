@@ -28,52 +28,58 @@ require_once '../_header.php';
   </form>
   <div class="">
     <h4>Trending Today</h4>
-    <?php foreach ($articleTrendingToday as $a) { ?>
-      <div class="d-inline-block card ms-3 me-3 mb-4 pl-wave" style="width: 18rem; height: 400px; overflow: hidden;">
-        <div class="other-news pl">
-          <img src="../img/article/<?= $a['img']; ?>" class="card-img-top" alt="<?= $a['title']; ?>" height="160px">
+    <section class="row justify-content-evenly">
+      <?php foreach ($articleTrendingToday as $a) : ?>
+        <div class="d-inline-block card col-4 mb-4 pl-wave" style="width: 18rem; height: 400px; overflow: hidden;">
+          <div class="other-news pl">
+            <img src="<?= base_url('img/article/') . $a['img']; ?>" class="card-img-top" alt="<?= $a['title']; ?>" height="160px">
+          </div>
+          <div class="card-body" style="width: 290px; margin-left: -15px;">
+            <h5 class="card-title pl"><?= substr($a['title'], 0, 38); ?>...</h5>
+            <p class="card-text pl"><?= substr($a['shortContent'], 0, 90); ?>...</p>
+            <a href="pages/detail.php?id=<?= $a['id']; ?>" style="position: absolute ;bottom: 10px; left: 15px;" class="btn btn-primary stretched-link pl">More Details</a>
+          </div>
         </div>
-        <div class="card-body">
-          <h5 class="card-title pl"><?= substr($a['title'], 0, 38); ?>...</h5>
-          <p class="card-text pl"><?= substr($a['shortContent'], 0, 90); ?>...</p>
-          <a href="detail.php?id=<?= $a['id']; ?>" style="position: absolute ;bottom: 10px; left: 15px;" class="btn btn-primary stretched-link pl">More Details</a>
-        </div>
-      </div>
-    <?php }; ?>
+      <?php endforeach; ?>
+    </section>
   </div>
   <br>
   <!-- week -->
   <div class="">
     <h4>Trending This Week</h4>
-    <?php foreach ($articleTrendingWeek as $a) { ?>
-      <div class="d-inline-block card ms-3 me-3 mb-4 pl-wave" style="width: 18rem; height: 400px; overflow: hidden;">
-        <div class="other-news pl">
-          <img src="../img/article/<?= $a['img']; ?>" class="card-img-top" alt="<?= $a['title']; ?>" height="160px">
+    <section class="row justify-content-evenly">
+      <?php foreach ($articleTrendingWeek as $a) : ?>
+        <div class="d-inline-block card col-4 mb-4 pl-wave" style="width: 18rem; height: 400px; overflow: hidden;">
+          <div class="other-news pl">
+            <img src="<?= base_url('img/article/') . $a['img']; ?>" class="card-img-top" alt="<?= $a['title']; ?>" height="160px">
+          </div>
+          <div class="card-body" style="width: 290px; margin-left: -15px;">
+            <h5 class="card-title pl"><?= substr($a['title'], 0, 38); ?>...</h5>
+            <p class="card-text pl"><?= substr($a['shortContent'], 0, 90); ?>...</p>
+            <a href="pages/detail.php?id=<?= $a['id']; ?>" style="position: absolute ;bottom: 10px; left: 15px;" class="btn btn-primary stretched-link pl">More Details</a>
+          </div>
         </div>
-        <div class="card-body">
-          <h5 class="card-title pl"><?= substr($a['title'], 0, 38); ?>...</h5>
-          <p class="card-text pl"><?= substr($a['shortContent'], 0, 90); ?>...</p>
-          <a href="detail.php?id=<?= $a['id']; ?>" style="position: absolute ;bottom: 10px; left: 15px;" class="btn btn-primary stretched-link pl">More Details</a>
-        </div>
-      </div>
-    <?php }; ?>
+      <?php endforeach; ?>
+    </section>
   </div>
   <br>
   <!-- month -->
   <div class="">
     <h4>Trending This Month</h4>
-    <?php foreach ($articleTrendingMonth as $a) { ?>
-      <div class="d-inline-block card ms-3 me-3 mb-4 pl-wave" style="width: 18rem; height: 400px; overflow: hidden;">
-        <div class="other-news pl">
-          <img src="../img/article/<?= $a['img']; ?>" class="card-img-top" alt="<?= $a['title']; ?>" height="160px">
+    <section class="row justify-content-evenly">
+      <?php foreach ($articleTrendingMonth as $a) : ?>
+        <div class="d-inline-block card col-4 mb-4 pl-wave" style="width: 18rem; height: 400px; overflow: hidden;">
+          <div class="other-news pl">
+            <img src="<?= base_url('img/article/') . $a['img']; ?>" class="card-img-top" alt="<?= $a['title']; ?>" height="160px">
+          </div>
+          <div class="card-body" style="width: 290px; margin-left: -15px;">
+            <h5 class="card-title pl"><?= substr($a['title'], 0, 38); ?>...</h5>
+            <p class="card-text pl"><?= substr($a['shortContent'], 0, 90); ?>...</p>
+            <a href="pages/detail.php?id=<?= $a['id']; ?>" style="position: absolute ;bottom: 10px; left: 15px;" class="btn btn-primary stretched-link pl">More Details</a>
+          </div>
         </div>
-        <div class="card-body">
-          <h5 class="card-title pl"><?= substr($a['title'], 0, 38); ?>...</h5>
-          <p class="card-text pl"><?= substr($a['shortContent'], 0, 90); ?>...</p>
-          <a href="detail.php?id=<?= $a['id']; ?>" style="position: absolute ;bottom: 10px; left: 15px;" class="btn btn-primary stretched-link pl">More Details</a>
-        </div>
-      </div>
-    <?php }; ?>
+      <?php endforeach; ?>
+    </section>
   </div>
 </div>
 

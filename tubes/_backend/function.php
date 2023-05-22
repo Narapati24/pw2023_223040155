@@ -2,12 +2,17 @@
 date_default_timezone_set('Asia/Jakarta');
 session_start();
 
-if (isset($_COOKIE['login'])) {
-  if ($_COOKIE['login'] == 'true') {
+if (isset($_COOKIE['key']) && isset($_COOKIE['id'])) {
+  $id = $_COOKIE['id'];
+  $role = $_COOKIE['role'];
+  $key = $_COOKIE['key'];
+  $user = query("SELECT username FROM users WHERE id = '$id'")[0];
+
+  if ($key === hash('sha256', $user['username'])) {
     // set session
-    $_SESSION['roles'] = $_COOKIE['role'];
-    $_SESSION['ids'] = $_COOKIE['id'];
     $_SESSION['login'] = true;
+    $_SESSION['roles'] = $role;
+    $_SESSION['ids'] = $id;
   }
 }
 
@@ -304,9 +309,9 @@ function loginAccount($data)
 
         // set cookies
         if (isset($data['remember'])) {
-          setcookie('login', 'true', time() + 60);
-          setcookie('id', "$id", time() + 60);
-          setcookie('role', "$role", time() + 60);
+          setcookie('key', hash('sha256', $user['username']), time() + 604800, '/');
+          setcookie('id', "$id", time() + 604800, '/');
+          setcookie('role', "$role", time() + 604800, '/');
         }
 
         header('Location:' .  base_url('pages/account/dashboard.php'));
@@ -321,9 +326,9 @@ function loginAccount($data)
 
         // set cookies
         if (isset($data['remember'])) {
-          setcookie('login', 'true', time() + 60);
-          setcookie('id', $query['id'], time() + 60);
-          setcookie('role', "$role", time() + 60);
+          setcookie('key', hash('sha256', $user['username']), time() + 604800, '/');
+          setcookie('id', $query['id'], time() + 604800, '/');
+          setcookie('role', "$role", time() + 604800, '/');
         }
 
         header('Location:' .  base_url('pages/account/dashboard.php'));
