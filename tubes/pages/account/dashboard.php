@@ -17,6 +17,13 @@ if (isset($_POST['updateAccount'])) {
 
 if (isset($_POST['changePassword'])) {
     $edit = changePassword($_POST);
+    if (isset($edit['error']) && !$edit['error']) {
+        echo "<script>
+                setTimeout(function() {
+                    document.location.href='dashboard.php'
+                }, 1500);
+            </script>";
+    }
 }
 
 $id = $_SESSION['ids'];
