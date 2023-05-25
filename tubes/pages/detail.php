@@ -132,6 +132,14 @@ require_once '../_header.php';
   </div>
 </div>
 
+<a href="editArticle.php?id=<?= $id; ?>" class="p-2 rounded-circle" style="position: fixed; right: 5px; bottom: 65px ;background-color: white; border: #40798C 5px solid;">
+  <img src="<?= base_url('_asset/img/logo/editLogo.png'); ?>" alt="" width="30" height="30">
+</a>
+
+<a href="<?= base_url('_backend/cetak.php?id=') . $id; ?>" class="p-2 rounded-circle" style="position: fixed; right: 5px; bottom: 5px ;background-color: white; border: #40798C 5px solid;" target="_blank">
+  <img src="<?= base_url('_asset/img/logo/downloadLogo.png'); ?>" alt="" width="30" height="30">
+</a>
+
 <script>
   var checkboxes = document.querySelectorAll(".ratingInput");
   var ratingLabels = document.querySelectorAll(".stars-rating");
