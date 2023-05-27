@@ -1,11 +1,11 @@
 <?php
 
-function find($data)
+function find($data, $data2)
 {
 
   $db = connect();
 
-  $query = "SELECT * FROM article WHERE title LIKE '%$data%' || content LIKE '%$data%' ORDER BY id DESC";
+  $query = "SELECT * FROM article, article_category WHERE article.id = article_category.article_id && article_category.category_id LIKE '%$data2%' && (article.title LIKE '%$data%' || article.content LIKE '%$data%') ORDER BY id DESC";
 
   $result = mysqli_query($db, $query);
   $rows = [];
@@ -16,13 +16,15 @@ function find($data)
   return $rows;
 }
 
-function findPopularToday($data)
+function findPopularToday($data, $data2)
 {
 
   $db = connect();
 
-  $query = "SELECT * FROM article, popularity WHERE visibility_id = 3 && article.id = popularity.article_id &&
-                                                    (title LIKE '%$data%' || content LIKE '%$data%') ORDER BY popularity.daily DESC";
+  $query = "SELECT * FROM article, popularity, article_category WHERE visibility_id = 3 && article.id = article_category.article_id &&
+                                                    article.id = popularity.article_id && 
+                                                    article_category.category_id LIKE '%$data2%' &&
+                                                    (title LIKE '%$data%' || content LIKE '%$data%') ORDER BY popularity.daily DESC LIMIT 4";
 
   $result = mysqli_query($db, $query);
   $rows = [];
@@ -33,13 +35,15 @@ function findPopularToday($data)
   return $rows;
 }
 
-function findPopularMonth($data)
+function findPopularWeek($data, $data2)
 {
 
   $db = connect();
 
-  $query = "SELECT * FROM article, popularity WHERE visibility_id = 3 && article.id = popularity.article_id &&
-                                                    (title LIKE '%$data%' || content LIKE '%$data%') ORDER BY popularity.monthly DESC";
+  $query = "SELECT * FROM article, popularity, article_category WHERE visibility_id = 3 && article.id = article_category.article_id &&
+                                                    article.id = popularity.article_id && 
+                                                    article_category.category_id LIKE '%$data2%' &&
+                                                    (title LIKE '%$data%' || content LIKE '%$data%') ORDER BY popularity.weekly DESC LIMIT 4";
 
   $result = mysqli_query($db, $query);
   $rows = [];
@@ -49,6 +53,26 @@ function findPopularMonth($data)
 
   return $rows;
 }
+
+function findPopularMonth($data, $data2)
+{
+
+  $db = connect();
+
+  $query = "SELECT * FROM article, popularity, article_category WHERE visibility_id = 3 && article.id = article_category.article_id &&
+                                                    article.id = popularity.article_id && 
+                                                    article_category.category_id LIKE '%$data2%' &&
+                                                    (title LIKE '%$data%' || content LIKE '%$data%') ORDER BY popularity.Monthly DESC LIMIT 4";
+
+  $result = mysqli_query($db, $query);
+  $rows = [];
+  while ($row = mysqli_fetch_assoc($result)) {
+    $rows[] = $row;
+  }
+
+  return $rows;
+}
+
 
 function findAdminArticle($data, $data2, $data3, $data4, $data5)
 {

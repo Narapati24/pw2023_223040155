@@ -20,7 +20,7 @@ $query = findAdminArticle($_GET['keyword'], $_GET['keyword2'], $_GET['keyword3']
 
 <?php foreach ($query as $a) { ?>
   <div class="d-flex">
-    <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#articleInfo" aria-expanded="false" aria-controls="collapseExample">
+    <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#article-<?= $a['id']; ?>" aria-expanded="false" aria-controls="collapseExample">
       <img src="<?= base_url('_asset/img/article/') . $a['img']; ?>" width="100" height="60" alt="profile">
     </button>
     <div style="line-height: 3px; margin-top: 12px;">
@@ -28,6 +28,25 @@ $query = findAdminArticle($_GET['keyword'], $_GET['keyword2'], $_GET['keyword3']
         <?= strlen($a['title']) > 90 ? '...' : ''; ?></p>
       <p>Editor : <?= $a['first_name'] . ' ' . $a['last_name']; ?></p>
       <p style="font-size: 12px; margin-top: 20px;"><?= $a['insert_date']; ?></p>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="article-<?= $a['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel"><?= $a['title']; ?></h1>
+        </div>
+        <div class="modal-body">
+          <img class="w-100 mb-3" src="<?= base_url('_asset/img/article/') . $a['img']; ?>">
+          <p><?= $a['shortContent']; ?></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a href="<?= base_url('pages/editArticle.php?id=') . $a['id']; ?>" class="btn btn-primary">Edit</a>
+        </div>
+      </div>
     </div>
   </div>
 <?php }; ?>

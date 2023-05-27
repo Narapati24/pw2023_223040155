@@ -8,7 +8,7 @@ updateClicks();
 $article = query("SELECT * FROM article WHERE visibility_id = 3 ORDER BY id DESC LIMIT 7");
 $hotArticle = query("SELECT * FROM article, popularity WHERE visibility_id = 3 && article.id = popularity.article_id ORDER BY popularity.daily DESC");
 $kategory = query("SELECT * FROM category ORDER BY RAND()");
-$articleKategory = query("SELECT * FROM article, article_category, category WHERE article.id = article_category.article_id && article_category.category_id = category.id_category ORDER BY RAND()");
+$articleKategory = query("SELECT * FROM article, article_category, category WHERE article.id = article_category.article_id && article_category.category_id = category.id_category ORDER BY article.id DESC");
 
 if ($hotArticle[0]['daily'] === '0') {
   $hotArticle = query("SELECT * FROM article, popularity WHERE visibility_id = 3 && article.id = popularity.article_id ORDER BY RAND()");
@@ -65,19 +65,23 @@ require_once '_header.php';
       </div>
     </div>
   </section>
-  <section class="row bg-body-secondary rounded" style="height: 500px;">
+  <section class="row bg-body-secondary rounded" style="height: 540px; overflow: hidden;">
     <?php foreach (array_slice($kategory, 0, 3) as $k) { ?>
       <div class="col-4">
-        <h4 class="text-center p-4"><?= $k['category_name']; ?></h4>
+        <div class="d-flex p-4">
+          <h4 class=""><?= $k['category_name']; ?></h4>
+          <a href="" class="ms-auto btn btn-primary pl">More Details</a>
+        </div>
         <?php foreach ($articleKategory as $ka) {
           if ($k['id_category'] == $ka['category_id']) { ?>
-            <li>
-              <a class="text-dark" href="<?= base_url('pages/detail.php?id=') . $ka['id']; ?>">
-                <?= substr($ka['shortContent'], 0, 100); ?>...
+            <hr>
+            <li class="row">
+              <img class="col-4" src="<?= base_url('_asset/img/article/') . $ka['img']; ?>" alt="" width="100" height="100" style="object-fit: cover;">
+              <a class="link-dark link-offset-2 col" style="text-decoration: none;" href="<?= base_url('pages/detail.php?id=') . $ka['id']; ?>">
+                <?= substr($ka['title'], 0, 100); ?>...
               </a>
             </li>
             <hr>
-            <br>
         <?php };
         }; ?>
       </div>

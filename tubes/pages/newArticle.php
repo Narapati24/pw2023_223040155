@@ -8,6 +8,8 @@ if (isset($_POST['submit'])) {
 
 // header
 $title = 'New Article';
+$category = query("SELECT * FROM category");
+$visibility = query("SELECT * FROM visibility");
 require_once '../_header.php';
 ?>
 
@@ -18,7 +20,7 @@ require_once '../_header.php';
 </style>
 
 <!-- content -->
-<div class="container">
+<div class="container w-50">
   <?php if (isset($article['error']) && !$article['error']) : ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
       <strong><?= $article['massage']; ?></strong>
@@ -39,7 +41,7 @@ require_once '../_header.php';
     <div class="form-floating mb-3">
       <input name="img" type="file" class="form-control img" id="floatingInput" placeholder="img" onchange="previewImage()" required>
       <label for="floatingInput">img</label>
-      <img src="<?= base_url('_asset/img/'); ?>" alt="" style="max-height: 300px;" class="d-block m-auto img-preview">
+      <img src="<?= base_url('_asset/img/article/'); ?>" alt="" style="max-height: 300px;" class="d-block m-auto img-preview">
     </div>
     <div class="form-floating mb-3">
       <input name="shortContentArticle" type="text" class="form-control" id="floatingInput" placeholder="Short Description" required maxlength="490" autocomplete="off">
@@ -48,10 +50,16 @@ require_once '../_header.php';
     <div class="form-floating mb-3">
       <textarea name="contentArticle" type="textarea" class="form-control text-editor" id="floatingInput" placeholder="Description" cols="80" rows="100"></textarea>
     </div>
+    <select name="category" class="form-select mb-3" aria-label="Default select example" required>
+      <option value="null" selected>Category</option>
+      <?php foreach ($category as $c) { ?>
+        <option value="<?= $c['id_category']; ?>"><?= $c['category_name']; ?></option>
+      <?php }; ?>
+    </select>
     <select name="visibility" class="form-select mb-3" aria-label="Default select example" required>
-      <option value="3" selected>Public</option>
-      <option value="2">Unlisted</option>
-      <option value="1">Private</option>
+      <?php foreach ($visibility as $v) { ?>
+        <option value="<?= $v['id']; ?>"><?= $v['visibility']; ?></option>
+      <?php }; ?>
     </select>
     <button name="submit" type="submit" class="btn btn-primary mb-3">Submit</button>
   </form>

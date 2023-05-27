@@ -12,10 +12,11 @@ $halamanAktif = (isset($_GET['page'])) ? $_GET['page'] : 1;
 $awalData = ($jumlahDataPerhalaman * $halamanAktif) - $jumlahDataPerhalaman;
 
 $article = query("SELECT * FROM article WHERE visibility_id = 3 ORDER BY id DESC LIMIT $awalData, $jumlahDataPerhalaman");
+$category = query("SELECT * FROM category");
 
 // Search bar
 if (isset($_POST['search'])) {
-  $article = find($_POST['keyword']);
+  $article = find($_POST['keyword'], $_POST['category']);
 }
 
 // header
@@ -28,6 +29,12 @@ require_once '../_header.php';
 <!-- content -->
 <div class="container">
   <form class="d-flex mb-3" role="search" method="post">
+    <select name="category" class="form-control w-25 me-2" id="">
+      <option value="">All</option>
+      <?php foreach ($category as $c) { ?>
+        <option value="<?= $c['id_category']; ?>"><?= $c['category_name']; ?></option>
+      <?php }; ?>
+    </select>
     <input name="keyword" class="form-control me-2" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
     <button name="search" class="btn btn-outline-success" type="submit">Search</button>
   </form>

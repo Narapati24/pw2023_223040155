@@ -151,7 +151,7 @@ function updateAccount($data)
   // username / password kosong
   if (empty($username)) {
     if ($img) {
-      unlink(base_url('_asset/img/profile/') . $img);
+      unlink('../../_asset/img/profile/' . $img);
     };
     return [
       'error' => true,
@@ -163,7 +163,7 @@ function updateAccount($data)
   // username terlalu panjang
   if (strlen($username) > 20) {
     if ($img) {
-      unlink(base_url('_asset/img/profile/') . $img);
+      unlink('../../_asset/img/profile/' . $img);
     };
     return [
       'error' => true,
@@ -175,7 +175,7 @@ function updateAccount($data)
   // username sudah ada
   if (query("SELECT * FROM users WHERE username = '$username' && id != '$id'")) {
     if ($img) {
-      unlink(base_url('_asset/img/profile/') . $img);
+      unlink('../../_asset/img/profile/' . $img);
     };
     return [
       'error' => true,
@@ -187,7 +187,7 @@ function updateAccount($data)
   // email sudah dipakai
   if (query("SELECT * FROM users WHERE email = '$email' && id != '$id'")) {
     if ($img) {
-      unlink(base_url('_asset/img/profile/') . $img);
+      unlink('../../_asset/img/profile/' . $img);
     };
     return [
       'error' => true,
@@ -204,7 +204,7 @@ function updateAccount($data)
       if (!$img) {
         $img = $data['former-img'];
       } else {
-        unlink(base_url('_asset/img/profile/') . $data['former-img']);
+        unlink('../../_asset/img/profile/' . $data['former-img']);
       }
 
       $query = "UPDATE users SET
@@ -225,7 +225,7 @@ function updateAccount($data)
       ];
       exit;
     } else {
-      unlink(base_url('_asset/img/profile/') . $img);
+      unlink('../../_asset/img/profile/' . $img);
       return [
         'error' => true,
         'massage' => 'PASSWORD WRONG'
@@ -234,7 +234,7 @@ function updateAccount($data)
     }
   } else {
     if ($img) {
-      unlink(base_url('_asset/img/profile/') . $img);
+      unlink('../../_asset/img/profile/' . $img);
     };
     return [
       'error' => true,
@@ -332,6 +332,13 @@ function loginAccount($data)
                                 || email = '$username'")[0]) {
       if (password_verify($password, $user['password'])) {
         $role = $query['role_name'];
+        if ($role === 'Banned') {
+          return [
+            'error' => true,
+            'massage' => 'THIS ACCOUNT HAS BEEN BANNED'
+          ];
+          exit;
+        }
 
         // set session
         $_SESSION['roles'] = $role;
@@ -401,7 +408,7 @@ function upload()
   $new_name_file = uniqid();
   $new_name_file .= '.';
   $new_name_file .= $file_extension;
-  move_uploaded_file($tmp_file, base_url('_asset/img/article/') . $new_name_file);
+  move_uploaded_file($tmp_file, '../_asset/img/article/' . $new_name_file);
 
   return $new_name_file;
 }
@@ -443,7 +450,7 @@ function uploadProfile()
   $new_name_file = uniqid();
   $new_name_file .= '.';
   $new_name_file .= $file_extension;
-  move_uploaded_file($tmp_file, base_url('_asset/img/profile/') . $new_name_file);
+  move_uploaded_file($tmp_file, '../../_asset/img/profile/' . $new_name_file);
 
   return $new_name_file;
 }
@@ -458,6 +465,7 @@ function inputArticle($data)
   $content = htmlspecialchars($data['contentArticle'], ENT_QUOTES);
   $idAuthor = htmlspecialchars($data['idAuthor']);
   $visibility = $data['visibility'];
+  $category = $data['category'];
 
   if (strlen($title) > 500) {
     return [
@@ -493,11 +501,110 @@ function inputArticle($data)
   $queryPopularity = "INSERT INTO popularity VALUES ('$article_id', DEFAULT, DEFAULT, DEFAULT, now(), DEFAULT);";
   mysqli_query($db, $queryPopularity);
   echo mysqli_error($db);
+
+  if ($category != "null") {
+    $queryCategory = "INSERT INTO article_category VALUES ('$article_id', '$category');";
+    mysqli_query($db, $queryCategory);
+    echo mysqli_error($db);
+  }
   return [
     'error' => false,
     'massage' => 'ARTICLE BEEN INPUTED'
   ];
   exit;
+}
+
+function UpdateArticle($data)
+{
+  $db = connect();
+
+  $id = $data['id'];
+  $title = htmlspecialchars($data['title']);
+  // $img = htmlspecialchars($data['img']);
+  $shortContent = htmlspecialchars($data['shortContentArticle']);
+  $content = htmlspecialchars($data['contentArticle'], ENT_QUOTES);
+  $idAuthor = htmlspecialchars($data['idAuthor']);
+  $visibility = $data['visibility'];
+  $category = $data['category'];
+
+  if (strlen($title) > 500) {
+    return [
+      'error' => true,
+      'massage' => 'TITLE TOO LONG'
+    ];
+    exit;
+  }
+
+  if (strlen($shortContent) > 500) {
+    return [
+      'error' => true,
+      'massage' => 'DESCRIPTION TOO LONG'
+    ];
+    exit;
+  }
+
+  $img = upload();
+  if (!$img) {
+    $img = $data['former-img'];
+  } else {
+    unlink('../_asset/img/article/' . $data['former-img']);
+  }
+  // article
+  $queryArticle = "UPDATE article SET
+                    title = '$title',
+                    img = '$img',
+                    shortContent = '$shortContent',
+                    content = '$content',
+                    visibility_id = '$visibility'
+                    WHERE id = '$id'";
+
+  mysqli_query($db, $queryArticle);
+  echo mysqli_error($db);
+
+  $listCategory = query("SELECT * FROM article_category WHERE article_id = '$id'");
+
+  if (!$listCategory) {
+    $queryCategory = "INSERT INTO article_category VALUES ('$id', '$category')";
+  } else {
+    $queryCategory = "UPDATE article_category SET
+                      category_id = '$category'
+                      WHERE article_id = '$id'";
+  }
+
+  mysqli_query($db, $queryCategory);
+  echo mysqli_error($db);
+
+  return [
+    'error' => false,
+    'massage' => 'ARTICLE BEEN UPDATED'
+  ];
+  exit;
+}
+
+function deleteArticle($data)
+{
+  $db = connect();
+
+  $id = $data['id'];
+  $img = $data['former-img'];
+  $listCategory = query("SELECT * FROM article_category WHERE article_id = '$id'");
+
+  if ($listCategory) {
+    $queryCategory = "DELETE FROM article_category WHERE article_id ='$id'";
+    mysqli_query($db, $queryCategory);
+  }
+  $queryPopularity = "DELETE FROM popularity WHERE article_id = '$id'";
+  mysqli_query($db, $queryPopularity);
+
+  unlink('../_asset/img/article/' . $img);
+
+  $queryArticle = "DELETE FROM article WHERE id = '$id'";
+  mysqli_query($db, $queryArticle);
+
+  return [
+    'error' => false,
+    'massage' => 'ARTICLE DELETED'
+  ];
 }
 
 function comment($data)
