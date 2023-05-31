@@ -65,9 +65,11 @@ require_once '_header.php';
       </div>
     </div>
   </section>
-  <section class="row bg-body-secondary rounded" style="height: 540px; overflow: hidden;">
+
+  <!-- category list -->
+  <section class="row bg-body-secondary rounded d-flex" style="justify-content: space-evenly;">
     <?php foreach (array_slice($kategory, 0, 3) as $k) { ?>
-      <div class="col-4">
+      <div class="col-4 border border-success rounded bg-light mt-3 mb-3" style="height: 540px; width: 400px; overflow: hidden;">
         <div class="d-flex p-4">
           <h4 class=""><?= $k['category_name']; ?></h4>
           <a href="" class="ms-auto btn btn-primary pl">More Details</a>

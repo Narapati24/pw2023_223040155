@@ -52,7 +52,7 @@ if (isset($_SESSION['login'])) {
         </ul>
         <div class="d-flex ms-auto">
           <a class="d-flex ms-auto btn btn-danger" href="logout.php">
-            <img src="../../img/logo/loginLogo.png" style="-webkit-transform: scaleX(-1);
+            <img src="<?= base_url('_asset/img/logo/loginLogo.png'); ?>" style="-webkit-transform: scaleX(-1);
                 transform: scaleX(-1); 
                 filter: brightness(0) invert(1);" alt="" width="22" height="24">
             Logout

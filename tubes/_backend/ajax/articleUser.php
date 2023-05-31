@@ -46,6 +46,9 @@ $query = findUserArticle($_GET['keyword'], $_GET['keyword2'], $awalData, $jumlah
       </div>
     </div>
   </div>
+<?php };
+if (!$query) { ?>
+  <h5 style="text-align: center; margin-top: 200px; margin-bottom: 200px;">NO ARTICLE</h5>
 <?php }; ?>
 
 <!-- pagination -->

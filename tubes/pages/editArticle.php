@@ -67,18 +67,10 @@ require_once '../_header.php';
     <select name="category" class="form-select mb-3" aria-label="Default select example" required>
       <?php if (!$article['category_id']) { ?>
         <option>Category</option>
-        <?php foreach ($category as $c) { ?>
-          <option value="<?= $c['id_category']; ?>"><?= $c['category_name']; ?></option>
-        <?php } ?>
-      <?php } else { ?>
-        <?php foreach ($category as $c) {
-          if ($c['id_category'] == $article['category_id']) { ?>
-            <option value="<?= $c['id_category']; ?>" selected><?= $c['category_name']; ?></option>
-          <?php } else { ?>
-            <option value="<?= $c['id_category']; ?>"><?= $c['category_name']; ?></option>
       <?php };
-        };
-      }; ?>
+      foreach ($category as $c) { ?>
+        <option value="<?= $c['id_category']; ?>" <?= isset($article['category_id']) === $c['id_category'] ? 'selected' : ''; ?>><?= $c['category_name']; ?></option>
+      <?php }; ?>
     </select>
     <select name="visibility" class="form-select mb-3" aria-label="Default select example" required>
       <?php foreach ($visibility as $v) {

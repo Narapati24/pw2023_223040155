@@ -57,11 +57,13 @@ if (isset($_SESSION['login'])) {
         <div class="d-flex ms-auto">
 
           <!-- if login or not -->
-          <?php if (isset($_SESSION['login'])) { ?>
-            <a class="mt-1 me-2" href="<?= base_url('pages/newArticle.php'); ?>">
-              <img src="<?= base_url('_asset/img/logo/uploadLogo.png'); ?>" alt="New Article" width="22" height="24" style="
+          <?php if (isset($_SESSION['login'])) {
+            if ($_SESSION['roles'] != 3) { ?>
+              <a class="mt-1 me-2" href="<?= base_url('pages/newArticle.php'); ?>">
+                <img src="<?= base_url('_asset/img/logo/uploadLogo.png'); ?>" alt="New Article" width="22" height="24" style="
                 filter: brightness(0) invert(1);">
-            </a>
+              </a>
+            <?php }; ?>
             <a data-bs-toggle="collapse" href="#profileSetting" role="button" aria-expanded="false" aria-controls="collapseExample">
               <img class="rounded-circle border border-success" src="<?= base_url('_asset/img/profile/') . $profile[0]['img']; ?>" style="object-fit: cover;" width="40px" height="40px" alt="Profile">
             </a>

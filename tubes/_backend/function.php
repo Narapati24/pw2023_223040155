@@ -331,8 +331,8 @@ function loginAccount($data)
                                 WHERE username = '$username'
                                 || email = '$username'")[0]) {
       if (password_verify($password, $user['password'])) {
-        $role = $query['role_name'];
-        if ($role === 'Banned') {
+        $role = $user['id_role'];
+        if ($role === '4') {
           return [
             'error' => true,
             'massage' => 'THIS ACCOUNT HAS BEEN BANNED'
@@ -349,7 +349,6 @@ function loginAccount($data)
         if (isset($data['remember'])) {
           setcookie('key', hash('sha256', $user['username']), time() + 604800, '/');
           setcookie('id', $query['id'], time() + 604800, '/');
-          setcookie('role', "$role", time() + 604800, '/');
         }
 
         header('Location:' .  base_url('pages/account/dashboard.php'));

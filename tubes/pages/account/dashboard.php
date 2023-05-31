@@ -7,7 +7,7 @@ if (!isset($_SESSION['login']) && !isset($_SESSION['roles'])) {
     header("Location: login.php");
 }
 
-if ($_SESSION['roles'] === 'Author' || $_SESSION['roles'] === 'User') {
+if ($_SESSION['roles'] !== '1') {
     header("Location: profile.php");
 }
 
@@ -243,6 +243,9 @@ require_once '_header.php';
                                     </div>
                                 </div>
                             </div>
+                        <?php };
+                        if (!$query) { ?>
+                            <h5 style="text-align: center; margin-top: 200px; margin-bottom: 200px;">NO ARTICLE</h5>
                         <?php }; ?>
                         <!-- pagination -->
                         <div aria-label="Page navigation">
