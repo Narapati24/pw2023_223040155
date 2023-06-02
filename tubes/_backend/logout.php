@@ -6,4 +6,4 @@ setcookie('id', '', time() - 360, '/');
 setcookie('role', '', time() - 360, '/');
 
 session_destroy();
-header("Location: login.php");
+header("Location: ../pages/account/login.php");

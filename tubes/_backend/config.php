@@ -2,6 +2,8 @@
 date_default_timezone_set('Asia/Jakarta');
 session_start();
 
+require 'function.php';
+
 if (isset($_COOKIE['key']) && isset($_COOKIE['id'])) {
   $id = $_COOKIE['id'];
   $key = $_COOKIE['key'];

@@ -1,7 +1,11 @@
 <?php
 function connect()
 {
-  return mysqli_connect('localhost', 'root', '', 'tubespw2023');
+  $hostDB = '';
+  $userDB = '';
+  $passDB = '';
+  $nameDB = '';
+  return mysqli_connect($hostDB, $userDB, $passDB, $nameDB);
 }
 
 function query($query)
@@ -25,7 +29,7 @@ function query($query)
 
 function base_url($url = null)
 {
-  $base_url = "http://localhost/pw2023_223040155/tubes";
+  $base_url = "";
   if ($url != null) {
     return $base_url . "/" . $url;
   } else {

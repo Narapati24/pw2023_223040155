@@ -72,7 +72,7 @@ if (isset($_SESSION['login'])) {
                 <a href="<?= base_url('pages/account/dashboard.php'); ?>">Profile</a>
               </div>
               <div class="card card-body">
-                <a href="<?= base_url('pages/account/logout.php'); ?>">Logout</a>
+                <a href="<?= base_url('_backend/logout.php'); ?>">Logout</a>
               </div>
             </div>
           <?php } else { ?>

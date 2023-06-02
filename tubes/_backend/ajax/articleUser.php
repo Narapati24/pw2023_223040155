@@ -1,5 +1,4 @@
 <?php
-require '../function.php';
 require '../config.php';
 require '../searchBar.php';
 $id = $_SESSION['ids'];
