@@ -7,7 +7,7 @@ require 'function.php';
 if (isset($_COOKIE['key']) && isset($_COOKIE['id'])) {
   $id = $_COOKIE['id'];
   $key = $_COOKIE['key'];
-  $user = query("SELECT username FROM users WHERE id = '$id'")[0];
+  $user = query("SELECT * FROM users WHERE id = '$id'")[0];
 
   if ($key === hash('sha256', $user['username'])) {
     // set session

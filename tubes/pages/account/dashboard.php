@@ -1,6 +1,7 @@
 <?php
 require '../../_backend/config.php';
 require '../../_backend/searchBar.php';
+require '../../_backend/reporting.php';
 
 if (!isset($_SESSION['login']) && !isset($_SESSION['roles'])) {
     header("Location: login.php");
@@ -31,11 +32,16 @@ if (isset($_POST['changePassword'])) {
     }
 }
 
+if (isset($_POST['acceptRequest']) || isset($_POST['dennyRequest'])) {
+    $edit = UpdateRoleRequest($_POST);
+}
+
 $id = $_SESSION['ids'];
 
 $profile = query("SELECT * FROM users WHERE id = $id");
 $query = query("SELECT * FROM users, article WHERE users.id = '$id' && article.user_id = '$id' ORDER BY article.id DESC LIMIT 0, 6");
-$users = query("SELECT * FROM users, roles WHERE users.id_role = roles.id");
+$users = query("SELECT users.id AS uid, users.*, roles.* FROM users, roles WHERE users.id_role = roles.id");
+$roleRequest = query("SELECT * FROM roles, role_request WHERE role_request.status = 'waiting' && role_request.role_id = roles.id");
 
 // pagination
 // konfigurasi
