@@ -1,5 +1,6 @@
 <?php
 require '../../_backend/config.php';
+require '../../_backend/reporting.php';
 
 if (isset($_POST['updateAccount'])) {
     $edit = updateAccount($_POST);
@@ -22,9 +23,14 @@ if (isset($_POST['changePassword'])) {
     }
 }
 
+if (isset($_POST['requestRole'])) {
+    $edit = roleRequest($_POST);
+}
+
 $id = $_SESSION['ids'];
 $profile = query("SELECT * FROM users WHERE id = $id");
 $query = query("SELECT * FROM users,article WHERE users.id = '$id' && users.id = article.user_id ORDER BY article.id LIMIT 0, 6");
+$role = query("SELECT * FROM roles WHERE role_name != 'Banned'");
 
 // pagination
 // konfigurasi

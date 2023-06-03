@@ -10,17 +10,7 @@ require '../../_asset/views/partial/account/_header.php';
       <div class="list-group pe-2 mb-3" id="list-tab" role="tablist">
         <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-home">Profile</a>
         <a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="#list-article" role="tab" aria-controls="list-profile">Article</a>
-        <a class="list-group-item list-group-item-action" id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">Settings</a>
-      </div>
-      <!-- Article Info -->
-      <div class="collapse text-center border border-primary pt-2" id="articleInfo" role="tabpanel">
-        <img src="<?= base_url('_asset/img/sample/sample.png'); ?>" class="rounded-circle" width="100" height="100" alt="profile">
-        <p>Title : Tugas Besar Pemrograman Web</p>
-        <p>Writter : Narapati Anandi</p>
-        <p>Desc : Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur, necessitatibus tempore ex ullam, numquam quae dolores ratione iste nisi quas laudantium reiciendis. Velit unde, dolor ullam rerum deleniti sunt voluptate vero est similique? Incidunt dicta libero ipsam non nam illo!</p>
-        <button type="button" class="btn btn-primary mb-2" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-          Edit
-        </button>
+        <a class="list-group-item list-group-item-action" id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">Client Support</a>
       </div>
     </div>
     <div class="col-sm-8">
@@ -219,8 +209,39 @@ require '../../_asset/views/partial/account/_header.php';
             </div>
           </div>
         </div>
-        <!-- Tab Setting -->
-        <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">Lorem ipsum dolor sit amet.</div>
+        <!-- Tab Client Support -->
+        <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
+          <div class="row text-center p-4">
+            <form method="post" class="col">
+              <h3>Request Role</h3>
+              <div class="form-floating mb-3">
+                <input name="userId" type="hidden" class="form-control" id="floatingInput" placeholder="Title" value="<?= $profile[0]['id']; ?>">
+                <label for="floatingInput"></label>
+              </div>
+              <select name="role" type="text" class="form-control w-50 m-auto" id="floatingInput" placeholder="Title" required maxlength="490">
+                <option selected>SELECT ROLE</option>
+                <?php foreach ($role as $r) : ?>
+                  <option value="<?= $r['id']; ?>"><?= $r['role_name']; ?></option>
+                <?php endforeach; ?>
+              </select>
+              <button name="requestRole" type="submit" class="btn btn-primary mt-3">Request</button>
+            </form>
+            <div class="col">
+              <h3>Report</h3>
+              <div class="form-floating mb-3">
+                <input name="userId" type="hidden" class="form-control" id="floatingInput" placeholder="Title" value="<?= $profile[0]['id']; ?>">
+                <label for="floatingInput"></label>
+              </div>
+              <select name="title" type="text" class="form-control w-50 m-auto" id="floatingInput" placeholder="Title" required maxlength="490">
+                <option selected>SELECT ROLE</option>
+                <?php foreach ($role as $r) : ?>
+                  <option value="<?= $r['id']; ?>"><?= $r['role_name']; ?></option>
+                <?php endforeach; ?>
+              </select>
+              <button name="requestRole" type="submit" class="btn btn-primary mt-3">Request</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
