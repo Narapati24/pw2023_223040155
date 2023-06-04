@@ -39,12 +39,10 @@ require '../_asset/views/partial/_header.php';
     <div class="form-floating mb-3">
       <textarea name="contentArticle" type="textarea" class="form-control text-editor" id="floatingInput" placeholder="Description" cols="80" rows="100"></textarea>
     </div>
-    <select name="category" class="form-select mb-3" aria-label="Default select example" required>
-      <option value="null" selected>Category</option>
-      <?php foreach ($category as $c) { ?>
-        <option value="<?= $c['id_category']; ?>"><?= $c['category_name']; ?></option>
-      <?php }; ?>
-    </select>
+    <div class="form-floating mb-3">
+      <input name="category" type="text" class="form-control" id="floatingInput" placeholder="Category" required maxlength="20" autocomplete="off">
+      <label for="floatingInput">Category</label>
+    </div>
     <select name="visibility" class="form-select mb-3" aria-label="Default select example" required>
       <?php foreach ($visibility as $v) { ?>
         <option value="<?= $v['id']; ?>"><?= $v['visibility']; ?></option>

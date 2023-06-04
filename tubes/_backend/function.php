@@ -1,10 +1,10 @@
 <?php
 function connect()
 {
-  $hostDB = '';
-  $userDB = '';
+  $hostDB = 'localhost';
+  $userDB = 'root';
   $passDB = '';
-  $nameDB = '';
+  $nameDB = 'tubespw2023';
   return mysqli_connect($hostDB, $userDB, $passDB, $nameDB);
 }
 
@@ -29,7 +29,7 @@ function query($query)
 
 function base_url($url = null)
 {
-  $base_url = "";
+  $base_url = "http://localhost/pw2023_223040155/tubes";
   if ($url != null) {
     return $base_url . "/" . $url;
   } else {
@@ -468,7 +468,21 @@ function inputArticle($data)
   $content = htmlspecialchars($data['contentArticle'], ENT_QUOTES);
   $idAuthor = htmlspecialchars($data['idAuthor']);
   $visibility = $data['visibility'];
-  $category = $data['category'];
+
+  // category
+  $keyword_category = str_replace(',', ' ', $data['category']);
+  $keyword_c = explode(' ', $keyword_category);
+
+  // clausa where dynamis
+  $whereClauses = [];
+
+  foreach ($keyword_c as $c) {
+    $whereClauses[] = "keyword LIKE '%$c%'";
+  }
+
+  // combine clause
+  $whereClauses = implode(' OR ', $whereClauses);
+  $category_list = query("SELECT DISTINCT category_id FROM category_keyword WHERE $whereClauses");
 
   if (strlen($title) > 500) {
     return [
@@ -505,11 +519,12 @@ function inputArticle($data)
   mysqli_query($db, $queryPopularity);
   echo mysqli_error($db);
 
-  if ($category != "null") {
+  foreach ($category_list as $cL) {
+    $category = $cL['category_id'];
     $queryCategory = "INSERT INTO article_category VALUES ('$article_id', '$category');";
     mysqli_query($db, $queryCategory);
     echo mysqli_error($db);
-  }
+  };
   return [
     'error' => false,
     'massage' => 'ARTICLE BEEN INPUTED'
@@ -528,7 +543,21 @@ function UpdateArticle($data)
   $content = htmlspecialchars($data['contentArticle'], ENT_QUOTES);
   $idAuthor = htmlspecialchars($data['idAuthor']);
   $visibility = $data['visibility'];
-  $category = $data['category'];
+
+  // category
+  $keyword_category = str_replace(',', ' ', $data['category']);
+  $keyword_c = explode(' ', $keyword_category);
+
+  // clausa where dynamis
+  $whereClauses = [];
+
+  foreach ($keyword_c as $c) {
+    $whereClauses[] = "keyword LIKE '%$c%'";
+  }
+
+  // combine clause
+  $whereClauses = implode(' OR ', $whereClauses);
+  $category_list = query("SELECT DISTINCT category_id FROM category_keyword WHERE $whereClauses");
 
   if (strlen($title) > 500) {
     return [
@@ -552,29 +581,37 @@ function UpdateArticle($data)
   } else {
     unlink('../_asset/img/article/' . $data['former-img']);
   }
+
+  // category
+  $category_article = query("SELECT category_id FROM article_category WHERE article_id = '$id'");
+  if (count($category_article) == 1) {
+    $category_article = $category_article[0];
+  }
+
+  $queryDeleteCategory = "DELETE FROM article_category WHERE article_id = '$id'";
+  mysqli_query($db, $queryDeleteCategory);
+  echo mysqli_error($db);
+
+  foreach ($category_list as $cL) {
+    $category = $cL['category_id'];
+    if ($category != $category_article) {
+      $queryAddCategory = "INSERT INTO article_category VALUES ('$id','$category');";
+      mysqli_query($db, $queryAddCategory);
+      echo mysqli_error($db);
+    }
+  };
+
   // article
   $queryArticle = "UPDATE article SET
                     title = '$title',
                     img = '$img',
                     shortContent = '$shortContent',
                     content = '$content',
+                    keyword_category = '$keyword_category',
                     visibility_id = '$visibility'
                     WHERE id = '$id'";
 
   mysqli_query($db, $queryArticle);
-  echo mysqli_error($db);
-
-  $listCategory = query("SELECT * FROM article_category WHERE article_id = '$id'");
-
-  if (!$listCategory) {
-    $queryCategory = "INSERT INTO article_category VALUES ('$id', '$category')";
-  } else {
-    $queryCategory = "UPDATE article_category SET
-                      category_id = '$category'
-                      WHERE article_id = '$id'";
-  }
-
-  mysqli_query($db, $queryCategory);
   echo mysqli_error($db);
 
   return [
