@@ -495,7 +495,7 @@ function inputArticle($data)
     exit;
   }
   // article
-  $queryArticle = "INSERT INTO article VALUES (null,'$title','$img','$shortContent','$content', now(),'$idAuthor','$visibility');";
+  $queryArticle = "INSERT INTO article VALUES (null,'$title','$img','$shortContent','$content', '$keyword_category', now(),'$idAuthor','$visibility');";
 
   mysqli_query($db, $queryArticle);
   echo mysqli_error($db);

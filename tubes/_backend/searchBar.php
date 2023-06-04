@@ -95,7 +95,7 @@ function findAdminUsers($data, $data2)
 
   $db = connect();
 
-  $query = "SELECT * FROM users, roles WHERE users.id_role = roles.id && (users.username LIKE '%$data%' && users.id_role LIKE '%$data2%')";
+  $query = "SELECT users.id AS uid, users.*, roles.* WHERE users.id_role = roles.id && (users.username LIKE '%$data%' && users.id_role LIKE '%$data2%')";
 
   $result = mysqli_query($db, $query);
   $rows = [];

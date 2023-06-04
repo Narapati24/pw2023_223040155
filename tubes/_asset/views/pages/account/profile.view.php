@@ -212,7 +212,7 @@ require '../../_asset/views/partial/account/_header.php';
         <!-- Tab Client Support -->
         <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
           <div class="row text-center p-4">
-            <form method="post" class="col">
+            <form method="post" class="col request-form">
               <h3>Request Role</h3>
               <div class="form-floating mb-3">
                 <input name="userId" type="hidden" class="form-control" id="floatingInput" placeholder="Title" value="<?= $profile[0]['id']; ?>">
@@ -226,20 +226,6 @@ require '../../_asset/views/partial/account/_header.php';
               </select>
               <button name="requestRole" type="submit" class="btn btn-primary mt-3">Request</button>
             </form>
-            <div class="col">
-              <h3>Report</h3>
-              <div class="form-floating mb-3">
-                <input name="userId" type="hidden" class="form-control" id="floatingInput" placeholder="Title" value="<?= $profile[0]['id']; ?>">
-                <label for="floatingInput"></label>
-              </div>
-              <select name="title" type="text" class="form-control w-50 m-auto" id="floatingInput" placeholder="Title" required maxlength="490">
-                <option selected>SELECT ROLE</option>
-                <?php foreach ($role as $r) : ?>
-                  <option value="<?= $r['id']; ?>"><?= $r['role_name']; ?></option>
-                <?php endforeach; ?>
-              </select>
-              <button name="requestRole" type="submit" class="btn btn-primary mt-3">Request</button>
-            </div>
           </div>
         </div>
       </div>
