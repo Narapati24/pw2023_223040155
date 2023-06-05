@@ -10,7 +10,7 @@ $kategory = query("SELECT * FROM category ORDER BY RAND()");
 $articleKategory = query("SELECT * FROM article, article_category, category WHERE article.id = article_category.article_id && article_category.category_id = category.id_category ORDER BY article.id DESC");
 
 if ($hotArticle[0]['daily'] === '0') {
-  $hotArticle = query("SELECT * FROM article, popularity WHERE visibility_id = 3 && article.id = popularity.article_id ORDER BY RAND()");
+  $hotArticle = query("SELECT * FROM article, popularity WHERE visibility_id = 3 && article.id = popularity.article_id ORDER BY article.id DESC");
 }
 
 // header

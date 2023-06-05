@@ -1,5 +1,5 @@
 <?php
-require_once '_asset/views/partial/_header.php';
+require_once 'partial/_header.php';
 ?>
 
 <link rel="stylesheet" href="<?= base_url('_asset/css/custom/news.css'); ?>">

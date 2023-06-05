@@ -46,14 +46,6 @@ require '../_asset/views/partial/_header.php';
 
   <p><?= html_entity_decode($article['content'], ENT_QUOTES); ?></p>
   <hr>
-  <!-- rating -->
-  <div class="rating text-center">
-    <h5>Rate</h5>
-    <?php for ($i = 1; $i <= 5; $i++) { ?>
-      <input class="d-none ratingInput" type="radio" id="star<?= $i; ?>" name="rating" value="<?= $i; ?>">
-      <label class="bi bi-star stars-rating" for="star<?= $i; ?>"></label>
-    <?php }; ?>
-  </div>
   <!-- comment -->
   <div class="container border" id="comment">
     <!-- alert -->
@@ -127,30 +119,6 @@ require '../_asset/views/partial/_header.php';
 <a href="<?= base_url('_backend/cetak.php?id=') . $id; ?>" class="p-2 rounded-circle" style="position: fixed; right: 5px; bottom: 5px ;background-color: white; border: #40798C 5px solid;" target="_blank">
   <img src="<?= base_url('_asset/img/logo/downloadLogo.png'); ?>" alt="" width="30" height="30">
 </a>
-
-<script>
-  var checkboxes = document.querySelectorAll(".ratingInput");
-  var ratingLabels = document.querySelectorAll(".stars-rating");
-  var previousRating = 0;
-
-  checkboxes.forEach(function(checkbox, index) {
-    checkbox.addEventListener('change', function() {
-      var currentRating = index + 1;
-
-      for (var i = 0; i < ratingLabels.length; i++) {
-        if (currentRating <= i) {
-          ratingLabels[i].classList.remove("bi-star-fill");
-          ratingLabels[i].classList.add("bi-star");
-        } else {
-          ratingLabels[i].classList.remove("bi-star");
-          ratingLabels[i].classList.add("bi-star-fill");
-        }
-      }
-      previousRating = currentRating;
-      console.log(previousRating);
-    });
-  });
-</script>
 
 <!-- footer -->
 <?php require_once '../_asset/views/partial/_footer.php'; ?>

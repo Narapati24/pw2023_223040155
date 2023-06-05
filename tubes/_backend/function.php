@@ -45,7 +45,7 @@ function registerAccount($data)
   $last_name = htmlspecialchars($data['last_name']);
   $birthdate = htmlspecialchars($data['birthdate']);
   $gender = htmlspecialchars($data['gender']);
-  $username = htmlspecialchars(strtolower($data['username']));
+  $username = htmlspecialchars(strtolower(str_replace(' ', '', $data['username'])));
   $email = htmlspecialchars($data['email']);
   $password1 = mysqli_real_escape_string($db, $data['password1']);
   $password2 = mysqli_real_escape_string($db, $data['password2']);
@@ -144,7 +144,7 @@ function updateAccount($data)
   $last_name = htmlspecialchars($data['last_name']);
   $birthdate = htmlspecialchars($data['birthdate']);
   $gender = htmlspecialchars($data['gender']);
-  $username = htmlspecialchars(strtolower($data['username']));
+  $username = htmlspecialchars(strtolower(str_replace(' ', '', $data['username'])));
   $email = htmlspecialchars($data['email']);
   $password =  mysqli_escape_string($db, $data['password']);
 
@@ -357,11 +357,17 @@ function loginAccount($data)
 
         header('Location:' .  base_url('pages/account/dashboard.php'));
         exit;
+      } else {
+        return [
+          'error' => true,
+          'massage' => 'PASSWORD INCORECT'
+        ];
+        exit;
       }
     } else {
       return [
         'error' => true,
-        'massage' => 'Username / Password salah!'
+        'massage' => 'USERNAME / PASSWORD INCORECT'
       ];
       exit;
     }
@@ -477,11 +483,13 @@ function inputArticle($data)
   $whereClauses = [];
 
   foreach ($keyword_c as $c) {
-    $whereClauses[] = "keyword LIKE '%$c%'";
+    if ($c != '') {
+      $whereClauses[] = "keyword LIKE '%$c%'";
+    }
   }
 
   // combine clause
-  $whereClauses = implode(' OR ', $whereClauses);
+  $whereClauses = implode(' OR ', $whereClauses != "keyword LIKE '%%'" ? $whereClauses : "keyword = 'abcd'");
   $category_list = query("SELECT DISTINCT category_id FROM category_keyword WHERE $whereClauses");
 
   if (strlen($title) > 500) {
@@ -552,7 +560,9 @@ function UpdateArticle($data)
   $whereClauses = [];
 
   foreach ($keyword_c as $c) {
-    $whereClauses[] = "keyword LIKE '%$c%'";
+    if ($c != '') {
+      $whereClauses[] = "keyword LIKE '%$c%'";
+    }
   }
 
   // combine clause
