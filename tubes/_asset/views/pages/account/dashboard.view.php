@@ -217,6 +217,7 @@ require '../../_asset/views/partial/account/_header.php';
             </div>
           </div>
         </div>
+
         <!-- Users -->
         <div class="tab-pane fade" id="list-users" role="tabpanel" aria-labelledby="list-messages-list">
           <div class="p-2">
@@ -325,6 +326,28 @@ require '../../_asset/views/partial/account/_header.php';
                 </div>
               <?php
               }; ?>
+              <!-- pagination -->
+              <div aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous" onclick="pageClick(<?= ($halamanAktifUser > 1) ? $halamanAktifUser - 1 : $halamanAktifUser . '#';; ?>)">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <?php for ($i = 1; $i <= $jumlahHalamanUser; $i++) { ?>
+                    <?php if ($halamanAktifUser == $i) { ?>
+                      <li class="page-item"><a class="page-link active" href="#" onclick="pageClick(<?= $i; ?>)"><?= $i; ?></a></li>
+                    <?php } else { ?>
+                      <li class="page-item"><a class="page-link" href="#" onclick="pageClick(<?= $i; ?>)"><?= $i; ?></a></li>
+                    <?php }; ?>
+                  <?php }; ?>
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next" onclick="pageClick(<?= ($halamanAktifUser < $jumlahHalamanUser) ? $halamanAktifUser + 1 : $halamanAktifUser . '#'; ?>)">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

@@ -90,12 +90,12 @@ function findAdminArticle($data, $data2, $data3, $data4, $data5)
   return $rows;
 }
 
-function findAdminUsers($data, $data2)
+function findAdminUsers($data, $data2, $data3, $data4)
 {
 
   $db = connect();
 
-  $query = "SELECT users.id AS uid, users.*, roles.* WHERE users.id_role = roles.id && (users.username LIKE '%$data%' && users.id_role LIKE '%$data2%')";
+  $query = "SELECT users.id AS uid, users.*, roles.* FROM users, roles WHERE users.id_role = roles.id && (users.username LIKE '%$data%' && users.id_role LIKE '%$data2%') LIMIT $data3, $data4";
 
   $result = mysqli_query($db, $query);
   $rows = [];
