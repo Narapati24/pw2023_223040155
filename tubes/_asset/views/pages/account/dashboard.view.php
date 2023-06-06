@@ -233,14 +233,19 @@ require '../../_asset/views/partial/account/_header.php';
               <?php foreach ($users as $u) { ?>
                 <div class="d-inline-block text-center col-sm-2" style="width: min-content;">
                   <button class="btn position-relative" type="button" data-bs-toggle="modal" data-bs-target="#profile-<?= $u['uid']; ?>" aria-expanded="false" aria-controls="collapseExample">
-                    <span class="position-absolute translate-middle badge rounded-pill bg-danger" style="margin-left: 15px; margin-top: 15px;">
-                      99+
-                      <span class="visually-hidden">unread messages</span>
-                    </span>
+                    <?php foreach ($report as $r) :
+                      if ($r['user_id'] == $u['uid']) {
+                        $count[] = $r ?>
+                        <span class="position-absolute translate-middle badge rounded-pill bg-danger" style="margin-left: 15px; margin-top: 15px;">
+                          <?= count($count); ?>
+                          <span class="visually-hidden">unread messages</span>
+                        </span>
+                    <?php };
+                    endforeach ?>
                     <img src="<?= base_url('_asset/img/profile/') . $u['img']; ?>" class="rounded-circle border border-success" style="object-fit: cover;" width="100" height="100" alt="profile">
                     <?php foreach ($roleRequest as $rR) {
                       if ($rR['user_id'] === $u['uid']) { ?>
-                        <span class="position-absolute translate-middle p-2 bg-warning border border-light rounded-circle" style="margin-top: 10px; margin-left: -10px;">
+                        <span class="position-absolute translate-middle p-2 bg-warning border border-light rounded-circle" style="margin-top: 10px; margin-left: -15px;">
                           <span class="visually-hidden">New alerts</span>
                         </span>
                     <?php };
@@ -260,7 +265,7 @@ require '../../_asset/views/partial/account/_header.php';
                       </div>
                       <div class="modal-body">
                         <img class="mb-3" src="<?= base_url('_asset/img/profile/') . $u['img']; ?>" width="100" height="100" style="object-fit: cover; overflow: hidden;">
-                        <button class="badge rounded-pill text-bg-danger position-absolute" style="right: 10px;">Report</button>
+                        <button class="badge rounded-pill text-bg-danger position-absolute" type="button" data-bs-toggle="offcanvas" data-bs-target="#report-<?= $u['uid']; ?>" aria-controls="offcanvasRight" style="right: 10px;">Report</button>
                         <button class="btn badge rounded-pill text-bg-warning position-absolute" type="button" data-bs-toggle="offcanvas" data-bs-target="#requestRole-<?= $u['uid']; ?>" aria-controls="offcanvasRight" style="top: 50px;right: 10px;">Request</button>
                         <p><?= $u['first_name']; ?></p>
                       </div>
@@ -271,7 +276,7 @@ require '../../_asset/views/partial/account/_header.php';
                   </div>
                 </div>
 
-                <!-- Canvas -->
+                <!-- Canvas Request-->
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="requestRole-<?= $u['uid']; ?>" aria-labelledby="offcanvasRightLabel" style="position: absolute; z-index: 9999;">
                   <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="offcanvasRightLabel">Request</h5>
@@ -294,12 +299,72 @@ require '../../_asset/views/partial/account/_header.php';
                     }; ?>
                   </div>
                 </div>
+
+                <!-- Canvas Report-->
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="report-<?= $u['uid']; ?>" aria-labelledby="offcanvasRightLabel" style="position: absolute; z-index: 9999;">
+                  <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasRightLabel">Report</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  </div>
+                  <div class="offcanvas-body" style="background-color: whitesmoke;">
+                    <?php foreach ($report as $r) {
+                      if ($r['user_id'] === $u['uid']) { ?>
+                        <form method="post" class="d-flex justify-content-between border p-3 m-2 bg-white">
+                          <img class="w-25 col me-2" src="<?= base_url('_asset/img/reporting/') . $r['img_reporting']; ?>" alt="" style="object-fit: cover;">
+                          <input name="id" type="hidden" value="<?= $r['id_reporting']; ?>">
+                          <input name="idProfile" type="hidden" value="<?= $profile[0]['id']; ?>">
+                          <span class="col"><?= $r['desc_reporting']; ?></span>
+                          <div class="col-2">
+                            <button name="acceptReport" type="submit" class="btn badge rounded-pill text-bg-success">Accept</button>
+                            <button name="dennyReport" type="submit" class="btn badge rounded-pill text-bg-danger">Denny</button>
+                          </div>
+                        </form>
+                    <?php };
+                    }; ?>
+                  </div>
+                </div>
               <?php
               }; ?>
             </div>
           </div>
         </div>
-        <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">Lorem ipsum dolor sit amet.</div>
+
+        <!-- tab setting -->
+        <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list" style="overflow: hidden;">
+          <!-- new category -->
+          <form action="" class="text-center p-4 category-form" id="category-form">
+            <select class="form-select mb-3 mt-4">
+              <option>LIST CATEGORY</option>
+              <?php foreach ($category as $c) : ?>
+                <option><?= $c['category_name']; ?></option>
+              <?php endforeach ?>
+            </select>
+            <div class="form-floating mb-3">
+              <input name="nameCategory" type="text" class="form-control" id="floatingInput" placeholder="CATEGORY NAME" autocomplete="off" required>
+              <label for="floatingInput">CATEGORY INPUT</label>
+            </div>
+            <button name="inputCategory" type="submit" class="btn badge rounded-pill text-bg-primary">INPUT CATEGORY</button>
+          </form>
+
+          <div class="text-center m-2">
+            <button type="button" class="btn badge rounded-pill text-bg-warning" id="switchCategoryKeyword">CATEGORY <=> KEYWORD</button>
+          </div>
+
+          <!-- new keyword -->
+          <form action="" class="text-center p-4 keyword-form hidden-form" id="keyword-form">
+            <select class="form-select mb-3 mt-4">
+              <option>SELECT CATEGORY</option>
+              <?php foreach ($category as $c) : ?>
+                <option><?= $c['category_name']; ?></option>
+              <?php endforeach ?>
+            </select>
+            <div class="form-floating mb-3">
+              <input name="nameCategory" type="text" class="form-control" id="floatingInput" placeholder="CATEGORY NAME" autocomplete="off" required>
+              <label for="floatingInput">KEYWORD INPUT</label>
+            </div>
+            <button name="inputKeyword" type="submit" class="btn badge rounded-pill text-bg-primary">INPUT KEYWORD</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -324,6 +389,12 @@ require '../../_asset/views/partial/account/_header.php';
       document.querySelector('form').reset();
       location.reload();
     }
+  }
+
+  // category keyword
+  document.getElementById('switchCategoryKeyword').onclick = function() {
+    document.getElementById('category-form').classList.toggle('hidden-form');
+    document.getElementById('keyword-form').classList.toggle('hidden-form');
   }
 </script>
 </body>

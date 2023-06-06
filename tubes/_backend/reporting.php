@@ -5,7 +5,7 @@ function roleRequest($data)
   $iduser = $data['userId'];
   $role = $data['role'];
 
-  $request = query("SELECT * FROM role_request WHERE user_id = '$iduser' && status = '3'");
+  $request = query("SELECT * FROM role_request WHERE user_id = '$iduser' && status_id = '3'");
 
   if (count($request) > 2) {
     return [
@@ -35,7 +35,7 @@ function UpdateRoleRequest($data)
 
   if (isset($data['acceptRequest'])) {
     $query = "UPDATE role_request a JOIN users b ON a.user_id = b.id SET 
-                a.status = '1',
+                a.status_id = '1',
                 a.admin_id = '$idProfile',
                 b.id_role = '$roleRequest'
                 WHERE a.id_request_role = '$idRequest'";
@@ -48,7 +48,7 @@ function UpdateRoleRequest($data)
     ];
   } else {
     $query = "UPDATE role_request SET 
-                status = '2',
+                status_id = '2',
                 admin_id = '$idProfile'
                 WHERE id_request_role = '$idRequest'";
 
@@ -102,4 +102,39 @@ function reportArticle($data)
     'error' => false,
     'massage' => 'ARTICLE BEEN REPORTED'
   ];
+}
+
+function UpdateReport($data)
+{
+  $db = connect();
+
+  $id = $data['id'];
+  $idProfile = $data['idProfile'];
+
+  if (isset($data['acceptReport'])) {
+    $query = "UPDATE reporting a, users b, article c SET 
+                a.status_id = '1',
+                a.admin_id = '$idProfile',
+                b.id_role = '4'
+                WHERE a.id_reporting = '$id' AND b.id = c.user_id AND a.article_id = c.id";
+
+    mysqli_query($db, $query);
+    echo mysqli_error($db);
+    return [
+      'error' => false,
+      'massage' => 'REQUEST BEEN APROVED'
+    ];
+  } else {
+    $query = "UPDATE reporting SET 
+                status_id = '2',
+                admin_id = '$idProfile'
+                WHERE id_reporting = '$id'";
+
+    mysqli_query($db, $query);
+    echo mysqli_error($db);
+    return [
+      'error' => false,
+      'massage' => 'REQUEST BEEN DENIED'
+    ];
+  }
 }

@@ -41,6 +41,24 @@ nav {
   position: relative;
   width: 80%;
   height: 80vh;
+  overflow: hidden;
+  transition: 600ms ease-in;
+  margin: auto;
+}
+
+.category-form {
+  position: relative;
+  width: 80%;
+  height: 30vh;
+  overflow: hidden;
+  transition: 600ms ease-in;
+  margin: auto;
+}
+
+.keyword-form {
+  position: relative;
+  width: 80%;
+  height: 30vh;
   transition: 600ms ease-in;
   margin: auto;
 }
