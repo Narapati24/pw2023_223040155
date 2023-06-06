@@ -41,6 +41,14 @@ if (isset($_POST['acceptReport']) || isset($_POST['dennyReport'])) {
     $edit = UpdateReport($_POST);
 }
 
+if (isset($_POST['inputCategory'])) {
+    $edit = inputCategory($_POST);
+}
+
+if (isset($_POST['inputKeyword'])) {
+    $edit = inputKeyword($_POST);
+}
+
 $id = $_SESSION['ids'];
 
 $profile = query("SELECT * FROM users WHERE id = $id");

@@ -355,7 +355,7 @@ require '../../_asset/views/partial/account/_header.php';
         <!-- tab setting -->
         <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list" style="overflow: hidden;">
           <!-- new category -->
-          <form action="" class="text-center p-4 category-form" id="category-form">
+          <form action="" class="text-center p-4 category-form" id="category-form" method="post">
             <select class="form-select mb-3 mt-4">
               <option>LIST CATEGORY</option>
               <?php foreach ($category as $c) : ?>
@@ -374,15 +374,15 @@ require '../../_asset/views/partial/account/_header.php';
           </div>
 
           <!-- new keyword -->
-          <form action="" class="text-center p-4 keyword-form hidden-form" id="keyword-form">
-            <select class="form-select mb-3 mt-4">
+          <form action="" class="text-center p-4 keyword-form hidden-form" id="keyword-form" method="post">
+            <select name="category" class="form-select mb-3 mt-4">
               <option>SELECT CATEGORY</option>
               <?php foreach ($category as $c) : ?>
-                <option><?= $c['category_name']; ?></option>
+                <option value="<?= $c['id_category']; ?>"><?= $c['category_name']; ?></option>
               <?php endforeach ?>
             </select>
             <div class="form-floating mb-3">
-              <input name="nameCategory" type="text" class="form-control" id="floatingInput" placeholder="CATEGORY NAME" autocomplete="off" required>
+              <input name="nameKeyword" type="text" class="form-control" id="floatingInput" placeholder="CATEGORY NAME" autocomplete="off" required>
               <label for="floatingInput">KEYWORD INPUT</label>
             </div>
             <button name="inputKeyword" type="submit" class="btn badge rounded-pill text-bg-primary">INPUT KEYWORD</button>
