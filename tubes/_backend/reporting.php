@@ -5,7 +5,7 @@ function roleRequest($data)
   $iduser = $data['userId'];
   $role = $data['role'];
 
-  $request = query("SELECT * FROM role_request WHERE user_id = '$iduser' && status = 'waiting'");
+  $request = query("SELECT * FROM role_request WHERE user_id = '$iduser' && status = '3'");
 
   if (count($request) > 2) {
     return [
@@ -15,7 +15,7 @@ function roleRequest($data)
     exit;
   }
 
-  $query = "INSERT INTO role_request VALUES(null, 'waiting', '$iduser', '$role', null)";
+  $query = "INSERT INTO role_request VALUES(null, '3', '$iduser', '$role', null)";
 
   mysqli_query($db, $query);
   echo mysqli_error($db);
@@ -35,7 +35,7 @@ function UpdateRoleRequest($data)
 
   if (isset($data['acceptRequest'])) {
     $query = "UPDATE role_request a JOIN users b ON a.user_id = b.id SET 
-                a.status = 'Accepted',
+                a.status = '1',
                 a.admin_id = '$idProfile',
                 b.id_role = '$roleRequest'
                 WHERE a.id_request_role = '$idRequest'";
@@ -48,7 +48,7 @@ function UpdateRoleRequest($data)
     ];
   } else {
     $query = "UPDATE role_request SET 
-                status = 'Denied',
+                status = '2',
                 admin_id = '$idProfile'
                 WHERE id_request_role = '$idRequest'";
 
@@ -59,4 +59,47 @@ function UpdateRoleRequest($data)
       'massage' => 'REQUEST BEEN DENIED'
     ];
   }
+}
+
+function reportArticle($data)
+{
+  $db = connect();
+
+  $idArticle = $data['idArticle'];
+  $img = $data['img'];
+  $desc = htmlspecialchars($data['desc']);
+  $idUser = $data['idUser'];
+
+  if (!$desc) {
+    return [
+      'error' => true,
+      'massage' => 'NEED DESCRIPTION FOR REPORTING'
+    ];
+    exit;
+  }
+
+  if (!$idUser) {
+    return [
+      'error' => true,
+      'massage' => 'YOU ARE NOT LOGON YET'
+    ];
+    exit;
+  }
+
+  if (!$idArticle) {
+    return [
+      'error' => true,
+      'massage' => 'YOU WANNA REPORT WHAT?'
+    ];
+    exit;
+  }
+
+  $query = "INSERT INTO reporting VALUES(null, '$img', '$desc', '3', '$idArticle', '$idUser', null)";
+
+  mysqli_query($db, $query);
+  echo mysqli_error($db);
+  return [
+    'error' => false,
+    'massage' => 'ARTICLE BEEN REPORTED'
+  ];
 }

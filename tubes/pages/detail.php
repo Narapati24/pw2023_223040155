@@ -1,6 +1,7 @@
 <?php
 require '../_backend/config.php';
 require '../_backend/updateClicks.php';
+require '../_backend/reporting.php';
 
 // return pages if no id
 if (!isset($_GET['id'])) {
@@ -11,6 +12,11 @@ if (!isset($_GET['id'])) {
 // comment
 if (isset($_POST['submit'])) {
   $commentInput = comment($_POST);
+}
+
+// report
+if (isset($_POST['report'])) {
+  $error = reportArticle($_POST);
 }
 
 $id = $_GET['id'];

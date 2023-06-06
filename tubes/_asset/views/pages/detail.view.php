@@ -2,6 +2,9 @@
 require '../_asset/views/partial/_header.php';
 ?>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="<?= base_url('_asset/js/custom/screenshot/html2canvas.js'); ?>"></script>
+<script src="<?= base_url('_asset/js/custom/screenshot/detailArticle.js'); ?>"></script>
 <style>
   .editor {
     line-height: 6px;
@@ -30,7 +33,19 @@ require '../_asset/views/partial/_header.php';
   }
 </style>
 <!-- content -->
-<div class="container w-50 rounded article" style="background-color: white; border: 5px solid whitesmoke;">
+<div class="container w-50 rounded article" style="background-color: white; border: 5px solid whitesmoke;" id="screenshot-container">
+  <!-- info error -->
+  <?php if (isset($error['error']) && !$error['error']) : ?>
+    <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+      <strong><?= $error['massage']; ?></strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <?php elseif (isset($error['error']) && $error['error']) : ?>
+    <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+      <strong><?= $error['massage']; ?></strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <?php endif; ?>
   <h4 class="fw-bolder mt-2">
     <?= strtoupper($article['title']); ?>
   </h4>
@@ -111,14 +126,60 @@ require '../_asset/views/partial/_header.php';
   </div>
 </div>
 
-<?php if (isset($_SESSION['ids']) && $_SESSION['ids'] === $editor['user_id']) { ?>
-  <a href="editArticle.php?id=<?= $id; ?>" class="p-2 rounded-circle" style="position: fixed; right: 5px; bottom: 65px ;background-color: white; border: #40798C 5px solid;">
-    <img src="<?= base_url('_asset/img/logo/editLogo.png'); ?>" alt="" width="30" height="30">
+<?php if (isset($_SESSION['login'])) {
+  if (isset($_SESSION['ids']) && $_SESSION['ids'] === $editor['user_id']) : ?>
+    <a href="editArticle.php?id=<?= $id; ?>" class="p-2 rounded-circle" style="position: fixed; right: 5px; bottom: 65px ;background-color: white; border: #40798C 5px solid;">
+      <img src="<?= base_url('_asset/img/logo/editLogo.png'); ?>" alt="" width="30" height="30">
+    </a>
+  <?php else : ?>
+    <button class="p-2 rounded-circle" style="position: fixed; right: 5px; bottom: 65px ;background-color: white; border: #40798C 5px solid;" id="capture-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-exclamation-lg" viewBox="0 0 16 16">
+        <path d="M7.005 3.1a1 1 0 1 1 1.99 0l-.388 6.35a.61.61 0 0 1-1.214 0L7.005 3.1ZM7 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z" />
+      </svg>
+    </button>
+  <?php endif; ?>
+  <a href="<?= base_url('_backend/cetak.php?id=') . $id; ?>" class="p-2 rounded-circle" style="position: fixed; right: 5px; bottom: 5px ;background-color: white; border: #40798C 5px solid;" target="_blank">
+    <img src="<?= base_url('_asset/img/logo/downloadLogo.png'); ?>" alt="" width="30" height="30">
   </a>
+
+
+  <!-- modal report -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <form class="modal-content" method="post">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Reporting</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <input name="idArticle" type="hidden" value="<?= $article['id']; ?>">
+          <div class="" id="livePreview"></div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+            <textarea name="desc" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+          <input name="idUser" type="hidden" value="<?= $_SESSION['ids']; ?>">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Close
+          </button>
+          <button name="report" type="submit" class="btn btn-danger">REPORT</button>
+        </div>
+      </form>
+    </div>
+  </div>
 <?php }; ?>
-<a href="<?= base_url('_backend/cetak.php?id=') . $id; ?>" class="p-2 rounded-circle" style="position: fixed; right: 5px; bottom: 5px ;background-color: white; border: #40798C 5px solid;" target="_blank">
-  <img src="<?= base_url('_asset/img/logo/downloadLogo.png'); ?>" alt="" width="30" height="30">
-</a>
+<!-- script -->
+<script>
+  $(document).ready(function() {
+    const capture = document.getElementById("capture-btn");
+    capture.addEventListener("click", function() {
+      console.log("success");
+      $("#exampleModal").modal("show");
+    });
+  });
+</script>
 
 <!-- footer -->
 <?php require_once '../_asset/views/partial/_footer.php'; ?>
