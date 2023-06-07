@@ -56,7 +56,7 @@ require '../_asset/views/partial/_header.php';
 <!-- img Preview -->
 <script src="<?= base_url('_asset/js/custom/previewImg/newArticlePage.js'); ?>"></script>
 <!-- ckEditor -->
-<script src="<?= base_url('_asset/js/CKEditor/ckeditor.js'); ?>"></script>
+<script src="<?= base_url('_asset/js/CKEDITOR/ckeditor.js'); ?>"></script>
 <script>
   ClassicEditor
     .create(document.querySelector('.text-editor'), {

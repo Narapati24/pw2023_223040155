@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home3/narapati_keysa/public_html/
+    - export DEPLOYPATH=/home3/narapati/project.narapatis.my.id/
     - /bin/cp -R * $DEPLOYPATH

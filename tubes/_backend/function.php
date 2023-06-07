@@ -1,10 +1,10 @@
 <?php
 function connect()
 {
-  $hostDB = 'localhost';
-  $userDB = 'root';
+  $hostDB = '';
+  $userDB = '';
   $passDB = '';
-  $nameDB = 'tubespw2023';
+  $nameDB = '';
   return mysqli_connect($hostDB, $userDB, $passDB, $nameDB);
 }
 
@@ -29,7 +29,7 @@ function query($query)
 
 function base_url($url = null)
 {
-  $base_url = "http://localhost/pw2023_223040155/tubes";
+  $base_url = "";
   if ($url != null) {
     return $base_url . "/" . $url;
   } else {
@@ -44,7 +44,7 @@ function registerAccount($data)
   $first_name = htmlspecialchars($data['first_name']);
   $last_name = htmlspecialchars($data['last_name']);
   $birthdate = htmlspecialchars($data['birthdate']);
-  $gender = htmlspecialchars($data['gender']);
+  $gender = $data['gender'];
   $username = htmlspecialchars(strtolower(str_replace(' ', '', $data['username'])));
   $email = htmlspecialchars($data['email']);
   $password1 = mysqli_real_escape_string($db, $data['password1']);
@@ -60,13 +60,13 @@ function registerAccount($data)
   }
 
   // gender other than man and women
-  if (query("SELECT gender from users WHERE gender != '$gender'")) {
-    return [
-      'error' => true,
-      'massage' => 'PLEASE, ONLY MAN AND WOMEN HERE'
-    ];
-    exit;
-  }
+  // if (query("SELECT gender from users WHERE gender != '$gender'")) {
+  //   return [
+  //     'error' => true,
+  //     'massage' => 'PLEASE, ONLY MAN AND WOMEN HERE'
+  //   ];
+  //   exit;
+  // }
 
   // username / password kosong
   if (empty($username) || empty($password1) || empty($password2)) {
