@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home3/narapati/project.narapatis.my.id/
+    - export DEPLOYPATH=/home/narapati/project.narapatis.my.id/
     - /bin/cp -R * $DEPLOYPATH
