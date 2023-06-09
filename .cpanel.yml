@@ -2,4 +2,4 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/narapati/project.narapatis.my.id/
-    - rsync -avz --exclude='kuliah' --exclude='tugas' source/ $DEPLOYPATH
+    - rsync -avz --exclude='kuliah' --exclude='tugas' ./ $DEPLOYPATH
