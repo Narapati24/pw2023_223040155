@@ -12,7 +12,7 @@ function query($query)
 {
   $db = connect();
 
-  $result = mysqli_query($db, $query);
+  $result = mysqli_query($db, $query) or die(mysqli_error($db));
 
   // if only one data
   // if (mysqli_num_rows($result) == 1) {
@@ -29,7 +29,7 @@ function query($query)
 
 function base_url($url = null)
 {
-  $base_url = "";
+  $base_url = "http://localhost/pw2023_223040155/tubes";
   if ($url != null) {
     return $base_url . "/" . $url;
   } else {
@@ -124,10 +124,9 @@ function registerAccount($data)
 
   $realPassword = password_hash($password1, PASSWORD_DEFAULT);
 
-  $query = "INSERT INTO users VALUES (null,DEFAULT,$first_name','$last_name','$birthdate','$gender','$username','$email','$realPassword', default);";
+  $query = "INSERT INTO users VALUES (null, DEFAULT, '$first_name','$last_name','$birthdate','$gender','$username','$email','$realPassword', default);";
 
-  mysqli_query($db, $query);
-  echo mysqli_error($db);
+  mysqli_query($db, $query) or die(mysqli_error($db));
   return [
     'error' => false,
     'massage' => 'REGISTER SUCCESS'
@@ -221,7 +220,7 @@ function updateAccount($data)
                 email = '$email'
                 WHERE id = '$id'";
 
-      mysqli_query($db, $query);
+      mysqli_query($db, $query) or die(mysqli_error($db));
 
       return [
         'error' => false,
@@ -314,7 +313,7 @@ function changePassword($data)
                 password = '$realPassword'
                 WHERE id = '$id'";
 
-  mysqli_query($db, $query);
+  mysqli_query($db, $query) or die(mysqli_error($db));
 
   return [
     'error' => false,
@@ -327,7 +326,7 @@ function loginAccount($data)
 {
   connect();
 
-  $username = htmlspecialchars($data['username']);
+  $username = htmlspecialchars(str_replace(' ', '', $data['username']));
   $password = htmlspecialchars($data['password']);
 
   if ($query = query("SELECT users.id, users.first_name, roles.role_name FROM users, roles WHERE users.id_role = roles.id && users.username = '$username'")[0]) {
@@ -519,19 +518,16 @@ function inputArticle($data)
   // article
   $queryArticle = "INSERT INTO article VALUES (null,'$title','$img','$shortContent','$content', '$keyword_category', now(),'$idAuthor','$visibility');";
 
-  mysqli_query($db, $queryArticle);
-  echo mysqli_error($db);
+  mysqli_query($db, $queryArticle) or die(mysqli_error($db));
   $article_id = mysqli_insert_id($db);
 
   $queryPopularity = "INSERT INTO popularity VALUES ('$article_id', DEFAULT, DEFAULT, DEFAULT, now(), DEFAULT);";
-  mysqli_query($db, $queryPopularity);
-  echo mysqli_error($db);
+  mysqli_query($db, $queryPopularity) or die(mysqli_error($db));
 
   foreach ($category_list as $cL) {
     $category = $cL['category_id'];
     $queryCategory = "INSERT INTO article_category VALUES ('$article_id', '$category');";
-    mysqli_query($db, $queryCategory);
-    echo mysqli_error($db);
+    mysqli_query($db, $queryCategory) or die(mysqli_error($db));
   };
   return [
     'error' => false,
@@ -599,15 +595,13 @@ function UpdateArticle($data)
   }
 
   $queryDeleteCategory = "DELETE FROM article_category WHERE article_id = '$id'";
-  mysqli_query($db, $queryDeleteCategory);
-  echo mysqli_error($db);
+  mysqli_query($db, $queryDeleteCategory) or die(mysqli_error($db));
 
   foreach ($category_list as $cL) {
     $category = $cL['category_id'];
     if ($category != $category_article) {
       $queryAddCategory = "INSERT INTO article_category VALUES ('$id','$category');";
-      mysqli_query($db, $queryAddCategory);
-      echo mysqli_error($db);
+      mysqli_query($db, $queryAddCategory) or die(mysqli_error($db));
     }
   };
 
@@ -621,9 +615,7 @@ function UpdateArticle($data)
                     visibility_id = '$visibility'
                     WHERE id = '$id'";
 
-  mysqli_query($db, $queryArticle);
-  echo mysqli_error($db);
-
+  mysqli_query($db, $queryArticle) or die(mysqli_error($db));
   return [
     'error' => false,
     'massage' => 'ARTICLE BEEN UPDATED'
@@ -641,15 +633,15 @@ function deleteArticle($data)
 
   if ($listCategory) {
     $queryCategory = "DELETE FROM article_category WHERE article_id ='$id'";
-    mysqli_query($db, $queryCategory);
+    mysqli_query($db, $queryCategory) or die(mysqli_error($db));
   }
   $queryPopularity = "DELETE FROM popularity WHERE article_id = '$id'";
-  mysqli_query($db, $queryPopularity);
+  mysqli_query($db, $queryPopularity) or die(mysqli_error($db));
 
   unlink('../_asset/img/article/' . $img);
 
   $queryArticle = "DELETE FROM article WHERE id = '$id'";
-  mysqli_query($db, $queryArticle);
+  mysqli_query($db, $queryArticle) or die(mysqli_error($db));
 
   return [
     'error' => false,
@@ -674,7 +666,7 @@ function comment($data)
   }
 
   $query = "INSERT INTO commentar VALUES (null, '$description', now(), '$user', '$article')";
-  mysqli_query($db, $query);
+  mysqli_query($db, $query) or die(mysqli_error($db));
   return [
     'error' => false,
     'massage' => 'COMMENT INSERTED'
