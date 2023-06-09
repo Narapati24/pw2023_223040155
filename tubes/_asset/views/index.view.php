@@ -20,7 +20,7 @@ require_once 'partial/_header.php';
       <p class="pl">
         <?= substr($hotArticle[0]['shortContent'], 0, 500); ?>...
       </p>
-      <a href="pages/detail.php?id=<?= $hotArticle[0]['id']; ?>" class="stretched-link"></a>
+      <a href="<?= base_url('pages/detail.php?id=') . $hotArticle[0]['id']; ?>" class="stretched-link"></a>
     </div>
   </div>
 
@@ -34,14 +34,14 @@ require_once 'partial/_header.php';
         <div class="card-body" style="width: 290px; margin-left: -15px;">
           <h5 class="card-title pl"><?= substr($a['title'], 0, 38); ?>...</h5>
           <p class="card-text pl"><?= substr($a['shortContent'], 0, 90); ?>...</p>
-          <a href="pages/detail.php?id=<?= $a['id']; ?>" style="position: absolute ;bottom: 10px; left: 15px;" class="btn btn-primary stretched-link pl">More Details</a>
+          <a href="<?= base_url('pages/detail.php?id=') . $a['id']; ?>" style="position: absolute ;bottom: 10px; left: 15px;" class="btn btn-primary stretched-link pl">More Details</a>
         </div>
       </div>
     <?php endforeach; ?>
     <!-- see more news -->
     <div class="card d-inline-block col-4 mb-4" style="width: 18rem; height: 420px; overflow: hidden;">
       <div class="d-flex" style="height: 100%; align-items: center; justify-content: center;">
-        <a class="pl" href="pages/news.php" style="text-align: center;">
+        <a class="pl" href="<?= base_url('pages/news.php'); ?>" style="text-align: center;">
           <img src="_asset/img/logo/rightArrow.png" alt="more logo" height="60" width="60">
           <p>see more news</p>
         </a>
@@ -55,7 +55,6 @@ require_once 'partial/_header.php';
       <div class="col-4 border border-success rounded bg-light mt-3 mb-3" style="height: 540px; width: 400px; overflow: hidden;">
         <div class="d-flex p-4">
           <h4 class=""><?= $k['category_name']; ?></h4>
-          <a href="" class="ms-auto btn btn-primary pl">More Details</a>
         </div>
         <?php foreach ($articleKategory as $ka) {
           if ($k['id_category'] == $ka['category_id']) { ?>

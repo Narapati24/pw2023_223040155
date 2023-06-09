@@ -128,7 +128,7 @@ require '../_asset/views/partial/_header.php';
 
 <?php if (isset($_SESSION['login'])) {
   if (isset($_SESSION['ids']) && $_SESSION['ids'] === $editor['user_id']) : ?>
-    <a href="editArticle.php?id=<?= $id; ?>" class="p-2 rounded-circle" style="position: fixed; right: 5px; bottom: 65px ;background-color: white; border: #40798C 5px solid;">
+    <a href="<?= base_url('pages/editArticle.php?id=') . $id; ?>" class="p-2 rounded-circle" style="position: fixed; right: 5px; bottom: 65px ;background-color: white; border: #40798C 5px solid;">
       <img src="<?= base_url('_asset/img/logo/editLogo.png'); ?>" alt="" width="30" height="30">
     </a>
   <?php else : ?>

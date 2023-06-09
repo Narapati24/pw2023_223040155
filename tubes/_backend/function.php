@@ -1,10 +1,10 @@
 <?php
 function connect()
 {
-  $hostDB = '';
-  $userDB = '';
+  $hostDB = 'localhost';
+  $userDB = 'root';
   $passDB = '';
-  $nameDB = '';
+  $nameDB = 'tubespw2023';
   return mysqli_connect($hostDB, $userDB, $passDB, $nameDB);
 }
 
@@ -31,7 +31,7 @@ function base_url($url = null)
 {
   $base_url = "http://localhost/pw2023_223040155/tubes";
   if ($url != null) {
-    return $base_url . "/" . $url;
+    return $base_url . "/" . str_replace('.php', '', $url);
   } else {
     return $base_url;
   }

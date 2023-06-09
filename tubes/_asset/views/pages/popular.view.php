@@ -28,7 +28,7 @@ require '../_asset/views/partial/_header.php';
           <div class="card-body" style="width: 290px; margin-left: -15px;">
             <h5 class="card-title pl"><?= substr($a['title'], 0, 38); ?>...</h5>
             <p class="card-text pl"><?= substr($a['shortContent'], 0, 90); ?>...</p>
-            <a href="pages/detail.php?id=<?= $a['id']; ?>" style="position: absolute ;bottom: 10px; left: 15px;" class="btn btn-primary stretched-link pl">More Details</a>
+            <a href="<?= base_url('pages/detail.php?id=') . $a['id']; ?>" style="position: absolute ;bottom: 10px; left: 15px;" class="btn btn-primary stretched-link pl">More Details</a>
           </div>
         </div>
       <?php endforeach; ?>
@@ -47,7 +47,7 @@ require '../_asset/views/partial/_header.php';
           <div class="card-body" style="width: 290px; margin-left: -15px;">
             <h5 class="card-title pl"><?= substr($a['title'], 0, 38); ?>...</h5>
             <p class="card-text pl"><?= substr($a['shortContent'], 0, 90); ?>...</p>
-            <a href="pages/detail.php?id=<?= $a['id']; ?>" style="position: absolute ;bottom: 10px; left: 15px;" class="btn btn-primary stretched-link pl">More Details</a>
+            <a href="<?= base_url('pages/detail.php?id=') . $a['id']; ?>" style="position: absolute ;bottom: 10px; left: 15px;" class="btn btn-primary stretched-link pl">More Details</a>
           </div>
         </div>
       <?php endforeach; ?>
@@ -66,7 +66,7 @@ require '../_asset/views/partial/_header.php';
           <div class="card-body" style="width: 290px; margin-left: -15px;">
             <h5 class="card-title pl"><?= substr($a['title'], 0, 38); ?>...</h5>
             <p class="card-text pl"><?= substr($a['shortContent'], 0, 90); ?>...</p>
-            <a href="detail.php?id=<?= $a['id']; ?>" style="position: absolute ;bottom: 10px; left: 15px;" class="btn btn-primary stretched-link pl">More Details</a>
+            <a href="<?= base_url('pages/detail.php?id=') . $a['id']; ?>" style="position: absolute ;bottom: 10px; left: 15px;" class="btn btn-primary stretched-link pl">More Details</a>
           </div>
         </div>
       <?php endforeach; ?>

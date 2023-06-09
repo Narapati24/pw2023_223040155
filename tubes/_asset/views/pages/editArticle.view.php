@@ -59,7 +59,7 @@ require '../_asset/views/partial/_header.php';
   </form>
 </div>
 
-<a href="detail.php?id=<?= $id; ?>" class="p-2 rounded-circle" style="position: fixed; right: 5px; bottom: 5px ;background-color: white; border: #40798C 5px solid;">
+<a href="<?= base_url('pages/detail.php?id=') . $id; ?>" class="p-2 rounded-circle" style="position: fixed; right: 5px; bottom: 5px ;background-color: white; border: #40798C 5px solid;">
   <img src="<?= base_url('_asset/img/logo/backArrowLogo.png'); ?>" alt="" width="30" height="30">
 </a>
 
