@@ -21,10 +21,19 @@ if (isset($_POST['report'])) {
 
 $id = $_GET['id'];
 clicks("UPDATE popularity SET daily = daily + 1, weekly = weekly + 1, monthly = monthly + 1, lifetime = lifetime + 1, update_data = now() WHERE article_id = $id");
-$article = query("SELECT * FROM article, article_category WHERE article.id = $id && article.id = article_category.article_id")[0];
+$article = query("SELECT * FROM article, article_category WHERE article.id = $id && article.id = article_category.article_id");
 $editor = query("SELECT * FROM users INNER JOIN article WHERE article.user_id = users.id && article.id = $id")[0];
-$articleCategory = $article['category_id'];
-$categoryArticle = query("SELECT * FROM article, article_category, category WHERE article.id = article_category.article_id && category.id_category = article_category.category_id && category.id_category = '$articleCategory' LIMIT 8");
+
+if (!$article) {
+  $article = query("SELECT * FROM article WHERE article.id = $id")[0];
+  $categoryArticle = query("SELECT * FROM article, article_category, category WHERE article.id = article_category.article_id && category.id_category = article_category.category_id ORDER BY RAND() LIMIT 8");
+} else {
+  $article = $article[0];
+  $articleCategory = $article['category_id'];
+  $categoryArticle = query("SELECT * FROM article, article_category, category WHERE article.id = article_category.article_id && category.id_category = article_category.category_id && category.id_category = '$articleCategory' LIMIT 8");
+}
+
+
 
 // commentar
 $comment = query("SELECT * FROM commentar, users WHERE users.id = commentar.user_id && commentar.article_id = $id ORDER BY id_comment DESC");

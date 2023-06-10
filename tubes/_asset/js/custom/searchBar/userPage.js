@@ -20,19 +20,17 @@ function checkInputsArticle(data) {
   const input1 = keywordArticle.value;
   const input2 = keywordArticle2.value;
   let input3 = 1;
-  if (!data) {
-    false;
-  } else {
+  if (data) {
     input3 = data;
   }
   fetch(
-    "../../_backend/ajax/articleUser.php ?keyword=" +
+    "../../_backend/ajax/articleUser.php?keyword=" +
       input1 +
       "&keyword2=" +
       input2 + 
       "&page=" +
       input3
   )
-    .then((Response) => Response.text())
-    .then((Response) => (containerArticle.innerHTML = Response));
+    .then((response) => response.text())
+    .then((response) => (containerArticle.innerHTML = response));
 };

@@ -27,13 +27,11 @@ function checkInputsArticle(data) {
   const input2 = keywordArticle2.value;
   const input3 = keywordArticle3.value;
   let input4 = 1;
-  if (!data) {
-    false;
-  } else {
+  if (data) {
     input4 = data;
   }
   fetch(
-  "../../_backend/ajax/adminPage/article.php ?keyword=" +
+  "../../_backend/ajax/adminPage/article.php?keyword=" +
     input1 +
     "&keyword2=" +
     input2 +
@@ -42,8 +40,8 @@ function checkInputsArticle(data) {
     "&page=" +
     input4
   )
-    .then((Response) => Response.text())
-    .then((Response) => (containerArticle.innerHTML = Response));
+    .then((response) => response.text())
+    .then((response) => (containerArticle.innerHTML = response));
 };
 
 // Users SearchBar
@@ -68,6 +66,6 @@ function checkInputsUsers() {
       "&keyword2=" +
       input2
   )
-    .then((Response) => Response.text())
-    .then((Response) => (containerUsers.innerHTML = Response));
+    .then((response) => response.text())
+    .then((response) => (containerUsers.innerHTML = response));
 };
