@@ -268,7 +268,10 @@ require '../../_asset/views/partial/account/_header.php';
                         <img class="mb-3" src="<?= base_url('_asset/img/profile/') . $u['img']; ?>" width="100" height="100" style="object-fit: cover; overflow: hidden;">
                         <button class="badge rounded-pill text-bg-danger position-absolute" type="button" data-bs-toggle="offcanvas" data-bs-target="#report-<?= $u['uid']; ?>" aria-controls="offcanvasRight" style="right: 10px;">Report</button>
                         <button class="btn badge rounded-pill text-bg-warning position-absolute" type="button" data-bs-toggle="offcanvas" data-bs-target="#requestRole-<?= $u['uid']; ?>" aria-controls="offcanvasRight" style="top: 50px;right: 10px;">Request</button>
-                        <p><?= $u['first_name']; ?></p>
+                        <p><?= $u['first_name'] . ' ' . $u['last_name']; ?></p>
+                        <p><?= $u['birthdate']; ?></p>
+                        <p><?= $u['gender']; ?></p>
+                        <p><?= $u['email']; ?></p>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

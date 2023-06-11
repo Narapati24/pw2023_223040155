@@ -105,3 +105,31 @@ footer {
   margin: 0 auto;
   text-align: center;
 }
+
+.ww {
+  width: 50%;
+}
+
+.wwc {
+  width: 400px;
+}
+
+footer ul li a{
+  color: white;
+}
+
+@media (max-width: 767px) {
+  .ww {
+    width: 100%;
+  }
+}
+
+@media (max-width: 990px) {
+  .ww {
+    width: 100%;
+  }
+
+  .wwc {
+    width: 300px;
+  }
+}

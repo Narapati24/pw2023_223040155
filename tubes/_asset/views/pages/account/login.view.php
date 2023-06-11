@@ -3,7 +3,7 @@ require '../../_asset/views/partial/_header.php';
 ?>
 
 <!-- content -->
-<div class="container border w-50" style="overflow: hidden; background-color: whitesmoke;">
+<div class="container border ww" style="overflow: hidden; background-color: whitesmoke;">
   <!-- info error -->
   <?php if (isset($login['error']) && !$login['error']) : ?>
     <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">

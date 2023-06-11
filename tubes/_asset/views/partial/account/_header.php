@@ -17,6 +17,8 @@ if (isset($_SESSION['login'])) {
   <!-- bootstrap -->
   <link rel="stylesheet" href="<?= base_url('_asset/css/bootstrap/bootstrap.min.css'); ?>">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <!-- Custom css -->
   <link rel="stylesheet" href="<?= base_url('_asset/css/custom/universal.css'); ?>">
   <link rel="icon" href="<?= base_url('_asset/img/logo/P-news-logo.png'); ?>">

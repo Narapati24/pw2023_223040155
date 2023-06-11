@@ -9,7 +9,7 @@ require '../_asset/views/partial/_header.php';
 </style>
 
 <!-- content -->
-<div class="container w-50">
+<div class="container ww">
   <?php if (isset($article['error']) && !$article['error']) : ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
       <strong><?= $article['massage']; ?></strong>

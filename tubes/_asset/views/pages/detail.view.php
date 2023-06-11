@@ -33,7 +33,7 @@ require '../_asset/views/partial/_header.php';
   }
 </style>
 <!-- content -->
-<div class="container w-50 rounded article" style="background-color: white; border: 5px solid whitesmoke;" id="screenshot-container">
+<div class="container ww rounded article" style="background-color: white; border: 5px solid whitesmoke;" id="screenshot-container">
   <!-- info error -->
   <?php if (isset($error['error']) && !$error['error']) : ?>
     <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
