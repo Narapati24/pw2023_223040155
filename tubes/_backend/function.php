@@ -1,10 +1,10 @@
 <?php
 function connect()
 {
-  $hostDB = '';
-  $userDB = '';
+  $hostDB = 'localhost';
+  $userDB = 'root';
   $passDB = '';
-  $nameDB = '';
+  $nameDB = 'tubespw2023';
   return mysqli_connect($hostDB, $userDB, $passDB, $nameDB);
 }
 
