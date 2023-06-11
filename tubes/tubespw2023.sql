@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 06, 2023 at 10:52 AM
+-- Generation Time: Jun 11, 2023 at 04:24 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -29,15 +29,15 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `article` (
   `id` int NOT NULL,
-  `title` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `img` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `shortContent` varchar(500) COLLATE utf8mb4_general_ci NOT NULL,
-  `content` text COLLATE utf8mb4_general_ci NOT NULL,
-  `keyword_category` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `title` varchar(500) CHARACTER SET utf8mb4 NOT NULL,
+  `img` varchar(50) NOT NULL,
+  `shortContent` varchar(500) NOT NULL,
+  `content` text NOT NULL,
+  `keyword_category` varchar(255) NOT NULL,
   `insert_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_id` int NOT NULL,
   `visibility_id` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `article`
@@ -84,7 +84,7 @@ INSERT INTO `article` (`id`, `title`, `img`, `shortContent`, `content`, `keyword
 CREATE TABLE `article_category` (
   `article_id` int NOT NULL,
   `category_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `article_category`
@@ -126,7 +126,7 @@ INSERT INTO `article_category` (`article_id`, `category_id`) VALUES
 CREATE TABLE `category` (
   `id_category` int NOT NULL,
   `category_name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `category`
@@ -150,7 +150,7 @@ CREATE TABLE `category_keyword` (
   `id_category_keyword` int NOT NULL,
   `category_id` int NOT NULL,
   `keyword` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `category_keyword`
@@ -180,11 +180,11 @@ INSERT INTO `category_keyword` (`id_category_keyword`, `category_id`, `keyword`)
 
 CREATE TABLE `commentar` (
   `id_comment` int NOT NULL,
-  `description` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `description` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
   `insert_date` datetime NOT NULL,
   `user_id` int NOT NULL,
   `article_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `commentar`
@@ -215,41 +215,41 @@ CREATE TABLE `popularity` (
   `monthly` int NOT NULL DEFAULT '0',
   `update_data` date NOT NULL,
   `lifetime` int NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `popularity`
 --
 
 INSERT INTO `popularity` (`article_id`, `daily`, `weekly`, `monthly`, `update_data`, `lifetime`) VALUES
-(1, 0, 0, 1, '2023-06-06', 46),
-(2, 0, 0, 0, '2023-06-06', 5),
-(3, 0, 0, 0, '2023-06-06', 12),
-(5, 2, 2, 2, '2023-06-06', 7),
-(7, 0, 0, 0, '2023-06-06', 3),
-(8, 0, 0, 0, '2023-06-06', 19),
-(9, 0, 0, 0, '2023-06-06', 4),
-(10, 0, 0, 0, '2023-06-06', 20),
-(11, 0, 0, 0, '2023-06-06', 59),
-(12, 0, 0, 0, '2023-06-06', 37),
-(13, 0, 0, 0, '2023-06-06', 15),
-(14, 0, 0, 0, '2023-06-06', 44),
-(15, 0, 0, 0, '2023-06-06', 41),
-(16, 0, 0, 0, '2023-06-06', 13),
-(17, 0, 0, 2, '2023-06-06', 18),
-(18, 0, 0, 0, '2023-06-06', 39),
-(19, 0, 0, 1, '2023-06-06', 17),
-(23, 1, 1, 1, '2023-06-06', 70),
-(25, 0, 0, 22, '2023-06-06', 250),
-(32, 0, 0, 7, '2023-06-06', 24),
-(49, 1, 1, 3, '2023-06-06', 19),
-(50, 4, 4, 25, '2023-06-06', 25),
-(51, 0, 0, 6, '2023-06-06', 6),
-(52, 1, 2, 10, '2023-06-06', 10),
-(53, 3, 3, 5, '2023-06-06', 5),
-(54, 39, 40, 74, '2023-06-06', 74),
-(55, 11, 31, 31, '2023-06-06', 31),
-(56, 0, 0, 0, '2023-06-06', 0);
+(1, 0, 0, 1, '2023-06-11', 46),
+(2, 0, 0, 0, '2023-06-11', 5),
+(3, 6, 6, 6, '2023-06-11', 18),
+(5, 0, 2, 2, '2023-06-11', 7),
+(7, 0, 0, 0, '2023-06-11', 3),
+(8, 0, 0, 0, '2023-06-11', 19),
+(9, 0, 0, 0, '2023-06-11', 4),
+(10, 0, 0, 0, '2023-06-11', 20),
+(11, 0, 0, 0, '2023-06-11', 59),
+(12, 0, 0, 0, '2023-06-11', 37),
+(13, 0, 0, 0, '2023-06-11', 15),
+(14, 0, 0, 0, '2023-06-11', 44),
+(15, 0, 0, 0, '2023-06-11', 41),
+(16, 0, 0, 0, '2023-06-11', 13),
+(17, 0, 0, 2, '2023-06-11', 18),
+(18, 0, 0, 0, '2023-06-11', 39),
+(19, 0, 0, 1, '2023-06-11', 17),
+(23, 0, 1, 1, '2023-06-11', 70),
+(25, 15, 15, 37, '2023-06-11', 265),
+(32, 0, 0, 7, '2023-06-11', 24),
+(49, 0, 1, 3, '2023-06-11', 19),
+(50, 0, 4, 25, '2023-06-11', 25),
+(51, 0, 0, 6, '2023-06-11', 6),
+(52, 0, 2, 10, '2023-06-11', 10),
+(53, 0, 9, 11, '2023-06-11', 11),
+(54, 0, 40, 74, '2023-06-11', 74),
+(55, 0, 272, 272, '2023-06-11', 272),
+(56, 0, 70, 70, '2023-06-11', 70);
 
 -- --------------------------------------------------------
 
@@ -265,7 +265,7 @@ CREATE TABLE `reporting` (
   `article_id` int NOT NULL,
   `reporter_id` int NOT NULL,
   `admin_id` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `reporting`
@@ -283,8 +283,8 @@ INSERT INTO `reporting` (`id_reporting`, `img_reporting`, `desc_reporting`, `sta
 
 CREATE TABLE `roles` (
   `id` int NOT NULL,
-  `role_name` varchar(10) COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `role_name` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `roles`
@@ -308,7 +308,7 @@ CREATE TABLE `role_request` (
   `user_id` int NOT NULL,
   `role_id` int NOT NULL,
   `admin_id` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `role_request`
@@ -330,7 +330,7 @@ INSERT INTO `role_request` (`id_request_role`, `status_id`, `user_id`, `role_id`
 CREATE TABLE `status` (
   `id_status` int NOT NULL,
   `status_name` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `status`
@@ -349,16 +349,16 @@ INSERT INTO `status` (`id_status`, `status_name`) VALUES
 
 CREATE TABLE `users` (
   `id` int NOT NULL,
-  `img` varchar(50) COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'no-profile.png',
-  `first_name` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
-  `last_name` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
+  `img` varchar(50) NOT NULL DEFAULT 'no-profile.png',
+  `first_name` varchar(10) NOT NULL,
+  `last_name` varchar(10) NOT NULL,
   `birthdate` date NOT NULL,
-  `gender` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
-  `username` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `gender` varchar(10) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
   `id_role` int NOT NULL DEFAULT '3'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
@@ -377,8 +377,8 @@ INSERT INTO `users` (`id`, `img`, `first_name`, `last_name`, `birthdate`, `gende
 
 CREATE TABLE `visibility` (
   `id` int NOT NULL,
-  `visibility` varchar(10) COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'private'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `visibility` varchar(10) NOT NULL DEFAULT 'private'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `visibility`
@@ -493,7 +493,7 @@ ALTER TABLE `visibility`
 -- AUTO_INCREMENT for table `article`
 --
 ALTER TABLE `article`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `category`

@@ -40,7 +40,7 @@ require '../_asset/views/partial/_header.php';
       <textarea name="contentArticle" type="textarea" class="form-control text-editor" id="floatingInput" placeholder="Description" cols="80" rows="100"></textarea>
     </div>
     <div class="form-floating mb-3">
-      <input name="category" type="text" class="form-control" id="floatingInput" placeholder="Category" required maxlength="20" autocomplete="off">
+      <input name="category" type="text" class="form-control" id="floatingInput" placeholder="Category" maxlength="200" required autocomplete="off">
       <label for="floatingInput">Category</label>
     </div>
     <select name="visibility" class="form-select mb-3" aria-label="Default select example" required>

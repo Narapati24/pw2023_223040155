@@ -53,7 +53,7 @@ $id = $_SESSION['ids'];
 
 $profile = query("SELECT * FROM users WHERE id = $id");
 $query = query("SELECT * FROM users, article WHERE users.id = '$id' && article.user_id = '$id' ORDER BY article.id DESC LIMIT 0, 6");
-$users = query("SELECT users.id AS uid, users.*, roles.* FROM users, roles WHERE users.id_role = roles.id DESC LIMIT 0, 11");
+$users = query("SELECT users.id AS uid, users.*, roles.* FROM users, roles WHERE users.id_role = roles.id ORDER BY roles.id ASC LIMIT 0, 11");
 $roleRequest = query("SELECT * FROM roles, role_request WHERE role_request.status_id = '3' && role_request.role_id = roles.id");
 $report = query("SELECT reporting.*, article.title, article.user_id FROM reporting, article WHERE status_id = '3' AND reporting.article_id = article.id");
 $category = query("SELECT * FROM category");

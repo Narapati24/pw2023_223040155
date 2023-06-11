@@ -42,7 +42,7 @@ require '../_asset/views/partial/_header.php';
       <textarea name="contentArticle" type="textarea" class="form-control text-editor" id="floatingInput" placeholder="Description" cols="80" rows="100"><?= html_entity_decode($article['content'], ENT_QUOTES); ?></textarea>
     </div>
     <div class="form-floating mb-3">
-      <input name="category" value="<?= $article['keyword_category']; ?>" type="text" class="form-control" id="floatingInput" placeholder="category" required maxlength="490" autocomplete="off">
+      <input name="category" value="<?= $article['keyword_category']; ?>" type="text" class="form-control" id="floatingInput" placeholder="category" maxlength="200" required autocomplete="off">
       <label for="floatingInput">Category</label>
     </div>
     <select name="visibility" class="form-select mb-3" aria-label="Default select example" required>
