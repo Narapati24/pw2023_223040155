@@ -5,7 +5,7 @@ function find($data, $data2)
 
   $db = connect();
 
-  $query = "SELECT * FROM article, article_category WHERE article.id = article_category.article_id && article_category.category_id LIKE '%$data2%' && (article.title LIKE '%$data%' || article.content LIKE '%$data%') ORDER BY id DESC";
+  $query = "SELECT * FROM article, article_category WHERE article.visibility_id = 3 && article.id = article_category.article_id && article_category.category_id LIKE '%$data2%' && (article.title LIKE '%$data%' || article.content LIKE '%$data%') ORDER BY id DESC";
 
   $result = mysqli_query($db, $query);
   $rows = [];

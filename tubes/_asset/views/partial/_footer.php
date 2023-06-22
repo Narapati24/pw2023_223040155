@@ -22,10 +22,8 @@
         </div>
         <div class="col-md-3">
           <ul class="social-media">
-            <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://www.instagram.com/lio_keysa24/"><i class="fab fa-instagram"></i></a></li>
-            <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+            <li><a href="https://twitter.com/Lio_Keysa24"><i class="fab fa-twitter"> Lio_Keysa24</i></a></li>
+            <li><a href="https://www.instagram.com/lio_keysa24/"><i class="fab fa-instagram"> lio_keysa24</i></a></li>
           </ul>
         </div>
       </div>

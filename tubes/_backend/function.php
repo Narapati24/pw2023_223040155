@@ -207,7 +207,9 @@ function updateAccount($data)
       if (!$img) {
         $img = $data['former-img'];
       } else {
-        unlink('../../_asset/img/profile/' . $data['former-img']);
+        if ($data['former-img'] != 'no-profile.png') {
+          unlink('../../_asset/img/profile/' . $data['former-img']);
+        }
       }
 
       $query = "UPDATE users SET
