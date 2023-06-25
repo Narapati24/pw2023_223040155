@@ -11,10 +11,10 @@ require '../_asset/views/partial/_header.php';
     <select name="category" class="form-control w-25 me-2" id="">
       <option value="">All</option>
       <?php foreach ($category as $c) { ?>
-        <option value="<?= $c['id_category']; ?>"><?= $c['category_name']; ?></option>
+        <option value="<?= $c['id_category']; ?>" <?= isset($_POST['category']) && $_POST['category'] === $c['id_category'] ? 'selected' : ''; ?>><?= $c['category_name']; ?></option>
       <?php }; ?>
     </select>
-    <input name="keyword" class="form-control me-2" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
+    <input name="keyword" class="form-control me-2" type="text" value="<?= isset($_POST['keyword']) ? $_POST['keyword'] : ''; ?>" placeholder="Search" aria-label="Search" autocomplete="off">
     <button name="search" class="btn btn-outline-success" type="submit">Search</button>
   </form>
   <div class="">

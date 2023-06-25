@@ -108,10 +108,12 @@ footer {
 
 .ww {
   width: 50%;
+  transition: all 0.7s ease-in-out;
 }
 
 .wwc {
   width: 400px;
+  transition: all 0.7s ease-in-out;
 }
 
 footer ul li a{

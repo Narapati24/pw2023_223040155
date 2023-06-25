@@ -12,7 +12,7 @@ require '../_asset/views/partial/_header.php';
         <option value="<?= $c['id_category']; ?>" <?= isset($_POST['category']) && $_POST['category'] === $c['id_category'] ? 'selected' : ''; ?>><?= $c['category_name']; ?></option>
       <?php }; ?>
     </select>
-    <input name="keyword" class="form-control me-2" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
+    <input name="keyword" class="form-control me-2" value="<?= isset($_POST['keyword']) ? $_POST['keyword'] : ''; ?>" type="text" placeholder="Search" aria-label="Search" autocomplete="off">
     <button name="search" class="btn btn-outline-success" type="submit">Search</button>
   </form>
   <h4>Newes</h4>
