@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 11, 2023 at 04:24 PM
--- Server version: 8.0.30
--- PHP Version: 8.1.10
+-- Generation Time: Jul 01, 2023 at 08:47 PM
+-- Server version: 10.5.21-MariaDB-cll-lve-log
+-- PHP Version: 8.1.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `tubespw2023`
+-- Database: `narapati_pw_tubes_223040155`
 --
 
 -- --------------------------------------------------------
@@ -28,16 +28,16 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `article` (
-  `id` int NOT NULL,
-  `title` varchar(500) CHARACTER SET utf8mb4 NOT NULL,
+  `id` int(11) NOT NULL,
+  `title` varchar(500) NOT NULL,
   `img` varchar(50) NOT NULL,
   `shortContent` varchar(500) NOT NULL,
   `content` text NOT NULL,
   `keyword_category` varchar(255) NOT NULL,
-  `insert_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `user_id` int NOT NULL,
-  `visibility_id` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `insert_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `user_id` int(11) NOT NULL,
+  `visibility_id` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `article`
@@ -73,7 +73,10 @@ INSERT INTO `article` (`id`, `title`, `img`, `shortContent`, `content`, `keyword
 INSERT INTO `article` (`id`, `title`, `img`, `shortContent`, `content`, `keyword_category`, `insert_date`, `user_id`, `visibility_id`) VALUES
 (54, 'Musim Ini Man City Berpeluang Treble, Musim Depan? Belum Tentu', '647c3bc263616.jpg', 'Bola.net - Josep Guardiola mengatakan Manchester City musim 2022/2023 ini memang berpeluang meraih treble tapi ke depannya peluang itu mungkin sulit mereka dapatkan lagi.  Man City berpeluang mencatatkan sejarah pada musim 2022/2023 ini. Mereka memiliki peluang untuk bisa meraih tiga gelar dalam semusim.', '&lt;p&gt;&lt;strong&gt;Bola.net - &lt;/strong&gt;&lt;a href=&quot;https://www.bola.net/tag/josep-guardiola/&quot;&gt;Josep Guardiola&lt;/a&gt; mengatakan &lt;a href=&quot;https://www.bola.net/tag/manchester-city/&quot;&gt;Manchester City&lt;/a&gt; musim 2022/2023 ini memang berpeluang meraih treble tapi ke depannya peluang itu mungkin sulit mereka dapatkan lagi.&lt;/p&gt;&lt;p&gt;Man City berpeluang mencatatkan sejarah pada musim 2022/2023 ini. Mereka memiliki peluang untuk bisa meraih tiga gelar dalam semusim.&lt;/p&gt;&lt;p&gt;Mereka sebelumnya sudah berhasil menjadi juara Premier League. City melakukannya dengan menikung Arsenal.&lt;/p&gt;&lt;p&gt;City kemudian berhasil meraih trofi FA Cup 2022/2023. Di final, mereka mengalahkan &lt;a href=&quot;https://www.bola.net/tag/manchester-united/&quot;&gt;Manchester United&lt;/a&gt;.&lt;/p&gt;&lt;h2&gt;City Bisa Ikuti Jejak MU&lt;/h2&gt;&lt;p&gt;Kini Manchester City hanya perlu memenangkan trofi Liga Champions. Di final mereka harus bisa menjegal wakil Serie A, &lt;strong&gt;Inter Milan&lt;/strong&gt;.&lt;/p&gt;&lt;p&gt;Jika bisa meraih treble, maka City akan mengikuti jejak Manchester United. Pada tahun 1999 silam, MU sukses meraih treble.&lt;/p&gt;&lt;p&gt;MU jadi satu-satunya tim asal Inggris yang sukses melakukan treble. Pengertian treble di Inggris sendiri adalah memenangkan trofi Premier League, FA Cup, dan Liga Champions.&lt;/p&gt;&lt;h2&gt;Peluang yang Mungkin Cuma Muncul Sekali&lt;/h2&gt;&lt;p&gt;Josep Guardiola lantas mengatakan bahwa skuad Manchester City kini sangat bersemangat untuk bisa meraih treble. Ia juga mengatakan anak-anak asuhnya paham bahwa peluang untuk bisa meraih gelar juara Liga&amp;nbsp; Champions itu harus dimanfaatkan semaksimal mungkin karena musim depan atau musim-musim berikutnya, mereka kemungkinan kesulitan mendapat peluang yang sama.&lt;/p&gt;&lt;p&gt;&quot;Mereka tahu apa yang kita miliki di depan kita. Semua orang mengatakan &#039;satu lagi untuk dijalani, satu pertandingan lagi untuk dijalani&#039;,&quot; ujarnya pada &lt;i&gt;Eurosport&lt;/i&gt;.&lt;/p&gt;&lt;p&gt;&quot;Mereka merasa kita berada dalam posisi kita mungkin tidak akan pernah ada lagi, dan setelah kita memiliki tiga atau empat sesi latihan, untuk bersiap untuk [menghadapi Inter Milan. Saya punya waktu dua hari untuk menonton mereka. Lalu kami pergi ke sana untuk mencoba [meraih kemenangan],&quot; tandas Guardiola.&lt;/p&gt;', 'sport', '2023-06-04 14:22:42', 1, 3),
 (55, 'Asteriskk Ungkap Lebih Menantang Main di SEA Games Dibandingkan VCT Indonesia', '647d6748cf7e3.jpeg', 'Pro Player Alter Ego divisi Valorant Nanda &#039;Asteriskk&#039; Rizana mengaku, bermain untuk SEA Games 2023 Kamboja lebih menantang ketimbang bermain di Turnamen Valorant Challenger Indonesia Split 2.  Kendati demikian, Alter Ego harus puasa mendapatkan juara ketiga pada ajang tersebut, timnya berhasil membawa pulang uang senilai 3.500 USD. Asteriskk mengatakan bermain mewakili Tim Nasional (timnas) Indonesia lebih menantang ketimban SEA Games', '&lt;p&gt;&lt;i&gt;Pro Player&lt;/i&gt; &lt;strong&gt;Alter Ego&lt;/strong&gt; divisi &lt;strong&gt;Valorant&lt;/strong&gt; &lt;strong&gt;Nanda &#039;Asteriskk&#039; Rizana&lt;/strong&gt; mengaku, bermain untuk &lt;strong&gt;SEA Games 2023 Kamboja&lt;/strong&gt; lebih menantang ketimbang bermain di &lt;strong&gt;Turnamen Valorant Challenger Indonesia Split 2.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Kendati demikian, Alter Ego harus puasa mendapatkan juara ketiga pada ajang tersebut, timnya berhasil membawa pulang uang senilai 3.500 USD. Asteriskk mengatakan bermain mewakili Tim Nasional (timnas) Indonesia lebih menantang ketimban SEA Games, karena pada turnamen SEA Games hanya sebentar waktu yang dibutuhkan untuk menjalin kedekatan antar sesama pemain.&lt;/p&gt;&lt;p&gt;&quot;&lt;i&gt;Lebih menantang timnas karena, di Alter Ego event VCT ini bonding sudah lama tapi kalau pas timnas adaptasi lagi,&quot;&lt;/i&gt; ungkapnya kepada esports.id di Jakarta, Minggu (04/06/2023).&lt;/p&gt;&lt;p&gt;Dalam ajang tersebut,&amp;nbsp;Asteriskk mendapatkan penghargaan Best Controller in VCT Indonesia. Sebelumnya, Asteriskk merupakan perain mendali emas pada ajang SEA Games untuk nomor pertandingan Valorant. Pemain asal Riau ini nantinya akan mendapatkan bonus dari capaian yang telah diraihnya tersebut.&lt;/p&gt;&lt;p&gt;Dikutip dari halaman resmi Riau.go.id Asteriskk mengaku bangga menjadi bagian dari Timnas Indonesia. Tidak hanya itu, ia juga merasa bahwa dirinya dapat mengharumkan kampung halamannya itu.&lt;/p&gt;&lt;p&gt;&quot;&lt;i&gt;Saya senang dan bangga bisa membawa nama harum tanah air Indonesia di ajang olaharaga Internasional, SEA Games. Saya bangga memberikan emas bagi tanah kelahiran saya, saya juga bangga mengharumkan nama Riau,”&lt;/i&gt; ujar Nanda Rizana.&lt;/p&gt;&lt;p&gt;Tambah, Ketua umum KONI Riau Iskandar Hoesin, mengatakan, bahwa pihaknya turut bangga dengan prestasi yang dicapai para atlet Riau. Ia bahkan, akan memberikan biaya pembinaan jika atlet yang berprestasi itu benar-benar terus memperkuat atlet Riau.&lt;/p&gt;&lt;p&gt;&quot;&lt;i&gt;Kami turut bangga dengan keberhasilan ini, karena esport adalah olahraga milenial yang tampil atau atletnya itu adalah milenial&lt;/i&gt;,&quot; ujar Iskandar.&lt;/p&gt;&lt;p&gt;Sebagai apresiasi terhadap prestasi yang diraih atlet Riau, KONI Riau akan memberikan uang pembinaan dari serta penghargaan berupa bonus dari pemerintah daerah. Dan untuk uang saku juga sudah disiapkan, bagi atlet yang memperkuat Indonesia pada SEA Games lalu.&lt;/p&gt;&lt;p&gt;&quot;&lt;i&gt;Kita berharap atlet kita ini terus berlatih untuk tetap mempertahankan prestasi,” &lt;/i&gt;kata Iskandar Hoesin.&lt;/p&gt;', 'games  gamer', '2023-06-05 11:40:40', 2, 3),
-(56, 'Waspadai Gula Darah Tinggi pada Ibu Hamil, Butuh Penanganan Khusus', '647ead880c35d.jpg', 'Spesialis penyakit dalam konsultan endokrin metabolik diabetes Yuanita Asri Langi mengatakan ibu hamil yang mengalami diabetes perlu mendapatkan penanganan khusus. Pasalnya, gula darah tinggi akan mempengaruhi kehamilan.  &quot;Aliran darah pada ibu yang diabetes melitus dengan kadar gula darah yang tinggi akan memengaruhi proses kehamilan dan proses bayi di dalam kandungan. Itulah yang menyebabkan ibu hamil dengan diabetes melitus perlu penanganan secara khusus,&quot; ', '&lt;p&gt;&lt;strong&gt;TEMPO.CO&lt;/strong&gt;, &lt;strong&gt;Jakarta&lt;/strong&gt; -&amp;nbsp;Spesialis penyakit dalam konsultan endokrin metabolik diabetes Yuanita Asri Langi mengatakan ibu hamil yang mengalami diabetes perlu mendapatkan penanganan khusus. Pasalnya, &lt;a href=&quot;https://www.tempo.co/tag/gula-darah-tinggi&quot;&gt;&lt;strong&gt;gula darah tinggi&lt;/strong&gt;&lt;/a&gt; akan mempengaruhi kehamilan.&lt;/p&gt;&lt;p&gt;&quot;Aliran darah pada ibu yang diabetes melitus dengan kadar gula darah yang tinggi akan memengaruhi proses kehamilan dan proses bayi di dalam kandungan. Itulah yang menyebabkan ibu hamil dengan diabetes melitus perlu penanganan secara khusus,&quot; kata dokter di RSUP Prof. Dr. R.D. Kandou Manado itu.&lt;/p&gt;&lt;p&gt;Menurut Yuanita, ada dua jenis &lt;a href=&quot;https://www.tempo.co/tag/diabetes&quot;&gt;&lt;strong&gt;diabetes&lt;/strong&gt;&lt;/a&gt; pada ibu hamil, yaitu diabetes melitus hamil (DMH) dan diabetes melitus gestasional (DMG). Ia menjelaskan DMH artinya ketika wanita sudah didiagnosis menderita diabetes melitus kemudian hamil.&amp;nbsp;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;Sementara DMG adalah ketika ia tidak pernah terdiagnosa diabetes melitus namun ketika hamil kadar gula darahnya di atas normal. Baik DMH maupun DMG perlu dikelola dengan baik karena kadar glukosa darah yang tinggi akan mempengaruhi fungsi dan perkembangan plasenta.&lt;/p&gt;&lt;p&gt;&quot;Apapun juga, kalau gula darah naik di atas normal akan mempengaruhi perkembangan dan fungsi plasenta,&quot; ujar Yuanita.&lt;/p&gt;&lt;p&gt;Padahal, plasenta mengatur nutrisi dan banyak hal lain terhadap janin. Untuk itu, wanita yang sudah didiagnosis &lt;a href=&quot;https://www.tempo.co/tag/diabetes-melitus&quot;&gt;&lt;strong&gt;diabetes melitus &lt;/strong&gt;&lt;/a&gt;kehamilan sebaiknya direncanakan terlebih dulu sehingga tubuh ibu lebih siap menjalaninya.&lt;/p&gt;&lt;p&gt;&quot;Kehamilannya harus direncanakan. Artinya, diusahakan sel sperma bertemu sel telur saat gula darah bagus,&quot; jelasnya.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;3 tahap pengelolaan&lt;/strong&gt;&lt;br&gt;Yuanita menjelaskan perencanaan kehamilan pada wanita dengan diabetes melitus penting sebab ia akan melewati tiga tahap pengelolaan kesehatan, yakni sebelum pembuahan (prakonsepsi), selama hamil (antenatal), dan setelah melahirkan (pospartum). Sementara mengenai DMG, ia mengatakan kondisi tersebut memiliki dampak buruk, baik terhadap ibu maupun bayi.&lt;/p&gt;&lt;p&gt;Pada ibu, dampak jangka pendeknya adalah preeklamsia atau eklamsia dan sulit saat melahirkan. Sedangkan jangka panjang di antaranya mengalami DMG pada kehamilan selanjutnya hingga berisiko mengalami diabetes melitus tipe 2 dan penyakit jantung koroner.&lt;/p&gt;&lt;p&gt;Pada bayi, dampak jangka pendek DMG di antaranya hipoglikemia neonatal dan distosia bahu. Sedangkan jangka panjang termasuk risiko obesitas, diabetes melitus tipe 2, hipertensi, hingga penyakit jantung koroner.&lt;/p&gt;&lt;p&gt;Adapun, penatalaksanaan diabetes pada ibu hamil dengan terapi nutrisi medis melalui pengaturan asupan nutrisi, latihan fisik terjadwal, pemantauan gula darah, baik secara mandiri atau didampingi, serta mengendalikan peningkatan berat badan ibu saat hamil. Jika indeks massa tubuh (IMT) ibu sebelum hamil kurang maka kenaikan berat badan selama hamil yang diperbolehkan adalah 12,5-18 kilogram. Sedangkan jika lebih adalah 7-11,5 kilogram dan jika diabetes adalah 5-9 kilogram.&lt;/p&gt;&lt;p&gt;&quot;Jika IMT ibu sebelum hamil normal maka selama kehamilan dia boleh naik berat badan maksimal 16 kilogram,&quot; ujar Yuanita.&lt;/p&gt;', 'kesehatan healthy', '2023-06-06 10:52:40', 1, 3);
+(56, 'Waspadai Gula Darah Tinggi pada Ibu Hamil, Butuh Penanganan Khusus', '647ead880c35d.jpg', 'Spesialis penyakit dalam konsultan endokrin metabolik diabetes Yuanita Asri Langi mengatakan ibu hamil yang mengalami diabetes perlu mendapatkan penanganan khusus. Pasalnya, gula darah tinggi akan mempengaruhi kehamilan.  &quot;Aliran darah pada ibu yang diabetes melitus dengan kadar gula darah yang tinggi akan memengaruhi proses kehamilan dan proses bayi di dalam kandungan. Itulah yang menyebabkan ibu hamil dengan diabetes melitus perlu penanganan secara khusus,&quot; ', '&lt;p&gt;&lt;strong&gt;TEMPO.CO&lt;/strong&gt;, &lt;strong&gt;Jakarta&lt;/strong&gt; -&amp;nbsp;Spesialis penyakit dalam konsultan endokrin metabolik diabetes Yuanita Asri Langi mengatakan ibu hamil yang mengalami diabetes perlu mendapatkan penanganan khusus. Pasalnya, &lt;a href=&quot;https://www.tempo.co/tag/gula-darah-tinggi&quot;&gt;&lt;strong&gt;gula darah tinggi&lt;/strong&gt;&lt;/a&gt; akan mempengaruhi kehamilan.&lt;/p&gt;&lt;p&gt;&quot;Aliran darah pada ibu yang diabetes melitus dengan kadar gula darah yang tinggi akan memengaruhi proses kehamilan dan proses bayi di dalam kandungan. Itulah yang menyebabkan ibu hamil dengan diabetes melitus perlu penanganan secara khusus,&quot; kata dokter di RSUP Prof. Dr. R.D. Kandou Manado itu.&lt;/p&gt;&lt;p&gt;Menurut Yuanita, ada dua jenis &lt;a href=&quot;https://www.tempo.co/tag/diabetes&quot;&gt;&lt;strong&gt;diabetes&lt;/strong&gt;&lt;/a&gt; pada ibu hamil, yaitu diabetes melitus hamil (DMH) dan diabetes melitus gestasional (DMG). Ia menjelaskan DMH artinya ketika wanita sudah didiagnosis menderita diabetes melitus kemudian hamil.&amp;nbsp;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;Sementara DMG adalah ketika ia tidak pernah terdiagnosa diabetes melitus namun ketika hamil kadar gula darahnya di atas normal. Baik DMH maupun DMG perlu dikelola dengan baik karena kadar glukosa darah yang tinggi akan mempengaruhi fungsi dan perkembangan plasenta.&lt;/p&gt;&lt;p&gt;&quot;Apapun juga, kalau gula darah naik di atas normal akan mempengaruhi perkembangan dan fungsi plasenta,&quot; ujar Yuanita.&lt;/p&gt;&lt;p&gt;Padahal, plasenta mengatur nutrisi dan banyak hal lain terhadap janin. Untuk itu, wanita yang sudah didiagnosis &lt;a href=&quot;https://www.tempo.co/tag/diabetes-melitus&quot;&gt;&lt;strong&gt;diabetes melitus &lt;/strong&gt;&lt;/a&gt;kehamilan sebaiknya direncanakan terlebih dulu sehingga tubuh ibu lebih siap menjalaninya.&lt;/p&gt;&lt;p&gt;&quot;Kehamilannya harus direncanakan. Artinya, diusahakan sel sperma bertemu sel telur saat gula darah bagus,&quot; jelasnya.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;3 tahap pengelolaan&lt;/strong&gt;&lt;br&gt;Yuanita menjelaskan perencanaan kehamilan pada wanita dengan diabetes melitus penting sebab ia akan melewati tiga tahap pengelolaan kesehatan, yakni sebelum pembuahan (prakonsepsi), selama hamil (antenatal), dan setelah melahirkan (pospartum). Sementara mengenai DMG, ia mengatakan kondisi tersebut memiliki dampak buruk, baik terhadap ibu maupun bayi.&lt;/p&gt;&lt;p&gt;Pada ibu, dampak jangka pendeknya adalah preeklamsia atau eklamsia dan sulit saat melahirkan. Sedangkan jangka panjang di antaranya mengalami DMG pada kehamilan selanjutnya hingga berisiko mengalami diabetes melitus tipe 2 dan penyakit jantung koroner.&lt;/p&gt;&lt;p&gt;Pada bayi, dampak jangka pendek DMG di antaranya hipoglikemia neonatal dan distosia bahu. Sedangkan jangka panjang termasuk risiko obesitas, diabetes melitus tipe 2, hipertensi, hingga penyakit jantung koroner.&lt;/p&gt;&lt;p&gt;Adapun, penatalaksanaan diabetes pada ibu hamil dengan terapi nutrisi medis melalui pengaturan asupan nutrisi, latihan fisik terjadwal, pemantauan gula darah, baik secara mandiri atau didampingi, serta mengendalikan peningkatan berat badan ibu saat hamil. Jika indeks massa tubuh (IMT) ibu sebelum hamil kurang maka kenaikan berat badan selama hamil yang diperbolehkan adalah 12,5-18 kilogram. Sedangkan jika lebih adalah 7-11,5 kilogram dan jika diabetes adalah 5-9 kilogram.&lt;/p&gt;&lt;p&gt;&quot;Jika IMT ibu sebelum hamil normal maka selama kehamilan dia boleh naik berat badan maksimal 16 kilogram,&quot; ujar Yuanita.&lt;/p&gt;', 'kesehatan', '2023-06-06 10:52:40', 1, 3),
+(57, 'Survei Populix: Fitur Live Streaming Shopee Live Jadi Platform Paling Sering Digunakan', '6483c0b134fd5.jpg', 'Survei Populix menunjukkan Platform belanja online live streaming Shopee Live unggul di atas platform sejenis, seperti TikTok Live, Tokopedia Play, dan Lazlive. Shopee Live menduduki peringkat pertama top op mind atau marketplace yang paling diingat konsumen dengan presentase mencapai 50 persen.  Sejalan dengan hal tersebut, Head of Research Populix, Indah Tanip, mengatakan Shopee Live juga menunjukkan porsi yang besar untuk jumlah transaksi yang dilakukan konsumennya.', '&lt;p&gt;&lt;strong&gt;TEMPO.CO&lt;/strong&gt;, &lt;strong&gt;Jakarta&lt;/strong&gt; -&amp;nbsp;Survei Populix menunjukkan Platform belanja online live streaming &lt;a href=&quot;https://www.tempo.co/tag/shopee&quot;&gt;&lt;strong&gt;Shopee&lt;/strong&gt;&lt;/a&gt; Live unggul di atas platform sejenis, seperti TikTok Live, Tokopedia Play, dan Lazlive. Shopee Live menduduki peringkat pertama top op mind atau marketplace yang paling diingat konsumen dengan presentase mencapai 50 persen.&lt;/p&gt;&lt;p&gt;Sejalan dengan hal tersebut, Head of Research Populix, Indah Tanip, mengatakan Shopee Live juga menunjukkan porsi yang besar untuk jumlah transaksi yang dilakukan konsumennya. &quot;Rata-rata transaksi per bulan di Shopee Live &amp;nbsp;oleh konsumen dalam 6 bulan terakhir mencapai 56 persen,&quot; kata Indah dalam konferensi pers virtual pada Jumat, 9 Juni 2023.&lt;/p&gt;&lt;p&gt;Di bawah Shopee Live, &amp;nbsp;&lt;a href=&quot;https://www.tempo.co/tag/tiktok&quot;&gt;&lt;strong&gt;TikTok&lt;/strong&gt;&lt;/a&gt; Live menyusul dengan presentase 30 persen. Kemudian Tokopedia Play sebesar 8 persen dan Lazlive 6 persen.&lt;/p&gt;&lt;p&gt;Tak hanya unggul dari jumlah transaksi rata-rata, Shopee Live juga unggul dari nilai transaksi dengan presentase 54 persen. Kemudian TikTok Live 31 persen, Tokopedia Play 10 persen, dan Lazlive 6 persen.&lt;/p&gt;&lt;p&gt;&quot;Jadi, lebih dari 50 persen Shopee Live itu mendominasi secara jumlah transaksi dan juga secara nilai transaksi ini sendiri,&quot; kata Indah.&amp;nbsp;&lt;/p&gt;&lt;p&gt;Adapun pengambilan data dalam survei ini dilakukan Populix pada 12 hingga 23 Mei. Jumlah respondennya sebanyak 508 orang, yang terdiri dari pria dan wanita. Area survei terbagi di antara wilayah Jabodetabek, Jawa, dan luar Jawa.&amp;nbsp;&lt;/p&gt;&lt;p&gt;Indah menilai tren &lt;a href=&quot;https://www.tempo.co/tag/belanja&quot;&gt;&lt;strong&gt;belanja&lt;/strong&gt;&lt;/a&gt; live streaming tumbuh pesat seiring meningkatnya interaksi di internat. Selain itu, ada kebutuhan hiburan. Tren belanja live streaming lebih menghibur karena sifatnya yang interaktif. Pembeli bisa mengajukan pertanyaan dan penjual bisa membaca dan menjawab langsung.&amp;nbsp;&lt;/p&gt;&lt;p&gt;&quot;Seller dan mungkin influencer, ketika menyiarkan barang yang ingin mereka jual, itu sangat menghibur,&quot; ujar Indah.&lt;/p&gt;&lt;p&gt;Indah mengatakan pasar e-commerce Indonesia semakin besar. &quot;Artinya, semakin banyak orang yang mencari barang secara online. Termasuk di dalamnya adalah di live streaming,&quot; kata dia.&lt;/p&gt;', 'teknologi handphone', '2023-06-10 08:15:45', 2, 3),
+(58, 'Johnny G Plate Segera Disidangkan, Kejagung Diminta Telusuri Pihak Lain', '6485f10ac491e.jpg', 'Bekas Menteri Komunikasi dan Informasi Johnny G Plate yang disangka terlibat korupsi pembangunan menara base transceiver station atau BTS 4G dan infrastruktur pendukung Bakti Kementerian Komunikasi dan Informatika tahun 2020-2022 segera disidangkan.', '&lt;p&gt;JAKARTA, KOMPAS â€” Bekas Menteri Komunikasi dan Informasi &lt;a href=&quot;https://www.kompas.id/label/johnny-g-plate?track_source=automate_body_url&quot;&gt;Johnny G Plate&lt;/a&gt; yang disangka terlibat korupsi pembangunan menara &lt;i&gt;base transceiver station &lt;/i&gt;atau BTS 4G dan infrastruktur pendukung Bakti Kementerian Komunikasi dan Informatika tahun 2020-2022 segera disidangkan. Penyidik telah menyerahkan berkas perkara dan tersangka Johnny G Plate kepada tim jaksa penuntut Kejaksaan Agung. Meski demikian, Kejaksaan Agung diminta untuk terus memperluas penyidikan karena disinyalir masih ada pihak lain yang terlibat.&lt;/p&gt;&lt;p&gt;Masyarakat Anti-Korupsi Indonesia (MAKI) menduga masih ada pihak lain yang terlibat, tetapi tidak tersentuh hukum. Hal itu diduga terjadi karena ada kesengajaan memutus penelusuran kasus dugaan korupsi pengadaan menara BTS itu dengan hanya menetapkan tujuh tersangka.&lt;/p&gt;&lt;p&gt;â€Kan, ini baru dari kluster pemborong dan kluster pemerintah. Justru di sini saya menduga masih ada kluster lain di luar tersangka yang sudah ada, tetapi belum tersentuh. Jadi seperti diputus di sini,â€ kata Koordinator MAKI Boyamin Saiman ketika dihubungi pada Minggu (11/6/2023).&lt;/p&gt;&lt;p&gt;Dalam kasus tersebut, penyidik telah menetapkan tujuh orang sebagai tersangka. Mereka adalah Komisaris PT Solitech Media Sinergy Irwan Hermawan; Direktur &lt;a href=&quot;https://www.kompas.id/label/utama?track_source=automate_body_url&quot;&gt;Utama&lt;/a&gt; Bakti Kemenkominfo Anang Achmad Latief; Direktur Utama PT Mora Telematika Indonesia Galumbang Menak; peneliti Human Development Universitas Indonesia tahun 2020, Yohan Suryanto; dan Account Director of Integrated Account Department Huawei Tech Investment Mukti Ali. Dua tersangka berikutnya adalah bekas Menkominfo Johnny G Plate dan Windy Purnama yang disebut sebagai orang kepercayaan Irwan.&lt;/p&gt;&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://project.narapatis.my.id/_asset/img/article/sub/6485f0882a8d4.jpg&quot;&gt;&lt;/figure&gt;&lt;p&gt;Pada Jumat (9/6/2023), penyidik melakukan serah terima tanggung jawab tersangka dan barang bukti (tahap II) atas berkas perkara tersangka Johnny G Plate kepada tim jaksa penuntut umum. Setelah serah terima tersebut, jaksa penuntut umum akan segera mempersiapkan surat dakwaan untuk politikus Partai Nasdem tersebut.&lt;/p&gt;&lt;p&gt;Johnny disangka melanggar Pasal 2 Ayat (1) dan Pasal 3 &lt;i&gt;juncto&lt;/i&gt; Pasal 18 Undang-Undang Nomor 31 Tahun 1999 sebagaimana diubah dan ditambah dengan UU Nomor 20 Tahun 2001 tentang Perubahan atas UU Nomor 31 Tahun 1999 tentang Pemberantasan Tindak Pidana Korupsi &lt;i&gt;juncto&lt;/i&gt; Pasal 55 Ayat (1) ke-1 Kitab Undang-Undang Hukum Pidana (KUHP).&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Manipulasi mulai perencanaan&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Menurut Boyamin, kasus ini diduga terjadi karena adanya manipulasi proyek mulai dari tahap perencanaan, pelaksanaan, hingga kemudian pembayaran atas proyek yang dikerjakan. Indikasi manipulasi itu muncul karena pekerjaan proyek pembangunan menanara BTS belum selesai, tetapi anggaran yang dicairkan sudah 100 persen.&lt;/p&gt;&lt;p&gt;Dengan jumlah dana yang dicairkan sangat besar, yakni sekitar Rp 10 triliun, semestinya ada pengawasan dari pihak atau orotitas yang berwenang. Namun, hingga saat ini proses hukum belum menyentuh mereka yang bertugas melakukan pengawasan. Boyamin menduga ada konflik kepentingan yang dialami pihak tersebut.&lt;/p&gt;&lt;p&gt;Di sisi lain, Boyamin juga mempertanyakan tidak dijeratnya Johnny dengan dugaan pencucian uang. Padahal, sudah jelas bahwa penyidik telah menyita kendaraan dan tanah seluas 11,7 hektar milik Johnny di Kabupaten Manggarai Barat.&lt;/p&gt;&lt;p&gt;â€Kalaupun toh mereka tidak melakukan pencucian uang aktif, mereka mestinya melakukan pencucian uang pasif, sebagai pihak yang membiarkan terjadinya tindak pidana sehingga dijerat dengan pasal penyertaan untuk pencucian uang,â€ tutur Boyamin.&lt;/p&gt;&lt;p&gt;Hingga saat ini terdapat empat tersangka yang dijerat dengan pasal pencucian uang. Mereka adalah Komisaris PT Solitech Media Sinergy Irwan Hermawan, Direktur Utama PT Mora Telematika Indonesia Galumbang Menak, Direktur Utama Bakti Kemenkominfo Anang Achmad Latief, dan pihak swasta bernama Windy Purnama.&lt;/p&gt;&lt;p&gt;Sementara secara terpisah, Jaksa Agung Muda Tindak Pidana Khusus Kejaksaan Agung Febri Adriansyah mengatakan, penyidik sudah menyita lahan milik Johnny. Selain itu, Febrie juga membenarkan adanya aliran dana dari Johnny ke gereja, tetapi dia menolak menyebutkan besaran nilainya.&lt;/p&gt;&lt;p&gt;Febrie juga tak menampik adanya dana yang diserahkan Johnny untuk perguruan tinggi dan bantuan sosial. Namun, dia menolak menyebutkan jumlahnya. â€Lupa itu. Saya cek dulu, ya, takut salah,â€ tuturnya.&lt;/p&gt;&lt;p&gt;Kasubdit Penyidikan Korupsi dan Tindak Pidana Pencucian Uang Direktorat Penyidikan Jampidsus &lt;a href=&quot;https://www.kompas.id/label/kejagung?track_source=automate_body_url&quot;&gt;Kejagung&lt;/a&gt; Haryoko Ari Prabowo menambahkan, hingga saat ini pihaknya telah menyita beberapa aset yang diduga berasal dari dana Bakti Kemkominfo, termasuk dari Johnny. Namun, Prabowo tidak menyebut total nilai dari aset tersebut.&lt;/p&gt;&lt;p&gt;Penyidik, lanjut Prabowo, belum menjerat Johnny dengan dugaan pencucian uang. Prabowo pun menolak menyebut dugaan adanya uang yang diterima Johnny maupun ke pihak lain, termasuk partai politik. â€Nanti dilihat di sidang,â€ ujar Prabowo.&lt;/p&gt;&lt;figure class=&quot;image&quot;&gt;&lt;img src=&quot;https://project.narapatis.my.id/_asset/img/article/sub/6485f0ad9d644.jpg&quot;&gt;&lt;/figure&gt;&lt;p&gt;Meski demikian, Prabowo tidak membenarkan ataupun menolak anggapan bahwa kasus ini berhenti pada tujuh tersangka tersebut. Sebab, sampai saat ini penyidik masih mendalami keterlibatan satu tersangka yang berkasnya masih ditangani penyidik, yakni tersangka Windy. â€Tinggal kita selesaikan berkas Windy, terus fakta persidangan nanti seperti apa, nanti kita lihat lagi,â€ kata Prabowo.&lt;/p&gt;', 'korupsi crime politik', '2023-06-12 00:06:34', 9, 3),
+(59, '5 Calon Kapten Real Madrid Selanjutnya Setelah Karim Benzema Pergi', '648a661fdb3d4.jpg', 'Bola.net - Karim Benzema sudah memutuskan untuk pergi dari Real Madrid pada akhir musim 2022/2023. Kepergian Benzema membuat Los Blancos harus memilih kapten baru.  Kontrak Benzema habis pada akhir Juni tahun ini. Mantan pemain Lyon tersebut bakal meninggalkan Real Madrid setelah 14 musim mengabdi di Santiago Bernabeu.  Selama berseragam Real Madrid, bomber asal Prancis itu telah mencetak 353 gol dari 647 laga. Benzema juga menyumbang total 25 trofi untuk raksasa Spanyol tersebut.', '&lt;p&gt;Bola.net - Karim Benzema sudah memutuskan untuk pergi dari Real Madrid pada akhir musim 2022/2023. Kepergian Benzema membuat Los Blancos harus memilih kapten baru.&lt;/p&gt;&lt;p&gt;Kontrak Benzema habis pada akhir Juni tahun ini. Mantan pemain Lyon tersebut bakal meninggalkan Real Madrid setelah 14 musim mengabdi di Santiago Bernabeu.&lt;/p&gt;&lt;p&gt;Selama berseragam Real Madrid, bomber asal Prancis itu telah mencetak 353 gol dari 647 laga. Benzema juga menyumbang total 25 trofi untuk raksasa Spanyol tersebut.&lt;/p&gt;&lt;p&gt;Musim ini, Benzema merupakan kapten utama Real Madrid. Dia menggantikan Marcelo yang meninggalkan Los Blancos pada akhir musim lalu.&lt;/p&gt;&lt;p&gt;Setelah kepergian Benzema, Carlo Ancelotti punya pekerjaan rumah baru. Selain mencari striker pengganti Benzema, pria asal Italia juga itu juga harus memilih pemimpin tim yang baru.&lt;/p&gt;&lt;p&gt;Berdasarkan tradisi, kapten Real Madrid dipilih berdasarkan masa pengabdiannya untuk Los Blancos. Lalu, siapa saja yang bisa menggantikan Benzema sebagai kapten?&lt;/p&gt;&lt;p&gt;Berikut ini lima calon kapten baru Real Madrid setelah kepergian Karim Benzema.&lt;br&gt;5. Lucas Vazquez&lt;img src=&quot;https://project.narapatis.my.id/_asset/img/article/sub/648a65e53b920.jpg&quot;&gt;&lt;/p&gt;', 'bola olahraga', '2023-06-15 09:15:11', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -82,9 +85,9 @@ INSERT INTO `article` (`id`, `title`, `img`, `shortContent`, `content`, `keyword
 --
 
 CREATE TABLE `article_category` (
-  `article_id` int NOT NULL,
-  `category_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `article_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `article_category`
@@ -115,7 +118,12 @@ INSERT INTO `article_category` (`article_id`, `category_id`) VALUES
 (53, 3),
 (54, 2),
 (55, 4),
-(56, 5);
+(56, 5),
+(57, 7),
+(58, 1),
+(58, 6),
+(59, 2),
+(59, 8);
 
 -- --------------------------------------------------------
 
@@ -124,9 +132,9 @@ INSERT INTO `article_category` (`article_id`, `category_id`) VALUES
 --
 
 CREATE TABLE `category` (
-  `id_category` int NOT NULL,
+  `id_category` int(11) NOT NULL,
   `category_name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `category`
@@ -138,7 +146,9 @@ INSERT INTO `category` (`id_category`, `category_name`) VALUES
 (3, 'music'),
 (4, 'games'),
 (5, 'health'),
-(6, 'crime');
+(6, 'crime'),
+(7, 'teknologi'),
+(8, 'sepakbola');
 
 -- --------------------------------------------------------
 
@@ -147,10 +157,10 @@ INSERT INTO `category` (`id_category`, `category_name`) VALUES
 --
 
 CREATE TABLE `category_keyword` (
-  `id_category_keyword` int NOT NULL,
-  `category_id` int NOT NULL,
+  `id_category_keyword` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL,
   `keyword` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `category_keyword`
@@ -170,7 +180,13 @@ INSERT INTO `category_keyword` (`id_category_keyword`, `category_id`, `keyword`)
 (11, 2, 'sepakbola'),
 (12, 2, 'bola'),
 (13, 6, 'crime'),
-(14, 6, 'korupsi');
+(14, 6, 'korupsi'),
+(15, 7, 'komputer'),
+(16, 7, 'handphone'),
+(17, 7, 'teknologi'),
+(18, 6, 'perampokan'),
+(19, 8, 'sepakbola'),
+(20, 8, 'bola');
 
 -- --------------------------------------------------------
 
@@ -179,12 +195,12 @@ INSERT INTO `category_keyword` (`id_category_keyword`, `category_id`, `keyword`)
 --
 
 CREATE TABLE `commentar` (
-  `id_comment` int NOT NULL,
-  `description` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+  `id_comment` int(11) NOT NULL,
+  `description` varchar(100) NOT NULL,
   `insert_date` datetime NOT NULL,
-  `user_id` int NOT NULL,
-  `article_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `user_id` int(11) NOT NULL,
+  `article_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `commentar`
@@ -200,7 +216,12 @@ INSERT INTO `commentar` (`id_comment`, `description`, `insert_date`, `user_id`, 
 (7, 'hai', '2023-05-21 13:34:12', 1, 25),
 (8, 'test test', '2023-05-21 15:15:51', 1, 25),
 (9, 'yah gitu', '2023-05-21 15:16:15', 1, 25),
-(10, 'halo', '2023-05-23 00:42:10', 2, 25);
+(10, 'halo', '2023-05-23 00:42:10', 2, 25),
+(11, 'keren artikel nya\r\n', '2023-06-08 10:34:20', 5, 52),
+(12, 'Kapan lagi ya world cup indonesia?', '2023-06-10 18:56:01', 9, 5),
+(13, 'Selamat membaca! Terimakasih Kompas.com', '2023-06-12 00:07:36', 9, 58),
+(14, 'Tenyataa pak gplateðŸ˜£', '2023-06-12 00:35:58', 4, 58),
+(15, 'Siapa sangka :D', '2023-06-12 17:30:39', 11, 58);
 
 -- --------------------------------------------------------
 
@@ -209,47 +230,50 @@ INSERT INTO `commentar` (`id_comment`, `description`, `insert_date`, `user_id`, 
 --
 
 CREATE TABLE `popularity` (
-  `article_id` int NOT NULL,
-  `daily` int NOT NULL DEFAULT '0',
-  `weekly` int NOT NULL DEFAULT '0',
-  `monthly` int NOT NULL DEFAULT '0',
+  `article_id` int(11) NOT NULL,
+  `daily` int(11) NOT NULL DEFAULT 0,
+  `weekly` int(11) NOT NULL DEFAULT 0,
+  `monthly` int(11) NOT NULL DEFAULT 0,
   `update_data` date NOT NULL,
-  `lifetime` int NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `lifetime` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `popularity`
 --
 
 INSERT INTO `popularity` (`article_id`, `daily`, `weekly`, `monthly`, `update_data`, `lifetime`) VALUES
-(1, 0, 0, 1, '2023-06-11', 46),
-(2, 0, 0, 0, '2023-06-11', 5),
-(3, 6, 6, 6, '2023-06-11', 18),
-(5, 0, 2, 2, '2023-06-11', 7),
-(7, 0, 0, 0, '2023-06-11', 3),
-(8, 0, 0, 0, '2023-06-11', 19),
-(9, 0, 0, 0, '2023-06-11', 4),
-(10, 0, 0, 0, '2023-06-11', 20),
-(11, 0, 0, 0, '2023-06-11', 59),
-(12, 0, 0, 0, '2023-06-11', 37),
-(13, 0, 0, 0, '2023-06-11', 15),
-(14, 0, 0, 0, '2023-06-11', 44),
-(15, 0, 0, 0, '2023-06-11', 41),
-(16, 0, 0, 0, '2023-06-11', 13),
-(17, 0, 0, 2, '2023-06-11', 18),
-(18, 0, 0, 0, '2023-06-11', 39),
-(19, 0, 0, 1, '2023-06-11', 17),
-(23, 0, 1, 1, '2023-06-11', 70),
-(25, 15, 15, 37, '2023-06-11', 265),
-(32, 0, 0, 7, '2023-06-11', 24),
-(49, 0, 1, 3, '2023-06-11', 19),
-(50, 0, 4, 25, '2023-06-11', 25),
-(51, 0, 0, 6, '2023-06-11', 6),
-(52, 0, 2, 10, '2023-06-11', 10),
-(53, 0, 9, 11, '2023-06-11', 11),
-(54, 0, 40, 74, '2023-06-11', 74),
-(55, 0, 272, 272, '2023-06-11', 272),
-(56, 0, 70, 70, '2023-06-11', 70);
+(1, 0, 0, 0, '2023-07-01', 47),
+(2, 0, 0, 0, '2023-07-01', 5),
+(3, 0, 0, 0, '2023-07-01', 12),
+(5, 0, 0, 0, '2023-07-01', 9),
+(7, 0, 0, 0, '2023-07-01', 3),
+(8, 0, 0, 0, '2023-07-01', 19),
+(9, 0, 0, 0, '2023-07-01', 4),
+(10, 0, 0, 0, '2023-07-01', 20),
+(11, 0, 0, 0, '2023-07-01', 59),
+(12, 0, 0, 0, '2023-07-01', 38),
+(13, 0, 0, 0, '2023-07-01', 15),
+(14, 0, 0, 0, '2023-07-01', 44),
+(15, 0, 0, 0, '2023-07-01', 41),
+(16, 0, 0, 0, '2023-07-01', 15),
+(17, 0, 0, 0, '2023-07-01', 18),
+(18, 0, 0, 0, '2023-07-01', 39),
+(19, 0, 0, 0, '2023-07-01', 17),
+(23, 0, 0, 0, '2023-07-01', 72),
+(25, 0, 0, 0, '2023-07-01', 251),
+(32, 0, 0, 0, '2023-07-01', 27),
+(49, 0, 0, 0, '2023-07-01', 20),
+(50, 0, 0, 0, '2023-07-01', 25),
+(51, 0, 0, 0, '2023-07-01', 7),
+(52, 0, 0, 0, '2023-07-01', 17),
+(53, 0, 0, 0, '2023-07-01', 10),
+(54, 0, 0, 0, '2023-07-01', 75),
+(55, 0, 0, 0, '2023-07-01', 44),
+(56, 0, 0, 0, '2023-07-01', 18),
+(57, 0, 0, 0, '2023-07-01', 8),
+(58, 0, 0, 0, '2023-07-01', 28),
+(59, 0, 0, 0, '2023-07-01', 2);
 
 -- --------------------------------------------------------
 
@@ -258,14 +282,14 @@ INSERT INTO `popularity` (`article_id`, `daily`, `weekly`, `monthly`, `update_da
 --
 
 CREATE TABLE `reporting` (
-  `id_reporting` int NOT NULL,
+  `id_reporting` int(11) NOT NULL,
   `img_reporting` varchar(255) NOT NULL,
   `desc_reporting` text NOT NULL,
-  `status_id` int NOT NULL,
-  `article_id` int NOT NULL,
-  `reporter_id` int NOT NULL,
-  `admin_id` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `status_id` int(11) NOT NULL,
+  `article_id` int(11) NOT NULL,
+  `reporter_id` int(11) NOT NULL,
+  `admin_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `reporting`
@@ -273,7 +297,11 @@ CREATE TABLE `reporting` (
 
 INSERT INTO `reporting` (`id_reporting`, `img_reporting`, `desc_reporting`, `status_id`, `article_id`, `reporter_id`, `admin_id`) VALUES
 (1, 'screenshot_1686010704.png', 'si abang jago banget gasuka', 3, 55, 1, NULL),
-(2, 'screenshot_1686013266.png', 'bang udah bang', 3, 50, 1, NULL);
+(2, 'screenshot_1686013266.png', 'bang udah bang', 3, 50, 1, NULL),
+(3, 'screenshot_1686316345.png', 'berita ini nyeleneh', 3, 55, 1, NULL),
+(4, 'screenshot_1686394408.png', 'LET HIM DOWN!', 3, 52, 9, NULL),
+(5, 'screenshot_1686664945.png', 'JOS!', 3, 57, 9, NULL),
+(6, 'screenshot_1686791016.png', 'berita ini hoax', 3, 58, 12, NULL);
 
 -- --------------------------------------------------------
 
@@ -282,9 +310,9 @@ INSERT INTO `reporting` (`id_reporting`, `img_reporting`, `desc_reporting`, `sta
 --
 
 CREATE TABLE `roles` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `role_name` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `roles`
@@ -303,12 +331,12 @@ INSERT INTO `roles` (`id`, `role_name`) VALUES
 --
 
 CREATE TABLE `role_request` (
-  `id_request_role` int NOT NULL,
-  `status_id` int NOT NULL,
-  `user_id` int NOT NULL,
-  `role_id` int NOT NULL,
-  `admin_id` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id_request_role` int(11) NOT NULL,
+  `status_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `admin_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `role_request`
@@ -319,7 +347,13 @@ INSERT INTO `role_request` (`id_request_role`, `status_id`, `user_id`, `role_id`
 (2, 1, 3, 3, 1),
 (3, 1, 3, 2, 1),
 (4, 3, 3, 2, NULL),
-(5, 3, 2, 1, NULL);
+(5, 1, 2, 1, 1),
+(6, 1, 5, 2, 1),
+(7, 2, 9, 2, 1),
+(8, 1, 9, 1, 1),
+(9, 3, 11, 1, NULL),
+(10, 3, 11, 2, NULL),
+(11, 3, 12, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -328,9 +362,9 @@ INSERT INTO `role_request` (`id_request_role`, `status_id`, `user_id`, `role_id`
 --
 
 CREATE TABLE `status` (
-  `id_status` int NOT NULL,
+  `id_status` int(11) NOT NULL,
   `status_name` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `status`
@@ -348,7 +382,7 @@ INSERT INTO `status` (`id_status`, `status_name`) VALUES
 --
 
 CREATE TABLE `users` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `img` varchar(50) NOT NULL DEFAULT 'no-profile.png',
   `first_name` varchar(10) NOT NULL,
   `last_name` varchar(10) NOT NULL,
@@ -356,9 +390,9 @@ CREATE TABLE `users` (
   `gender` varchar(10) NOT NULL,
   `username` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
-  `id_role` int NOT NULL DEFAULT '3'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `password` varchar(255) NOT NULL,
+  `id_role` int(11) NOT NULL DEFAULT 3
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -366,8 +400,17 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `img`, `first_name`, `last_name`, `birthdate`, `gender`, `username`, `email`, `password`, `id_role`) VALUES
 (1, '647e8d5410aa2.jpg', 'Narapati', 'Anandi', '2004-02-24', 'Male', 'lio_keysa24', 'narapatikeysa00@gmail.com', '$2y$10$FMwRaVua/PP/ryoxyrr2/unuTiC1/8eS1AUoGoiHwXqTMFxCCq5qO', 1),
-(2, 'no-profile.png', 'Catherine', 'Nathania', '2004-07-16', 'Female', 'catherinenathania16', 'catherinenathania16@gmail.com', '$2y$10$F8m2fw/nfGSAWe2/LGy2NuZ.dPLdvPPMcAFLQcsmiHvhdoPvV4kUG', 2),
-(3, 'no-profile.png', 'Fellyvia', 'Marshanda', '2004-03-25', 'Female', 'fllymrs_', 'fellyviamarshanda25@gmail.com', '$2y$10$KU8jKxPXtGi2GA7RGh.H0uEAgAikx3awgTNEZyY2McQ7Sa7RVpQWe', 3);
+(2, 'no-profile.png', 'Catherine', 'Nathania', '2004-07-16', 'Female', 'catherinenathania16', 'catherinenathania16@gmail.com', '$2y$10$F8m2fw/nfGSAWe2/LGy2NuZ.dPLdvPPMcAFLQcsmiHvhdoPvV4kUG', 1),
+(3, 'no-profile.png', 'Fellyvia', 'Marshanda', '2004-03-25', 'Female', 'fllymrs_', 'fellyviamarshanda25@gmail.com', '$2y$10$KU8jKxPXtGi2GA7RGh.H0uEAgAikx3awgTNEZyY2McQ7Sa7RVpQWe', 3),
+(4, '64813f49e849a.jpg', 'Rainy', 'Deep', '2005-02-20', 'Male', 'rainydeep', 'Rainy@gmail.com', '$2y$10$kCkM4dbqz.KDcl2OukmHoOOx6kITHoxI1We8iiWPKUoSmjxnZgCNK', 3),
+(5, '6481260e3dcff.jpg', 'Adrian', 'Zidan', '2004-05-23', 'Male', 'adrianzidan', 'adrianzidan24@gmail.com', '$2y$10$1escbq.jrjwPpix9VQDNp.lF0n8cMYtGVVzGGTDyiiGxlmKO4P5p6', 2),
+(6, 'no-profile.png', 'Naufal', 'Sayyid', '2003-05-31', 'Male', 'naufalsayyid', 'naufalsayyid75@gmail.com', '$2y$10$D3xjonTJljCvWTfsvHdnYet3E5RiHPOAwl4yQB/hTfzUbqbZRQrfO', 3),
+(7, '64813f3b0a684.jpeg', 'Tegar', 'Samudra', '2002-06-09', 'Male', 'tegar', 'tegarsamudraaa@gmail.com', '$2y$10$55nDpw7Pj/P1IzavpMKhTutmFTG.nXuDCSWl/xzYEAX1Ts0RB1uuC', 3),
+(8, 'no-profile.png', 'dodon', 'ramdan', '1999-11-01', 'Male', 'domba', 'sidkiramdani@gmail.com', '$2y$10$PrWyc4JTB7baveo6D0Ey0uLNJRArQDCdR9XveC2UCrCCG/CUrMiJm', 3),
+(9, '6485eddd7f03b.jpeg', 'Dhika', 'UWU', '2023-06-09', 'Male', 'dikeyttpuwu', 'me@bhadrikais.my.id', '$2y$10$1Ofzuvc7B1tRbsGtOLTlJOGcTxwxo.OZwpwGg5QKjCTqViwdUTt0e', 1),
+(10, '6485ef4620e1a.jpg', 'Reyna', 'Alamsemest', '2018-12-22', 'Female', 'reyna', 'Reynaduelist@gmail.com', '$2y$10$wWvS2vW9QET/BEHEAA3GSOtbqWsWChOWOVUcMX9LHj/j4XtCaLyBO', 3),
+(11, '6486e709108a2.jpeg', 'Usup', 'Saipudin', '1945-01-01', 'Female', 'usupgantenq', 'usupcuawcuaw@gmail.com', '$2y$10$nyzjhLT0ChLIF5Xs1o6dRODYWo28F3WVH9uAHNE4Zzhk3zYdym49W', 3),
+(12, 'no-profile.png', 'Narapati', 'Keysa', '2023-05-03', 'Male', 'narapati24', 'narapati@gmail.com', '$2y$10$NSl9/WsL643ZKELfNlpL4uvRWvWznemoK6Lc6RJnK0lpHobcBDUpG', 3);
 
 -- --------------------------------------------------------
 
@@ -376,9 +419,9 @@ INSERT INTO `users` (`id`, `img`, `first_name`, `last_name`, `birthdate`, `gende
 --
 
 CREATE TABLE `visibility` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `visibility` varchar(10) NOT NULL DEFAULT 'private'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visibility`
@@ -493,61 +536,61 @@ ALTER TABLE `visibility`
 -- AUTO_INCREMENT for table `article`
 --
 ALTER TABLE `article`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id_category` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `category_keyword`
 --
 ALTER TABLE `category_keyword`
-  MODIFY `id_category_keyword` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_category_keyword` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `commentar`
 --
 ALTER TABLE `commentar`
-  MODIFY `id_comment` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_comment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `reporting`
 --
 ALTER TABLE `reporting`
-  MODIFY `id_reporting` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_reporting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `role_request`
 --
 ALTER TABLE `role_request`
-  MODIFY `id_request_role` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_request_role` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
-  MODIFY `id_status` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_status` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `visibility`
 --
 ALTER TABLE `visibility`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -564,14 +607,14 @@ ALTER TABLE `article`
 -- Constraints for table `article_category`
 --
 ALTER TABLE `article_category`
-  ADD CONSTRAINT `article_category_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  ADD CONSTRAINT `article_category_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `category` (`id_category`) ON DELETE RESTRICT ON UPDATE CASCADE;
+  ADD CONSTRAINT `article_category_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `article_category_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `category` (`id_category`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `category_keyword`
 --
 ALTER TABLE `category_keyword`
-  ADD CONSTRAINT `category_keyword_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id_category`) ON DELETE RESTRICT ON UPDATE CASCADE;
+  ADD CONSTRAINT `category_keyword_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id_category`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `commentar`
@@ -593,7 +636,7 @@ ALTER TABLE `reporting`
   ADD CONSTRAINT `reporting_ibfk_1` FOREIGN KEY (`status_id`) REFERENCES `status` (`id_status`),
   ADD CONSTRAINT `reporting_ibfk_2` FOREIGN KEY (`reporter_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `reporting_ibfk_3` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
-  ADD CONSTRAINT `reporting_ibfk_4` FOREIGN KEY (`admin_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+  ADD CONSTRAINT `reporting_ibfk_4` FOREIGN KEY (`admin_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `role_request`
@@ -602,7 +645,7 @@ ALTER TABLE `role_request`
   ADD CONSTRAINT `role_request_ibfk_1` FOREIGN KEY (`status_id`) REFERENCES `status` (`id_status`),
   ADD CONSTRAINT `role_request_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `role_request_ibfk_3` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`),
-  ADD CONSTRAINT `role_request_ibfk_4` FOREIGN KEY (`admin_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+  ADD CONSTRAINT `role_request_ibfk_4` FOREIGN KEY (`admin_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `users`
